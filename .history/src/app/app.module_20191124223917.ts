@@ -10,14 +10,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // components
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
-import { HomeComponent } from './components/seccions/home/home.component';
+import { HomeComponent } from './components/layout/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MainComponent } from './components/layout/main/main.component';
 import { CardComponent } from './components/seccions/catalog/card/card.component';
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
-import { CarouselComponent } from './components/seccions/home/carousel/carousel.component';
-import { FiltersComponent } from './components/seccions/catalog/filters/filters.component';
 
 
 
@@ -30,9 +28,7 @@ import { FiltersComponent } from './components/seccions/catalog/filters/filters.
     LayoutComponent,
     MainComponent,
     CardComponent,
-    DetailComponent,
-    CarouselComponent,
-    FiltersComponent
+    DetailComponent
   ],
   imports: [
     BrowserModule,

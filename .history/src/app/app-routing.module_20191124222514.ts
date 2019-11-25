@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { HomeComponent } from './components/seccions/home/home.component';
+import { HomeComponent } from './components/layout/home/home.component';
 
 const appRoutes: Routes = [
   // mantenimiento

@@ -16,8 +16,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { MainComponent } from './components/layout/main/main.component';
 import { CardComponent } from './components/seccions/catalog/card/card.component';
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
-import { CarouselComponent } from './components/seccions/home/carousel/carousel.component';
-import { FiltersComponent } from './components/seccions/catalog/filters/filters.component';
 
 
 
@@ -30,9 +28,7 @@ import { FiltersComponent } from './components/seccions/catalog/filters/filters.
     LayoutComponent,
     MainComponent,
     CardComponent,
-    DetailComponent,
-    CarouselComponent,
-    FiltersComponent
+    DetailComponent
   ],
   imports: [
     BrowserModule,
