@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -7,9 +7,10 @@ import { Component, OnInit, DoCheck, Input, Output, EventEmitter } from '@angula
 })
 export class CardComponent implements OnInit {
 
-  ngOnInit() { }
+  constructor() { }
 
-  ndDoCheck() { }
+
+  ngOnInit() {
+  }
 
 }
-

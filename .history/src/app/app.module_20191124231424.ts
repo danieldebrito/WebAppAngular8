@@ -17,8 +17,7 @@ import { MainComponent } from './components/layout/main/main.component';
 import { CarouselComponent } from './components/seccions/home/carousel/carousel.component';
 import { CatalogComponent } from './components/seccions/catalog/catalog.component';
 import { FilterComponent } from './components/seccions/catalog/filter/filter.component';
-import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
-import { CardsComponent } from './components/seccions/catalog/cards/cards.component';
+import { CardComponent } from './components/seccions/catalog/card/card.component';
 
 
 
@@ -33,8 +32,7 @@ import { CardsComponent } from './components/seccions/catalog/cards/cards.compon
     CarouselComponent,
     CatalogComponent,
     FilterComponent,
-    DetailComponent,
-    CardsComponent
+    CardComponent
   ],
   imports: [
     BrowserModule,

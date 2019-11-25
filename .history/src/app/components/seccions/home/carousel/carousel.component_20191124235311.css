@@ -1,0 +1,48 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+h3 {
+    color: red;
+    text-shadow: 1px 1px white;
+    /* letter-spacing: 2px; */
+    font-size: 50px;
+    font-weight: normal;
+}
+
+h1 {
+    color: white;
+    text-shadow: 1px 1px gray;
+    /* letter-spacing: 2px; */
+    font-size: 30px;
+    font-weight: normal;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+h3 {
+    color: red;
+    text-shadow: 1px 1px white;
+    /* letter-spacing: 2px; */
+    font-size: 50px;
+    font-weight: normal;
+}
+
+h1 {
+    color: white;
+    text-shadow: 1px 1px gray;
+    /* letter-spacing: 2px; */
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.bg {
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

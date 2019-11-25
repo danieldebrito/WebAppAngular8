@@ -14,11 +14,10 @@ import { HomeComponent } from './components/seccions/home/home.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MainComponent } from './components/layout/main/main.component';
+import { CardComponent } from './components/seccions/catalog/card/card.component';
+import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
 import { CarouselComponent } from './components/seccions/home/carousel/carousel.component';
 import { CatalogComponent } from './components/seccions/catalog/catalog.component';
-import { FilterComponent } from './components/seccions/catalog/filter/filter.component';
-import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
-import { CardsComponent } from './components/seccions/catalog/cards/cards.component';
 
 
 
@@ -30,11 +29,10 @@ import { CardsComponent } from './components/seccions/catalog/cards/cards.compon
     FooterComponent,
     LayoutComponent,
     MainComponent,
-    CarouselComponent,
-    CatalogComponent,
-    FilterComponent,
+    CardComponent,
     DetailComponent,
-    CardsComponent
+    CarouselComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,
