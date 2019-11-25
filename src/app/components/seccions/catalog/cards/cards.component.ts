@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
+import { AmmmService } from 'src/app/services/catalogo/ammm.service';
 
 @Component({
   selector: 'app-cards',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardsComponent implements OnInit {
 
-  constructor() { }
+  public ammm: ArtMarModMot[];
+
+  constructor(private ammmService: AmmmService) { }
+
+
+  public listar() {
+    this.ammmService.ListarO().subscribe(response => {
+      this.ammm = response;
+      alert(this.ammm);
+    },
+      error => {
+        console.error(error);
+      });
+  }
 
   ngOnInit() {
+    this.listar();
   }
 
 }

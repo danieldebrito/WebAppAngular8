@@ -1,1 +1,30 @@
-<p>cards works!</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+            <th scope="col">ID Maquina</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let item of ammm">
+        <tr>
+            <td>{{ ammm.id_articulo }}</td>
+            <td>{{ ammm.id_linea }}</td>
+            <td>{{ ammm.id_marca }}</td>
+            <td>{{ ammm.id_combustible }}</td>
+            <td>{{ ammm.motor }}</td>
+            <td>{{ ammm.modelo }}</td>
+            <td>{{ ammm.cilindrada }}</td>
+            <td>{{ ammm.competicion }}</td>
+            <td>{{ ammm.id_producto }}</td>
+            <td>{{ ammm.id_aplicacion }}</td>
+        </tr>
+    </tbody>
+</table>
