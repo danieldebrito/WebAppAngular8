@@ -1,0 +1,24 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*
+h3 {
+    color: red;
+    text-shadow: 1px 1px white;
+    /* letter-spacing: 2px; 
+    font-size: 50px;
+    font-weight: bold;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}*/
+
+h3 {
+    font-family: Calibri;
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 700;
+    line-height: 15.4px;
+}

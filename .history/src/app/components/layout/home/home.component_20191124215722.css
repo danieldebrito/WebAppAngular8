@@ -12,8 +12,8 @@ h3 {
 }
 
 h1 {
-    color: white;
-    text-shadow: 1px 1px gray;
+    color: red;
+    text-shadow: 1px 1px black;
     /* letter-spacing: 2px; */
     font-size: 30px;
     font-weight: normal;

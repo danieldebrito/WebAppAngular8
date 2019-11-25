@@ -1,0 +1,12 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+h3 {
+    color: red;
+    /* text-shadow: 1px 1px white; */
+    /* letter-spacing: 2px; */
+    font-size: 50px;
+    font-weight: normal;
+}

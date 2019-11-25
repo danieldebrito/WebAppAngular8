@@ -1,0 +1,9 @@
+img {
+    width: 100%;
+    height: auto;
+}
+
+h3 {
+    color: red;
+    text-shadow: 3px 2px white;
+}
