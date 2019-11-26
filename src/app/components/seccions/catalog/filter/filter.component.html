@@ -1,30 +1,43 @@
 <div class="filtro" *ngIf="show">
-    <p>
-        <button type="button" class="btn btn-outline-danger" (click)="colapsar1()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">
 
-            <i class="fas fa-check-double"></i>&nbsp;
-            <strong>Filtro</strong>
-        </button> &nbsp;
+    <div class="container p-2">
 
-        <button type="button" class="btn btn-outline-danger" (click)="colapsar2()" [attr.aria-expanded]="isCollapsed2" aria-controls="collapseExample2">
+        <p>
+            <button type="button" class="btn btn-outline-danger" (click)="colapsar1()"
+                [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">
 
-            <i class="fas fa-search"></i>&nbsp;
-            <strong>Busqueda por Codigo Meyro</strong>
-        </button> &nbsp;
+                <i class="fa fa-check-double"></i>&nbsp;
+                <strong>Filtro</strong>
+            </button> &nbsp;
 
-        <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3">
+            <button type="button" class="btn btn-outline-danger" (click)="colapsar2()"
+                [attr.aria-expanded]="isCollapsed2" aria-controls="collapseExample2">
 
-            <i class="fas fa-search"></i>&nbsp;
-            <strong>Busqueda Libre </strong>
-        </button> &nbsp;
+                <i class="fa fa-search"></i>&nbsp;
+                <strong>Busqueda por Codigo Meyro</strong>
+            </button> &nbsp;
 
-        <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3" routerLink="/carrito">
+            <button type="button" class="btn btn-outline-danger" (click)="colapsar3()"
+                [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3">
 
-            <i class="fas fa-cart-plus"></i>&nbsp;
-            <strong>Ir a Carrito</strong>
+                <i class="fa fa-search"></i>&nbsp;
+                <strong>Busqueda Libre </strong>
+            </button> &nbsp;
 
-        </button>
-    </p>
+            <button type="button" class="btn btn-outline-danger" (click)="colapsar3()"
+                [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3" routerLink="/carrito">
+
+                <i class="fa fa-cart-plus"></i>&nbsp;
+                <strong>Ir a Carrito</strong>
+
+            </button>&nbsp;
+
+            <button class="btn btn-outline-danger" (click)="isCollapsed = !isCollapsed">
+                <strong>Cerrar Menu</strong>
+            </button>
+        </p>
+
+    </div>
 
     <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
         <div class="card">
@@ -55,11 +68,12 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <!--  ////////////////////////////columna 1 ////////////////////////////////////////////////////////-->
-                            <ul>
+                            <ul style="list-style-type:none;">
                                 <li>
                                     <strong><b>Linea Liviana / Pesada :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="linea" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="linea"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione la Linea</option>
                                             <option *ngFor="let item of columnaLinea">
                                                 {{ item  }}
@@ -70,7 +84,8 @@
                                 <li>
                                     <strong><b>Marca :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="marca" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="marca"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione la Marca</option>
                                             <option *ngFor="let item of columnaMarca">
                                                 {{ item  }}
@@ -81,10 +96,11 @@
                                 <li>
                                     <strong><b>Combustible :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="combustible" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="combustible"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione el Combustible</option>
                                             <option *ngFor="let item of columnaComb">
-                                               {{ item  }}
+                                                {{ item  }}
                                             </option>
                                         </select>
                                     </div>
@@ -93,11 +109,12 @@
                         </div>
                         <div class="col-sm-3">
                             <!--  ////////////////////////////columna 2 ////////////////////////////////////////////////////////-->
-                            <ul>
+                            <ul style="list-style-type:none;">
                                 <li>
                                     <strong><b>Motor :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="motor" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="motor"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione el Motor</option>
                                             <option *ngFor="let item of columnaMotor">
                                                 {{ item  }}
@@ -108,7 +125,8 @@
                                 <li>
                                     <strong><b>Modelo :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="modelo" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="modelo"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione el Modelo</option>
                                             <option *ngFor="let item of columnaModelo">
                                                 {{ item  }}
@@ -119,7 +137,8 @@
                                 <li>
                                     <strong><b>Cilindrada :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="cilindrada" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="cilindrada"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione la Cilindrada</option>
                                             <option *ngFor="let item of columnaCilind">
                                                 {{ item  }}
@@ -131,11 +150,12 @@
                         </div>
                         <div class="col-sm-3">
                             <!--  ////////////////////////////columna 3 ////////////////////////////////////////////////////////-->
-                            <ul>
+                            <ul style="list-style-type:none;">
                                 <li>
                                     <strong><b>Estandard / Competicion :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="competicion" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="competicion"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione Estandard / Competicion </option>
                                             <option *ngFor="let item of columnaStd">
                                                 {{ item  }}
@@ -146,7 +166,8 @@
                                 <li>
                                     <strong>Producto :</strong>
                                     <div>
-                                        <select [(ngModel)]="producto" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="producto"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione el Producto</option>
                                             <option *ngFor="let item of columnaProd">
                                                 {{ item  }}
@@ -157,7 +178,8 @@
                                 <li>
                                     <strong><b>Aplicación :</b></strong>
                                     <div>
-                                        <select [(ngModel)]="aplicacion" [ngModelOptions]="{standalone: true}">
+                                        <select class="custom-select mr-1" [(ngModel)]="aplicacion"
+                                            [ngModelOptions]="{standalone: true}">
                                             <option value="" disabled>Selecione la Aplicacion</option>
                                             <option *ngFor="let item of columnaApp">
                                                 {{ item }}
@@ -169,7 +191,7 @@
                         </div>
                         <div class="col-sm-3">
                             <!--  ////////////////////////////columna 4 ////////////////////////////////////////////////////////-->
-                            <ul>
+                            <ul style="list-style-type:none;">
                                 <div class="botones">
                                     <li>
                                         <strong>
@@ -177,28 +199,25 @@
                                         </strong>
                                     </li>
                                     <li>
-                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                        <button class="btn btn-outline-danger btn-sm">
                                             <strong>Motor</strong>
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                        <button class="btn btn-outline-danger btn-sm">
                                             <strong>Modelo</strong>
                                         </button>
                                     </li><br>
                                     <li>
-                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                        <button class="btn btn-outline-danger btn-sm">
                                             <strong>Cilindrada</strong>
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                        <button class="btn btn-outline-danger btn-sm">
                                             <strong>Codigo Meyro</strong>
                                         </button>
                                     </li>
                                     <hr>
                                     <li>
-                                        <button class="btn btn-sm btn-outline-danger mr-2" (click)="Limpiar()">
+                                        <button class="btn btn-outline-danger btn-sm" (click)="Limpiar()">
                                             <strong>Limpiar Filtros</strong>
-                                        </button>
-                                        <button class="btn btn-sm btn-outline-danger mr-2" (click)="isCollapsed = !isCollapsed">
-                                            <strong>Cerrar Filtros</strong>
                                         </button>
                                     </li>
                                 </div>
