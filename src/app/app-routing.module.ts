@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './components/seccions/home/home.component';
 import { CatalogComponent } from './components/seccions/catalog/catalog.component';
+import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
+import { ContactComponent } from './components/seccions/contact/contact.component';
+import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
+
 
 
 const appRoutes: Routes = [
@@ -11,6 +15,9 @@ const appRoutes: Routes = [
   // { path: 'correctivos', component: CorrectivoTabsComponent },
   { path: 'home', component: HomeComponent },
   { path: 'catalog', component: CatalogComponent },
+  { path: 'detalle', component: DetailComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'blog', component: BlogComponent },
   {
     path: '',
     redirectTo: '/home',

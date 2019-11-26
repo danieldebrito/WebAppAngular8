@@ -1,1 +1,128 @@
-<p>detail works!</p>
+<div class="container">
+
+  <div class="col-md-12 py-2">
+    <div class="card">
+      <div class="py-2">
+        <section id="clientes">
+          <div class="container">
+            <div class="row">
+  
+              <div class="col-md-6">
+  
+                <!-- /////////////////////////////  IMAGENES ////////////////////////////////////////////////////// -->
+  
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Imagenes</h4>
+                  </div>
+                  <div class="card-body">
+                    <img src="../../../../../assets/juntas_grandes/01-2870_web.jpg" alt="" srcset="">
+                  </div>
+                  <div class="card-footer">
+                    <a href="./../../../../../assets/pdf_folleto_tecnico/01-1280 FT.pdf" target="_blank">
+                      <i class="fas fa-file-pdf"></i> <b> Descargar Instrucciones de Ajuste</b>
+                    </a>
+                  </div>
+                </div>
+  
+                <br>
+  
+                <!-- ///////////////////////////// modelos y   MOTORES ////////////////////////////////////////////////////// -->
+  
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Modelos y Motores</h4>
+                  </div>
+                  <div class="card-body">
+  
+                    <table class="table-responsive table-bordered">
+                      <thead>
+                        <tr>
+                          <th style="width: 25%">Marca</th>
+                          <th>Modelos</th>
+                          <th>Catalogo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td nowrap>
+                            FORD
+                          </td>
+                          <td>
+                            FALCON STANDARD / DE LUXE / FUTURA / GHIA
+                            TAXI / RANCHERO / RURAL
+                            FAIRLANE 500 / LTD - PICK UP F-100 / F-150
+                            (1969/88)
+                          </td>
+                          <td>
+                            <a href="./../../../../../assets/pdf_folleto_tecnico/01-1280 FT.pdf" target="_blank">
+                              <img src="./../../../../../assets/descarga_pdf.png" alt="" srcset="">
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+  
+                    <table class="table-responsive table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Motor</th>
+                          <th>cm3</th>
+                          <th nowrap>Ø Junta</th>
+                          <th nowrap>Ø Motor</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            188 / 221”
+                            3,0 - 3,6 Lts
+                            7 Bancadas
+                          </td>
+                          <td nowrap>
+                            3081 cm3 - 3620 cm3
+                          </td>
+                          <td nowrap>
+                            97mm
+                          </td>
+                          <td nowrap>
+                            93,47mm
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer">
+  
+                  </div>
+                </div>
+                <br>
+  
+              </div>
+  
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Junta para tapa de Cilindro</h4>
+                  </div>
+                  <div class="card-b-ody">
+                    
+                    <app-tabla-prod-version (showValue)="cambiaVista()" *ngIf="!showDetail"></app-tabla-prod-version>
+  
+                    <app-tabla-comp-jgos (showValue)="cambiaVista()" *ngIf="showDetail"></app-tabla-comp-jgos>
+  
+                  </div>
+                  <div class="card-footer">
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+</div>

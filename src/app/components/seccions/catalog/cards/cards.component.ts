@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
+import { Router } from '@angular/router';
+import { Articulo } from 'src/app/class/articulo';
+import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
+
+
 
 @Component({
   selector: 'app-cards',
@@ -14,11 +19,18 @@ export class CardsComponent implements OnInit {
 
   public p: number;  // paginacion primer page
 
-  constructor() {
-    this.p = 1;
+  constructor(
+    private router: Router,
+    private artService: ArticulosService
+  ) { this.p = 1; }
+
+  public cambiarVista(art: Articulo) {
+    this.artService.artDetalle = art;
+    this.artService.show = false;
+    this.showValue.emit({ show: this.artService.show });  // true, muestra grilla, false, muestra detalle de art
+    this.router.navigate(['especificacion']);
   }
 
-  public cambiarVista() {} // implementar
 
   ngOnInit() { }
 }

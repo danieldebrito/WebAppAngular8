@@ -1,0 +1,13 @@
+.page-footer {
+    background-color: #ccc;
+    
+}
+
+ul {
+    list-style-type:none;
+}
+
+
+a:link { color: black; text-decoration: none }
+a:hover { color: red; text-decoration: none }
+a:visited { color: blue; text-decoration: none }

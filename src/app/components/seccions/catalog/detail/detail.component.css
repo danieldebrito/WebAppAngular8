@@ -1,0 +1,54 @@
+/* para que no se pise con la navbar */
+.container {
+    padding-top: 4rem;
+}
+
+.bgd {
+    background-color:  #f2f3f4;
+    padding-left:  1%;
+    padding-right: 1%;
+}
+
+img {
+    width: 100%;
+}
+
+select {
+    width:100%;
+}
+
+th {
+    background-color:red;
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+strong {
+    background-color:red;
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+select {
+    height:40px;
+    line-height:30px;
+    background:#f4f4f4;
+} 
+
+.carritoInput {
+    width: 30%;
+}
+
+.carritoTotales {
+    text-align: right;
+}
+
+table{
+    table-layout: fixed;
+    width: auto;
+    font-size: small;
+}

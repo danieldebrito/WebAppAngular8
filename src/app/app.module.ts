@@ -21,6 +21,13 @@ import { FilterComponent } from './components/seccions/catalog/filter/filter.com
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
 import { CardsComponent } from './components/seccions/catalog/cards/cards.component';
 import { ListComponent } from './components/seccions/catalog/list/list.component';
+import { PreNavComponent } from './components/layout/nav-bar/pre-nav/pre-nav.component';
+import { PreFooterComponent } from './components/layout/footer/pre-footer/pre-footer.component';
+import { TablaCompJgosComponent } from './components/seccions/catalog/tabla-comp-jgos/tabla-comp-jgos.component';
+import { TablaProdVersionComponent } from './components/seccions/catalog/tabla-prod-version/tabla-prod-version.component';
+import { ContactComponent } from './components/seccions/contact/contact.component';
+import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
+import { BotonComprarComponent } from './components/seccions/catalog/boton-comprar/boton-comprar.component';
 
 
 
@@ -37,7 +44,14 @@ import { ListComponent } from './components/seccions/catalog/list/list.component
     FilterComponent,
     DetailComponent,
     CardsComponent,
-    ListComponent
+    ListComponent,
+    PreNavComponent,
+    PreFooterComponent,
+    TablaCompJgosComponent,
+    TablaProdVersionComponent,
+    ContactComponent,
+    BlogComponent,
+    BotonComprarComponent
   ],
   imports: [
     BrowserModule,
