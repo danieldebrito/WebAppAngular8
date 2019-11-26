@@ -1,0 +1,70 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-2">
+            <h2 class="text-left">Mis Sucursales</h2>
+        </div>
+
+        <div class="col-sm-5">
+            <form #formProducto="ngForm" (ngSubmit)="onSubmit()" id="form-producto1">
+
+                <div class="row">
+
+                    <div class="col-sm-12 mb-12">
+                        <label for="fname"> Nombre Sucursal : </label>
+                        <input type="text" name="nombre_sucursal" #nombre_sucursal="ngModel"
+                            [(ngModel)]="sucursal.nombre_sucursal" placeholder="Ingrese el Nombre de la Sucursal..."
+                            required>
+                    </div>
+
+                    <div class="col-sm-4 mb-4">
+                        <label for="fname">CP</label>
+                        <input type="text" name="cp" #cp="ngModel" [(ngModel)]="sucursal.cp"
+                            placeholder="Ingrese el Codigo Postal..." required>
+                    </div>
+
+                    <div class="col-sm-8 mb-8">
+                        <label for="fname">Localidad</label>
+                        <input type="text" name="localidad" #localidad="ngModel" [(ngModel)]="sucursal.localidad"
+                            placeholder="Ingrese la Localidad..." required>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-sm-5">
+            <form form #formProducto="ngForm" (ngSubmit)="onSubmit()" id="form-producto2">
+
+                <div class="row">
+                    <div class="col-sm-8 mb-8">
+                        <label for="fname"> Direccion Calle :</label>
+                        <input type="text" name="calle: " #calle="ngModel" [(ngModel)]="sucursal.calle"
+                            placeholder="Ingrese la Calle..." required>
+                    </div>
+
+                    <div class="col-sm-4 mb-4">
+                        <label for="lname">Nro :</label>
+                        <input type="email" name="numero" #numero="ngModel" [(ngModel)]="sucursal.numero"
+                            placeholder="Ingrese el Nro..." required>
+                    </div>
+
+                    <div class="col-sm-12 mb-12">
+                        <label for="lname">Provincia</label>
+                        <input type="text" name="provincia" #provincia="ngModel" [(ngModel)]="sucursal.provincia"
+                            placeholder="Ingrese la Provincia..." required>
+                    </div>
+                </div>
+
+                <br>
+                <div class="col-sm-4 mb-4">
+                    <input type="submit" value="Guardar">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

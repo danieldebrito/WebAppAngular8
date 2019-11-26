@@ -28,6 +28,14 @@ import { TablaProdVersionComponent } from './components/seccions/catalog/tabla-p
 import { ContactComponent } from './components/seccions/contact/contact.component';
 import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { BotonComprarComponent } from './components/seccions/catalog/boton-comprar/boton-comprar.component';
+import { ClienteTabsComponent } from './components/seccions/clientes/cliente-tabs/cliente-tabs.component';
+import { LoginComponent } from './components/seccions/clientes/login/login.component';
+import { MisDatosComponent } from './components/seccions/clientes/mis-datos/mis-datos.component';
+import { RecupPasswordComponent } from './components/seccions/clientes/recup-password/recup-password.component';
+import { RegistroComponent } from './components/seccions/clientes/registro/registro.component';
+import { SucursalesDetalleComponent } from './components/seccions/clientes/sucursales-detalle/sucursales-detalle.component';
+import { SucursalesListadoComponent } from './components/seccions/clientes/sucursales-listado/sucursales-listado.component';
+import { SucursalesNuevaComponent } from './components/seccions/clientes/sucursales-nueva/sucursales-nueva.component';
 
 
 
@@ -51,7 +59,15 @@ import { BotonComprarComponent } from './components/seccions/catalog/boton-compr
     TablaProdVersionComponent,
     ContactComponent,
     BlogComponent,
-    BotonComprarComponent
+    BotonComprarComponent,
+    ClienteTabsComponent,
+    LoginComponent,
+    MisDatosComponent,
+    RecupPasswordComponent,
+    RegistroComponent,
+    SucursalesDetalleComponent,
+    SucursalesListadoComponent,
+    SucursalesNuevaComponent
   ],
   imports: [
     BrowserModule,

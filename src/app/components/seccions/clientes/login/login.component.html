@@ -1,0 +1,47 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-3">
+          <h2>Ingreso de Clientes</h2>
+      
+        </div>
+        <div class="col-sm-6">
+      
+          <div *ngIf="!error">
+      
+            <form #formProducto="ngForm" (ngSubmit)="onSubmit()" id="form-producto1">
+                    
+              <label for="fname">¡Hola! Ingrese su Codigo de Cliente</label>
+              <input type="text" name="id" #nombre="ngModel" [(ngModel)]="login.id" placeholder="Ejemplo : 01-001..." required>
+      
+              <label for="fname"> Contraseña :</label>
+              <input type="password" name="clave: " #nombre="ngModel" [(ngModel)]="login.clave" placeholder="Ingrese la Contraseña..." required>
+      
+              <input type="submit" value="Login">
+            </form>
+      
+            <button routerLink="/registro">Crear Cuenta</button>
+      
+            <button routerLink="/recupPass">Recuperar Contraseña</button>
+          </div>
+      
+          <div *ngIf="error">
+      
+                <p><strong>
+                  <h1>Usuario o Contraseña incorrecta!!</h1>
+                </strong></p>
+                
+              <button (click)="cambiaVista()">Intertar Nuevamente</button>
+        
+              <button routerLink="/registro">Crear Cuenta</button>
+        
+              <button routerLink="/recupPass">Recuperar Contraseña</button>
+            </div>
+      
+        </div>
+        <div class="col-sm-3">
+      
+        </div>
+      </div>
+
+</div>

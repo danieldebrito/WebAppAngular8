@@ -1,0 +1,90 @@
+/* para que no se pise con la navbar */
+.container {
+    padding-top: 4rem;
+}
+
+::ng-deep .nav-fill .nav-link.active {
+    margin-top: -1px;
+    border-top: 2px solid #0599cf;
+}
+
+::ng-deep .nav-pills .nav-link.active, 
+::ng-deep .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: red;
+    margin: 3px;
+}
+
+.filtro {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+select {
+    width:200px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+select {
+    padding: 2%;
+}
+
+.bgd {
+    background-color:  #f2f3f4;
+}
+
+th {
+    background-color:red;
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+  
+.table-responsive {
+    width: 100%;
+    height: 100%;
+}
+
+.card-header {
+    text-align: left;
+}
+
+
+
+.cant {
+    width: 30%;
+}
+
+.inputCant {
+    width: 50%;
+}
+
+.der {
+    text-align: right;
+}
+
+.izq {
+    text-align: left;
+}
+
+.cent {
+    text-align: center;
+}
+
+.bgd {
+    background-color:  #f2f3f4;
+    padding : 1%; 
+}
+
+textarea {
+    width: 100%;
+    padding: 1%;
+}
+
+.btn {
+    margin: 3px;
+}
