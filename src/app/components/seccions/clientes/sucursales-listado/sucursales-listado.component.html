@@ -1,1 +1,36 @@
-<p>sucursales-listado works!</p>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Calle</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Localidad</th>
+        <th scope="col">Provincia</th>
+        <th scope="col">Acción</th>
+  
+      </tr>
+    </thead>
+    <tbody *ngFor="let sucursal of sucursales" >
+      <tr>
+        <td>{{ sucursal.nombre_sucursal }}</td>
+        <td>{{ sucursal.calle }}</td>
+        <td>{{ sucursal.numero }}</td>
+        <td>{{ sucursal.localidad }}</td>
+        <td>{{ sucursal.provincia }}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-primary"
+              (click)="mostrarDetalle(sucursal)">Detalle</button>
+          </div>
+          &nbsp;
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-danger"
+              (click)="eliminar(sucursal.id_sucursal)">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button class="buttonGreen" routerLink="/sucursalNueva">Agregar Sucursal</button>
+  
