@@ -9,12 +9,9 @@ import { AmmmService } from 'src/app/services/catalogo/ammm.service';
 })
 export class CardsComponent implements OnInit {
 
-  public ammm: ArtMarModMot[];
-  public p: number;  // paginacion primer page
+  public ammm = [];
 
-  constructor(private ammmService: AmmmService) {
-    this.p = 1;
-  }
+  constructor(private ammmService: AmmmService) { }
 
 
   public listar() {

@@ -1,7 +1,6 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
             <th scope="col">ID Articulo</th>
             <th scope="col">Linea</th>
             <th scope="col">Marca</th>
@@ -14,9 +13,8 @@
             <th scope="col">Aplicacion</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let item of ammm  | paginate: { itemsPerPage: 100, currentPage: p }; let indice=index ">
-            <td>{{ indice + 1 }}</td>
+    <tbody *ngFor="let item of ammm">
+        <tr>
             <td>{{ item.id_articulo }}</td>
             <td>{{ item.id_linea }}</td>
             <td>{{ item.id_marca }}</td>
@@ -30,5 +28,3 @@
         </tr>
     </tbody>
 </table>
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -10,16 +10,14 @@ import { AmmmService } from 'src/app/services/catalogo/ammm.service';
 export class CardsComponent implements OnInit {
 
   public ammm: ArtMarModMot[];
-  public p: number;  // paginacion primer page
 
-  constructor(private ammmService: AmmmService) {
-    this.p = 1;
-  }
+  constructor(private ammmService: AmmmService) { }
 
 
   public listar() {
     this.ammmService.ListarO().subscribe(response => {
       this.ammm = response;
+      alert(this.ammm);
     },
       error => {
         console.error(error);
