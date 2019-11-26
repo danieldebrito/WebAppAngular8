@@ -1,0 +1,220 @@
+<div class="filtro" *ngIf="show">
+    <p>
+        <button type="button" class="btn btn-outline-danger" (click)="colapsar1()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">
+
+            <i class="fas fa-check-double"></i>&nbsp;
+            <strong>Filtro</strong>
+        </button> &nbsp;
+
+        <button type="button" class="btn btn-outline-danger" (click)="colapsar2()" [attr.aria-expanded]="isCollapsed2" aria-controls="collapseExample2">
+
+            <i class="fas fa-search"></i>&nbsp;
+            <strong>Busqueda por Codigo Meyro</strong>
+        </button> &nbsp;
+
+        <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3">
+
+            <i class="fas fa-search"></i>&nbsp;
+            <strong>Busqueda Libre </strong>
+        </button> &nbsp;
+
+        <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3" routerLink="/carrito">
+
+            <i class="fas fa-cart-plus"></i>&nbsp;
+            <strong>Ir a Carrito</strong>
+
+        </button>
+    </p>
+
+    <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" placeholder="Ejemplo: 01-2000 S">&nbsp;
+                <button type="button" class="btn btn-outline-danger">BUSCAR</button>&nbsp;
+                <button type="button" class="btn btn-outline-danger" (click)="isCollapsed2 = !isCollapsed2">Cerrar
+                    Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="collapseExample3" [ngbCollapse]="isCollapsed3">
+        <div class="card">
+            <div class="card-body">
+                <input type="text" placeholder="Marca, Modelo, Motor, Cilindrada...">&nbsp;
+                <button type="button" class="btn btn-outline-danger">BUSCAR</button>&nbsp;
+                <button type="button" class="btn btn-outline-danger" (click)="isCollapsed3 = !isCollapsed3">Cerrar
+                    Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="card">
+            <div class="card-body">
+                <form #f="ngForm" name="f" (change)="Filtrar()">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!--  ////////////////////////////columna 1 ////////////////////////////////////////////////////////-->
+                            <ul>
+                                <li>
+                                    <strong><b>Linea Liviana / Pesada :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="linea" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione la Linea</option>
+                                            <option *ngFor="let item of columnaLinea">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong><b>Marca :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="marca" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione la Marca</option>
+                                            <option *ngFor="let item of columnaMarca">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong><b>Combustible :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="combustible" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione el Combustible</option>
+                                            <option *ngFor="let item of columnaComb">
+                                               {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <!--  ////////////////////////////columna 2 ////////////////////////////////////////////////////////-->
+                            <ul>
+                                <li>
+                                    <strong><b>Motor :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="motor" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione el Motor</option>
+                                            <option *ngFor="let item of columnaMotor">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong><b>Modelo :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="modelo" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione el Modelo</option>
+                                            <option *ngFor="let item of columnaModelo">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong><b>Cilindrada :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="cilindrada" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione la Cilindrada</option>
+                                            <option *ngFor="let item of columnaCilind">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <!--  ////////////////////////////columna 3 ////////////////////////////////////////////////////////-->
+                            <ul>
+                                <li>
+                                    <strong><b>Estandard / Competicion :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="competicion" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione Estandard / Competicion </option>
+                                            <option *ngFor="let item of columnaStd">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong>Producto :</strong>
+                                    <div>
+                                        <select [(ngModel)]="producto" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione el Producto</option>
+                                            <option *ngFor="let item of columnaProd">
+                                                {{ item  }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <strong><b>Aplicación :</b></strong>
+                                    <div>
+                                        <select [(ngModel)]="aplicacion" [ngModelOptions]="{standalone: true}">
+                                            <option value="" disabled>Selecione la Aplicacion</option>
+                                            <option *ngFor="let item of columnaApp">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <!--  ////////////////////////////columna 4 ////////////////////////////////////////////////////////-->
+                            <ul>
+                                <div class="botones">
+                                    <li>
+                                        <strong>
+                                            <p>Ordenar por : </p>
+                                        </strong>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                            <strong>Motor</strong>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                            <strong>Modelo</strong>
+                                        </button>
+                                    </li><br>
+                                    <li>
+                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                            <strong>Cilindrada</strong>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger mr-2">
+                                            <strong>Codigo Meyro</strong>
+                                        </button>
+                                    </li>
+                                    <hr>
+                                    <li>
+                                        <button class="btn btn-sm btn-outline-danger mr-2" (click)="Limpiar()">
+                                            <strong>Limpiar Filtros</strong>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger mr-2" (click)="isCollapsed = !isCollapsed">
+                                            <strong>Cerrar Filtros</strong>
+                                        </button>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+
+<app-cards [Items]='dataFiltrada' (showValue)="cambiaVista()" *ngIf="show"></app-cards>
+
+<app-detail (showValue)="cambiaVista()" *ngIf="!show"></app-detail>
+
+-->

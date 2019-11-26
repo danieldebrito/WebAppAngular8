@@ -1,0 +1,34 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID Articulo</th>
+            <th scope="col">Linea</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Combustible</th>
+            <th scope="col">Motor</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Cilindrada</th>
+            <th scope="col">Competicion</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Aplicacion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of ammm  | paginate: { itemsPerPage: 100, currentPage: p }; let indice=index ">
+            <td>{{ indice + 1 }}</td>
+            <td>{{ item.id_articulo }}</td>
+            <td>{{ item.id_linea }}</td>
+            <td>{{ item.id_marca }}</td>
+            <td>{{ item.id_combustible }}</td>
+            <td>{{ item.motor }}</td>
+            <td>{{ item.modelo }}</td>
+            <td>{{ item.cilindrada }}</td>
+            <td>{{ item.competicion }}</td>
+            <td>{{ item.id_producto }}</td>
+            <td>{{ item.id_aplicacion }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

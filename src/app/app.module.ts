@@ -20,6 +20,7 @@ import { CatalogComponent } from './components/seccions/catalog/catalog.componen
 import { FilterComponent } from './components/seccions/catalog/filter/filter.component';
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
 import { CardsComponent } from './components/seccions/catalog/cards/cards.component';
+import { ListComponent } from './components/seccions/catalog/list/list.component';
 
 
 
@@ -35,7 +36,8 @@ import { CardsComponent } from './components/seccions/catalog/cards/cards.compon
     CatalogComponent,
     FilterComponent,
     DetailComponent,
-    CardsComponent
+    CardsComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
