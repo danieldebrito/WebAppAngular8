@@ -34,7 +34,7 @@ export class CardsComponent implements OnInit {
   public traerArtID(id) {
     this.artService.TraerUno(id).subscribe(response => {
       this.art = response;
-      return this.art;
+      return this.art.img_peq_url;
     },
       error => {
         console.error(error);
