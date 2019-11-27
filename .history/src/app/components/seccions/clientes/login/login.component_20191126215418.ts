@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 
           if (response['Estado'] === 'OK') {
             if (!this.authService.redirectUrl) {
-              this.authService.redirectUrl = '/catalog';
+              this.authService.redirectUrl = '/catalogo';
               this.message = response['Mensaje'];
             }
 

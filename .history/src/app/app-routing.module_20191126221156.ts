@@ -8,8 +8,6 @@ import { DetailComponent } from './components/seccions/catalog/detail/detail.com
 import { ContactComponent } from './components/seccions/contact/contact.component';
 import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { LoginComponent } from './components/seccions/clientes/login/login.component';
-import { PageNotFoundComponent } from './components/seccions/page-not-found/page-not-found.component';
-
 
 const appRoutes: Routes = [
   // mantenimiento
@@ -25,7 +23,7 @@ const appRoutes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  { path: '**', component: PageNotFoundComponent },
+  // { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

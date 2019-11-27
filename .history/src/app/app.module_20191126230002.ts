@@ -42,7 +42,6 @@ import { PedidosListadoComponent } from './components/seccions/pedidos/pedidos-l
 import { PedidosTabsComponent } from './components/seccions/pedidos/pedidos-tabs/pedidos-tabs.component';
 import { QuienSoyComponent } from './components/seccions/quien-soy/quien-soy.component';
 import { AbmExpresosComponent } from './components/seccions/users/abm-expresos/abm-expresos.component';
-import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
 
 
 
@@ -80,8 +79,7 @@ import { PanelControlComponent } from './components/seccions/users/panel-control
     PedidosListadoComponent,
     PedidosTabsComponent,
     QuienSoyComponent,
-    AbmExpresosComponent,
-    PanelControlComponent
+    AbmExpresosComponent
   ],
   imports: [
     BrowserModule,
