@@ -1,0 +1,27 @@
+/* para que no se pise con la navbar */
+
+.container {
+    padding-top: 4rem;
+}
+
+.banner {
+    background-image: url("../../../../../assets/dto-tecnico/blog-banner.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5%;
+    text-align: center;
+    color: white;
+}
+
+.item-blog img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+}
+
+.item-blog img:hover {
+    box-shadow: 0 0 2px 1px red;
+}

@@ -1,0 +1,58 @@
+<div class="container p-2">
+
+    <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+
+    <!--Row with two equal columns-->
+    <div class="row">
+        <div class="col-md-3 p-2" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
+
+            <div class="card">
+                <img src="./../../../../../assets/juntas_grandes/01-1200_web.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    {{ item.id_producto }} <br> {{ traerArtID(item.id_producto).descripcion_corta }}
+                    <h5 class="card-title">{{ item.id_articulo }}</h5>
+                    <p class="card-text">
+                        {{ item.id_aplicacion }} <br>
+                        <b>{{ item.id_marca }}</b> {{ item.modelo }} <br>
+                        <b>Motor: </b> {{ item.motor }} - {{ item.cilindrada }} - {{ item.id_combustible }} <br> {{ item.competicion }}
+                    </p>
+                </div>
+                <div class="card-footer">
+
+                    <div class="options d-flex flex-fill">
+                        <select class="custom-select mr-1">
+                            <option selected>Materiales</option>
+                            <option value="1">Corcho y Goma 3 mm</option>
+                            <option value="2">Goma Sintetica</option>
+                            <option value="3">Fibra 1.50 mm</option>
+                            <option value="4">Corcho y Goma con Fibra comprimida 1.50 mm fsdfsdfdsfdf fsdsdfsdffs rewrwerwerew rwerwerewrwe rewrewr</option>
+                        </select>
+                        <!--
+                        <input type="number" class="form-control mr-1" id="cantidad" placeholder="Cant.">
+                        -->
+                        <select class="custom-select mr-1">
+                            <option selected>Materiales</option>
+                            <option value="1">Corcho y Goma 3 mm</option>
+                            <option value="2">Goma Sintetica</option>
+                            <option value="3">Fibra 1.50 mm</option>
+                            <option value="4">Corcho y Goma con Fibra comprimida 1.50 mm fsdfsdfdsfdf fsdsdfsdffs rewrwerwerew rwerwerewrwe rewrewr</option>
+                        </select>
+
+                    </div>
+                    <div class="buy d-flex justify-content-between align-items-center">
+                        <div class="price text-success">
+                            <h6 class="mt-4">$9999.99 - Con Stock</h6>
+                        </div>
+                        <a href="#" class="btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i></a>
+                        <a routerLink="/detalle" class="btn btn-danger mt-3"><i class="fa fa-shopping-cart"></i></a>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
