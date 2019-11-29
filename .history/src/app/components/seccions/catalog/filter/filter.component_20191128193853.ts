@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 // class
 import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
 // services
@@ -44,8 +45,9 @@ export class FilterComponent implements OnInit {
   public columnaApp: string[];
 
   constructor(
-    private ammmService: AmmmService
-  ) {
+    private ammmService: AmmmService,
+    private spinner: NgxSpinnerService
+    ) {
     this.show = true;
   }
 
@@ -183,6 +185,7 @@ export class FilterComponent implements OnInit {
   }
 
   public Filtrar() {
+    this.spinner.show();
     this.ammmService.FiltrarP(
         this.linea,
         this.marca,
@@ -221,6 +224,7 @@ public Limpiar() {
       this.aplicacion = '';
 
       this.LimpiaColumnas();
+      this.spinner.hide();
 
   },
       error => {

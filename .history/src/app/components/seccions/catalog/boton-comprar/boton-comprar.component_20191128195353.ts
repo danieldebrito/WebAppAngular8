@@ -45,7 +45,7 @@ export class BotonComprarComponent implements OnInit {
     this.identity = this.authService.getIdentityLocalStorage();
   }
 
-  DoCheck() {
+  ngDoCheck() {
     this.identity = this.authService.getIdentityLocalStorage();
   }
 }

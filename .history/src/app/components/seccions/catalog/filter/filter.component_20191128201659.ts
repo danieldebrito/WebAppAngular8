@@ -44,8 +44,8 @@ export class FilterComponent implements OnInit {
   public columnaApp: string[];
 
   constructor(
-    private ammmService: AmmmService
-  ) {
+    private ammmService: AmmmService,
+    ) {
     this.show = true;
   }
 
