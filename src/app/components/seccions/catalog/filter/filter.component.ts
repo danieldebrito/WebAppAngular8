@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // class
-import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
+import { Cards } from 'src/app/class/cards';
 // services
 import { CardsService } from 'src/app/services/catalogo/cards.service';
-import { Cards } from 'src/app/class/cards';
 
 @Component({
   selector: 'app-filter',

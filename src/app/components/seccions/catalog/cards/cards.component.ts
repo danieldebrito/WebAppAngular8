@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
+import { Cards } from 'src/app/class/cards';
 import { Router } from '@angular/router';
 import { Articulo } from 'src/app/class/articulo';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
@@ -11,7 +11,7 @@ import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 })
 export class CardsComponent implements OnInit {
 
-  @Input() Items: ArtMarModMot[];
+  @Input() Items: Cards[];
   @Output() showValue = new EventEmitter();
 
   public p: number;  // paginacion primer page

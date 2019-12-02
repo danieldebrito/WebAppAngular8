@@ -29,15 +29,15 @@ export class CardsService {
 
     const request: object = {
 
-      id_linea: linea == null ? '' : linea,
-      id_marca: marca == null ? '' : marca,
-      id_combustible: combustible == null ? '' : combustible,
+      linea: linea == null ? '' : linea,
+      marca: marca == null ? '' : marca,
+      combustible: combustible == null ? '' : combustible,
       motor: motor == null ? '' : motor,
       modelo: modelo == null ? '' : modelo,
       cilindrada: cilindrada == null ? '' : cilindrada,
       competicion: competicion == null ? '' : competicion,
-      id_producto: producto == null ? '' : producto,
-      id_aplicacion: aplicacion == null ? '' : aplicacion
+      producto: producto == null ? '' : producto,
+      aplicacion: aplicacion == null ? '' : aplicacion
     };
 
     return this.miHttp.httpPostP('/cards/filtrar', request);
