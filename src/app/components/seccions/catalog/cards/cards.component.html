@@ -7,8 +7,11 @@
         <div class="col-md-3 p-2" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
 
             <div class="card">
-                <img src=" {{ item.urlImgPeq }}" class="card-img-top" alt="...">
-                {{ item.urlImgPeq }}
+                <!--
+                <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
+                -->
+
+                <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
 
                 <div class="card-body">
                     {{ item.id_producto }} <br> {{ item.id_aplicacion }} <br>
