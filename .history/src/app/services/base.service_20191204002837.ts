@@ -12,6 +12,7 @@ export class BaseService {
     // hostinger test hosting
     // this.urlBase = 'http://juntasmeyro.000webhostapp.com/api/index.php';
 
+
     // localhost
     this.urlBase = 'http://localhost/api_myr_web/app/index.php';
 
@@ -20,7 +21,7 @@ export class BaseService {
   }
 
 
-  public httpGetP( url: string) {
+  public httpGetP ( url: string) {
     return this.http
     .get( this.urlBase + url )
     .toPromise()
@@ -28,7 +29,7 @@ export class BaseService {
     .catch( this.handleError );
   }
 
-  public httpDeleteP( url: string) {
+  public httpDeleteP ( url: string) {
     return this.http
     .delete( this.urlBase + url )
     .toPromise()
@@ -44,11 +45,11 @@ export class BaseService {
     return this.http.get<T>( this.urlBase + url );
   }
 
-  private extractData( res: Response ) {
+  private extractData ( res: Response ) {
     return res.json() || {};
   }
 
-  private handleError( error: Response | any ) {
+  private handleError ( error: Response | any ) {
     return error;
   }
 }
