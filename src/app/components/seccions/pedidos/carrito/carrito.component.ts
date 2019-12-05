@@ -149,11 +149,11 @@ export class CarritoComponent implements OnInit {
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
     this.listarPedidoAbierto();
-  }
-
-  ngDoCheck() {
-    this.identity = this.authService.getIdentityLocalStorage();
     this.listaPorCliente();
     this.listaExpresos();
+  }
+
+  DoCheck() {
+    this.identity = this.authService.getIdentityLocalStorage();
   }
 }
