@@ -47,6 +47,7 @@ import { PanelControlComponent } from './components/seccions/users/panel-control
 import { HistoriaComponent } from './components/seccions/nosotros/historia/historia.component';
 import { CertificacionesComponent } from './components/seccions/nosotros/certificaciones/certificaciones.component';
 import { ProductosComponent } from './components/seccions/nosotros/productos/productos.component';
+import { NovedadesComponent } from './components/seccions/nosotros/novedades/novedades.component';
 // dto tecnico
 import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { InstruccionesComponent } from './components/seccions/ayuda/instrucciones/instrucciones.component';
@@ -96,7 +97,8 @@ import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-i
     InstruccionesComponent,
     AprieteComponent,
     RetenesInfoComponent,
-    BulonesInfoComponent
+    BulonesInfoComponent,
+    NovedadesComponent
   ],
   imports: [
     BrowserModule,

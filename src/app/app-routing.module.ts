@@ -21,6 +21,7 @@ import { HistoriaComponent } from './components/seccions/nosotros/historia/histo
 import { CertificacionesComponent } from './components/seccions/nosotros/certificaciones/certificaciones.component';
 import { ProductosComponent } from './components/seccions/nosotros/productos/productos.component';
 import { InstruccionesComponent } from './components/seccions/ayuda/instrucciones/instrucciones.component';
+import { NovedadesComponent } from './components/seccions/nosotros/novedades/novedades.component';
 // dto tecnico
 import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { AprieteComponent } from './components/seccions/dtoTecnico/apriete/apriete.component';
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   { path: 'sucursal', component: SucursalesDetalleComponent },
   { path: 'sucursalNueva', component: SucursalesNuevaComponent },
   { path: 'historia', component: HistoriaComponent },
+  { path: 'novedades', component: NovedadesComponent },
   { path: 'certificaciones', component: CertificacionesComponent },
   { path: 'productos', component: ProductosComponent },
   { path: 'instrucciones', component: InstruccionesComponent },
