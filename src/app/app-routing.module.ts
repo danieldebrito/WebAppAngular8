@@ -16,6 +16,7 @@ import { PedidosTabsComponent } from './components/seccions/pedidos/pedidos-tabs
 import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
 import { SucursalesNuevaComponent } from './components/seccions/clientes/sucursales-nueva/sucursales-nueva.component';
 import { SucursalesDetalleComponent } from './components/seccions/clientes/sucursales-detalle/sucursales-detalle.component';
+// nosotros
 import { HistoriaComponent } from './components/seccions/nosotros/historia/historia.component';
 import { CertificacionesComponent } from './components/seccions/nosotros/certificaciones/certificaciones.component';
 import { ProductosComponent } from './components/seccions/nosotros/productos/productos.component';
@@ -25,6 +26,9 @@ import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.compon
 import { AprieteComponent } from './components/seccions/dtoTecnico/apriete/apriete.component';
 import { RetenesInfoComponent } from './components/seccions/dtoTecnico/retenes-info/retenes-info.component';
 import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-info/bulones-info.component';
+// pedidos
+import { PedidosListadoComponent } from './components/seccions/pedidos/pedidos-listado/pedidos-listado.component';
+
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -48,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'apriete', component: AprieteComponent },
   { path: 'retenes', component: RetenesInfoComponent },
   { path: 'bulones', component: BulonesInfoComponent },
+  { path: 'pedidos', component: PedidosListadoComponent },
   {
     path: '',
     redirectTo: '/home',
