@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 // styles
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // components
 import { AppComponent } from './app.component';
@@ -27,7 +27,6 @@ import { PreFooterComponent } from './components/layout/footer/pre-footer/pre-fo
 import { TablaCompJgosComponent } from './components/seccions/catalog/tabla-comp-jgos/tabla-comp-jgos.component';
 import { TablaProdVersionComponent } from './components/seccions/catalog/tabla-prod-version/tabla-prod-version.component';
 import { ContactComponent } from './components/seccions/contact/contact.component';
-import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { BotonComprarComponent } from './components/seccions/catalog/boton-comprar/boton-comprar.component';
 import { ClienteTabsComponent } from './components/seccions/clientes/cliente-tabs/cliente-tabs.component';
 import { LoginComponent } from './components/seccions/clientes/login/login.component';
@@ -41,11 +40,19 @@ import { PageNotFoundComponent } from './components/seccions/page-not-found/page
 import { CarritoComponent } from './components/seccions/pedidos/carrito/carrito.component';
 import { PedidosListadoComponent } from './components/seccions/pedidos/pedidos-listado/pedidos-listado.component';
 import { PedidosTabsComponent } from './components/seccions/pedidos/pedidos-tabs/pedidos-tabs.component';
-import { QuienSoyComponent } from './components/seccions/quien-soy/quien-soy.component';
+import { QuienSoyComponent } from './components/seccions/ayuda/quien-soy/quien-soy.component';
 import { AbmExpresosComponent } from './components/seccions/clientes/abm-expresos/abm-expresos.component';
 import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
-
-
+// nosotros
+import { HistoriaComponent } from './components/seccions/nosotros/historia/historia.component';
+import { CertificacionesComponent } from './components/seccions/nosotros/certificaciones/certificaciones.component';
+import { ProductosComponent } from './components/seccions/nosotros/productos/productos.component';
+// dto tecnico
+import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
+import { InstruccionesComponent } from './components/seccions/ayuda/instrucciones/instrucciones.component';
+import { AprieteComponent } from './components/seccions/dtoTecnico/apriete/apriete.component';
+import { RetenesInfoComponent } from './components/seccions/dtoTecnico/retenes-info/retenes-info.component';
+import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-info/bulones-info.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +89,14 @@ import { PanelControlComponent } from './components/seccions/users/panel-control
     PedidosTabsComponent,
     QuienSoyComponent,
     AbmExpresosComponent,
-    PanelControlComponent
+    PanelControlComponent,
+    HistoriaComponent,
+    CertificacionesComponent,
+    ProductosComponent,
+    InstruccionesComponent,
+    AprieteComponent,
+    RetenesInfoComponent,
+    BulonesInfoComponent
   ],
   imports: [
     BrowserModule,
