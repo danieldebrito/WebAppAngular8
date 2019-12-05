@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class PedidoItemsService {
 
+  public cantItems: number;
+
   constructor(public miHttp: BaseService) { }
 
   public Listar(): Observable<PedidoItem[]> {

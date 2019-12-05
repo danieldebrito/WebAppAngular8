@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Cliente } from 'src/app/class/cliente';
 import { AuthService } from 'src/app/services/clientes/auth.service';
+import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,10 +11,23 @@ import { AuthService } from 'src/app/services/clientes/auth.service';
 export class NavBarComponent implements OnInit, DoCheck {
 
   public identity: Cliente;
+  public cantItemsCarrito: number;
 
   isNavbarCollapsed = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private pedidoItemServ: PedidoItemsService
+  ) { }
+
+  public cuentaItemsCarrito() {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
+      this.cantItemsCarrito = response.length;
+    },
+      error => {
+        console.error(error);
+      });
+  }
 
   logout() {
     this.authService.logout();
@@ -21,11 +35,13 @@ export class NavBarComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
+    this.cuentaItemsCarrito();
   }
 
 
   ngDoCheck() {
     this.identity = this.authService.getIdentityLocalStorage();
+    this.cuentaItemsCarrito();
   }
 
 }

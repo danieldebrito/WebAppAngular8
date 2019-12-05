@@ -16,7 +16,6 @@ import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 
-
 @Component({
   selector: 'app-carrito',
   templateUrl: './carrito.component.html',
@@ -57,10 +56,18 @@ export class CarritoComponent implements OnInit {
   public listarPedidoAbierto() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
       this.pedidoItems = response;
+      this.cuentaCantItems();
     },
       error => {
         console.error(error);
       });
+  }
+
+  /**
+   * cuenta cantidad de items en carrito
+   */
+  public cuentaCantItems() {
+    this.pedidoItemServ.cantItems = this.pedidoItems.length;
   }
 
   /**
@@ -151,6 +158,7 @@ export class CarritoComponent implements OnInit {
     this.listarPedidoAbierto();
     this.listaPorCliente();
     this.listaExpresos();
+    this.cuentaCantItems();
   }
 
   DoCheck() {

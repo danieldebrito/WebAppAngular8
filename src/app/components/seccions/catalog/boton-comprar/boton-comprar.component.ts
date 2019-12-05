@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, Input } from '@angular/core';
-
+import { ToastrService } from 'ngx-toastr';
 // class
 import { Cliente } from 'src/app/class/cliente';
 
@@ -19,7 +19,8 @@ export class BotonComprarComponent implements OnInit {
 
   constructor(
     private pedidoItemServ: PedidoItemsService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toastr: ToastrService) {
     this.cantidad = 1;
   }
 
@@ -32,6 +33,7 @@ export class BotonComprarComponent implements OnInit {
       'abierto'
     ).then(
       response => {
+        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
       }
     ).catch(
