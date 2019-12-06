@@ -56,6 +56,9 @@ import { InstruccionesComponent } from './components/seccions/ayuda/instruccione
 import { AprieteComponent } from './components/seccions/dtoTecnico/apriete/apriete.component';
 import { RetenesInfoComponent } from './components/seccions/dtoTecnico/retenes-info/retenes-info.component';
 import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-info/bulones-info.component';
+import { CompeticionPipe } from './pipes/competicion.pipe';
+import { EnPromoPipe } from './pipes/en-promo.pipe';
+import { NuevoProductoPipe } from './pipes/nuevo-producto.pipe';
 
 @NgModule({
   declarations: [
@@ -100,7 +103,10 @@ import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-i
     AprieteComponent,
     RetenesInfoComponent,
     BulonesInfoComponent,
-    NovedadesComponent
+    NovedadesComponent,
+    CompeticionPipe,
+    EnPromoPipe,
+    NuevoProductoPipe
   ],
   imports: [
     BrowserModule,
