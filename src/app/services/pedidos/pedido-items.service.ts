@@ -33,7 +33,7 @@ export class PedidoItemsService {
   }
 
   public Alta(
-    idPedido: string,
+    idPedido: number,
     idCliente: string,
     idArticulo: string,
     cantidad: number
@@ -49,7 +49,7 @@ export class PedidoItemsService {
 
   public Update(
     idPedidoItem: number,
-    idPedido: string,
+    idPedido: number,
     idCliente: string,
     idArticulo: string,
     cantidad: number

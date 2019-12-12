@@ -21,13 +21,18 @@ export class NavBarComponent implements OnInit, DoCheck {
   ) { }
 
   public cuentaItemsCarrito() {
+
+    if (this.identity == null) {
+      this.cantItemsCarrito = 0;
+    } else {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
       this.cantItemsCarrito = response.length;
     },
       error => {
         console.error(error);
       });
-  }
+    }
+    }
 
   logout() {
     this.authService.logout();
@@ -43,5 +48,4 @@ export class NavBarComponent implements OnInit, DoCheck {
     this.identity = this.authService.getIdentityLocalStorage();
     this.cuentaItemsCarrito();
   }
-
 }

@@ -25,19 +25,14 @@ export class BotonComprarComponent implements OnInit {
   }
 
   public cargaItem() {
-    this.pedidoItemServ.Alta(
-      this.identity.id,
-      '-1',
-      this.id_articulo,
-      this.cantidad
-    ).then(
+    this.pedidoItemServ.Alta(-1, this.identity.id, this.id_articulo, this.cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
       }
     ).catch(
       error => {
-        console.error('ERROR DEL SERVIDOR', error);
+        console.error('ERROR DEL SERVIDOR, boton-comprar.ts', error);
       }
     );
   }
