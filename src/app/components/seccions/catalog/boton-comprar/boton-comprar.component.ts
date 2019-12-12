@@ -29,8 +29,7 @@ export class BotonComprarComponent implements OnInit {
       this.identity.id,
       '-1',
       this.id_articulo,
-      this.cantidad,
-      'abierto'
+      this.cantidad
     ).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
@@ -48,6 +47,6 @@ export class BotonComprarComponent implements OnInit {
   }
 
   DoCheck() {
-    this.identity = this.authService.getIdentityLocalStorage();
+    // this.identity = this.authService.getIdentityLocalStorage();
   }
 }
