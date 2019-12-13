@@ -35,7 +35,7 @@ export class PedidosService {
   public Alta(
     idCliente: string,
     idSucursal: number,
-    idExpreso: number,
+    idExpreso: string,
     estado: string,
     fecha: string,
     observaciones: string,

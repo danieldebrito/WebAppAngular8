@@ -15,7 +15,7 @@
 
             <div class="col-sm-3">
                 <strong><b>Direccion de Entrega :</b></strong>
-                <select [(ngModel)]="sucursal" [ngModelOptions]="{standalone: true}">
+                <select [(ngModel)]="sucursal" name="sucursal">
                     <option *ngFor="let sucursal of sucursales">
                         {{ sucursal.nombre_sucursal }}
                     </option>
@@ -25,7 +25,7 @@
 
             <div class="col-sm-3">
                 <strong><b>Medio de Envío :</b></strong>
-                <select [(ngModel)]="expreso" [ngModelOptions]="{standalone: true}">
+                <select [(ngModel)]="expreso" name="expreso">
                     <option *ngFor="let expreso of expresos">
                         {{ expreso.nombre }}
                     </option>

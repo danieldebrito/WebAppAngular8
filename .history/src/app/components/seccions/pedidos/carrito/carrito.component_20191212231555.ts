@@ -15,7 +15,6 @@ import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',
@@ -24,6 +23,7 @@ import { FormControl } from '@angular/forms';
 })
 export class CarritoComponent implements OnInit {
 
+  public identity: Cliente;
   public articulo: Articulo;
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
@@ -32,7 +32,11 @@ export class CarritoComponent implements OnInit {
   public sucursal: Sucursal; // opcion elegida en select
 
 
+  public idSucursal: number;
+  public idExpreso: number;
   public idCliente: string;
+  public estado: string;
+  public fecha: string;
   public observaciones: string;
 
   constructor(
@@ -43,9 +47,7 @@ export class CarritoComponent implements OnInit {
     private expresosService: ExpresosService,
 
     private authService: AuthService
-  ) {
-    this.idCliente = this.authService.getIdentityLocalStorage().id;
-  }
+  ) { }
 
   public nuevoPedido() { }
 
@@ -53,7 +55,7 @@ export class CarritoComponent implements OnInit {
    * trae los items que tengan el atributo estado = 'abierto' y sean del cliente en sesion
    */
   public listarPedidoAbierto() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaCantItems();
     },
@@ -92,15 +94,15 @@ export class CarritoComponent implements OnInit {
    * debe seleccionar una para cerrar el pedido.
    */
   listaPorCliente() {
-    this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
+    this.sucursalesService.ListarPorCliente(this.identity.id).subscribe(response => {
       this.sucursales = response;
     });
   }
 
   /**
-   * LISTA los expresos
-   * debe seleccionar uno para cerrar el pedido.
-   */
+ * LISTA los expresos
+ * debe seleccionar uno para cerrar el pedido.
+ */
   listaExpresos() {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
@@ -113,26 +115,22 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
-    alert(this.idCliente + ' suc ' + this.sucursal.id_sucursal + ' exp ' + this.expreso.id_expreso
-     + '' +  'abierto' + ' fec ' + this.pedidosService.getfecha() + ' obs ' +  this.observaciones);
-/*
     this.pedidosService.Alta(
       this.idCliente,
-      this.sucursal.id_sucursal,
-      this.expreso.id_expreso,
-      'abierto',
-      this.pedidosService.getfecha(),
+      this.idSucursal,
+      this.idExpreso,
+      this.estado,
+      this.fecha,
       this.observaciones
-    ).then(
-      response => {
-        this.cerrarPedido(response);
-        return response;
-      }
-    ).catch(
-      error => {
-        console.error('ERROR DEL SERVIDOR', error);
-      }
-    );*/
+      ).then(
+        response => {
+          return response;
+        }
+      ).catch(
+        error => {
+          console.error('ERROR DEL SERVIDOR', error);
+        }
+      );
   }
 
 
@@ -141,8 +139,8 @@ export class CarritoComponent implements OnInit {
    * @param id_pedido => id de pedido
    * @param id_cliente => id de cliente
    */
-  public cerrarPedido(idPedido) {
-    this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
+  public cerrarPedido(id_pedido, id_cliente) {
+    this.pedidoItemServ.cierraItems(id_pedido, id_cliente).then(
       response => {
         return response;
       }
@@ -154,6 +152,7 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.identity = this.authService.getIdentityLocalStorage();
     this.listarPedidoAbierto();
     this.listaPorCliente();
     this.listaExpresos();
@@ -161,6 +160,6 @@ export class CarritoComponent implements OnInit {
   }
 
   DoCheck() {
-    // this.identity = this.authService.getIdentityLocalStorage();
+    this.identity = this.authService.getIdentityLocalStorage();
   }
 }

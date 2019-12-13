@@ -15,7 +15,6 @@ import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',

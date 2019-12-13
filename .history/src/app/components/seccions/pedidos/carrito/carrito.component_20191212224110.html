@@ -59,9 +59,9 @@
                             <tr *ngFor="let item of pedidoItems">
                                 <td nowrap class="cent"> <input class="inputCant" type="number" name="Cantidad" value="{{ item.cantidad }}"> </td>
                                 <td class="cent"> {{ item.idArticulo }} </td>
-                                <td nowrap class="izq"> {{ item.descripcion_corta }} </td>
+                                <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                                 <td nowrap class="cent"> {{ item.stock }} </td>
-                                <td nowrap class="der"> {{ item.precio_lista }} </td>
+                                <td nowrap class="der"> {{ item.precioLista }} </td>
                                 <td nowrap class="der"> 20+15+10% </td>
                                 <td nowrap class="der"> $ 89.35 </td>
                                 <td nowrap class="der"> $ 446.75 </td>
@@ -96,7 +96,7 @@
                     </tbody>
                     <tfoot>
                         <td colspan="2">
-                            <button type="button" class="btn btn-success btn-block" (click)="crearPedido()">Finalizar
+                            <button type="button" class="btn btn-success btn-block" (click)="nuevoPedido()">Finalizar
                                 Pedido</button>
                         </td>
                     </tfoot>
@@ -108,7 +108,7 @@
         <hr>
 
         <div class="col-sm-12">
-            <textarea placeholder="Observaciones..." name="message" [(ngModel)]="observaciones"></textarea>
+            <textarea placeholder="Observaciones..." name="message"></textarea>
         </div>
     </div>
 

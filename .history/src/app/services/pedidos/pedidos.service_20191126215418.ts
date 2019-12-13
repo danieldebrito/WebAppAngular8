@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 // class
+import { Cliente } from 'src/app/class/cliente';
 import { Pedido } from 'src/app/class/pedido';
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
@@ -31,20 +32,17 @@ export class PedidosService {
     return this.miHttp.httpGetO<Pedido>('/pedidos/' + '"' + id + '"');
   }
 
-
   public Alta(
-    idCliente: string,
-    idSucursal: number,
-    idExpreso: number,
-    estado: string,
+    id_sucursal: number,
+    id_expreso: number,
+    envio: string,
     fecha: string,
     observaciones: string,
   ): Promise<object> {
     const request: object = {
-      idCliente,
-      idSucursal,
-      idExpreso,
-      estado,
+      id_sucursal,
+      id_expreso,
+      envio,
       fecha,
       observaciones
     };
@@ -52,20 +50,18 @@ export class PedidosService {
   }
 
   public Update(
-    idPedido: number,
-    idCliente: number,
-    idSucursal: number,
-    idExpreso: string,
-    estado: string,
+    id_pedido: string,
+    id_sucursal: number,
+    id_expreso: number,
+    envio: string,
     fecha: string,
     observaciones: string,
     ): Promise<object> {
     const request: object = {
-      idPedido,
-      idCliente,
-      idSucursal,
-      idExpreso,
-      estado,
+      id_pedido,
+      id_sucursal,
+      id_expreso,
+      envio,
       fecha,
       observaciones
     };

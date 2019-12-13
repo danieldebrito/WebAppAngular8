@@ -30,12 +30,20 @@ export class PedidosService {
   public TraerUno(id: string): Observable<Pedido> {
     return this.miHttp.httpGetO<Pedido>('/pedidos/' + '"' + id + '"');
   }
-
+  /*
+  
+  public idCliente: number,
+  public idSucursal: number,
+  public idExpreso: number,
+  public estado: string,
+  public fecha: string,
+  public observaciones: string
+  */
 
   public Alta(
-    idCliente: string,
+    idCliente: number,
     idSucursal: number,
-    idExpreso: number,
+    idExpreso: string,
     estado: string,
     fecha: string,
     observaciones: string,

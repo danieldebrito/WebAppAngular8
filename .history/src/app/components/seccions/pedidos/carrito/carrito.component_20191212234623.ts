@@ -15,7 +15,6 @@ import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',
@@ -113,9 +112,6 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
-    alert(this.idCliente + ' suc ' + this.sucursal.id_sucursal + ' exp ' + this.expreso.id_expreso
-     + '' +  'abierto' + ' fec ' + this.pedidosService.getfecha() + ' obs ' +  this.observaciones);
-/*
     this.pedidosService.Alta(
       this.idCliente,
       this.sucursal.id_sucursal,
@@ -132,7 +128,7 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
-    );*/
+    );
   }
 
 

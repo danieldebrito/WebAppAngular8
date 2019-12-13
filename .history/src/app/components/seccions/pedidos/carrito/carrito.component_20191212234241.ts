@@ -15,7 +15,6 @@ import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',
@@ -24,6 +23,7 @@ import { FormControl } from '@angular/forms';
 })
 export class CarritoComponent implements OnInit {
 
+  public identity: Cliente;
   public articulo: Articulo;
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
@@ -53,7 +53,7 @@ export class CarritoComponent implements OnInit {
    * trae los items que tengan el atributo estado = 'abierto' y sean del cliente en sesion
    */
   public listarPedidoAbierto() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaCantItems();
     },
@@ -92,7 +92,7 @@ export class CarritoComponent implements OnInit {
    * debe seleccionar una para cerrar el pedido.
    */
   listaPorCliente() {
-    this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
+    this.sucursalesService.ListarPorCliente(this.identity.id).subscribe(response => {
       this.sucursales = response;
     });
   }
@@ -113,9 +113,6 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
-    alert(this.idCliente + ' suc ' + this.sucursal.id_sucursal + ' exp ' + this.expreso.id_expreso
-     + '' +  'abierto' + ' fec ' + this.pedidosService.getfecha() + ' obs ' +  this.observaciones);
-/*
     this.pedidosService.Alta(
       this.idCliente,
       this.sucursal.id_sucursal,
@@ -132,7 +129,7 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
-    );*/
+    );
   }
 
 
