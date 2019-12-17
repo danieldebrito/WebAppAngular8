@@ -43,7 +43,7 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
-    this.sucursal = new Sucursal(0, '', '', '', 0, '', '', '');
+    this.sucursal = this.sucursales[0];
     this.expreso = new Expreso(0, '');
   }
 
@@ -89,7 +89,7 @@ export class CarritoComponent implements OnInit {
    * LISTA las sucursales del cliente en sesion
    * debe seleccionar una para cerrar el pedido.
    */
-  listaPorCliente() {
+  listaSucursalesCliente() {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
     });
@@ -111,8 +111,14 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
-    alert(this.idCliente + ' suc ' + this.sucursal.id_sucursal + ' exp ' + this.expreso.id_expreso
-     + '' +  'abierto' + ' fec ' + this.pedidosService.getfecha() + ' obs ' +  this.observaciones);
+    alert(
+      this.idCliente +
+       ' suc ' + this.sucursal.id_sucursal +
+       ' exp ' + this.expreso.id_expreso +
+       ' estado ' +  'abierto' +
+       ' feccha ' + this.pedidosService.getfecha() +
+       ' obs ' +  this.observaciones
+       );
 /*
     this.pedidosService.Alta(
       this.idCliente,
@@ -153,7 +159,7 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit() {
     this.listarPedidoAbierto();
-    this.listaPorCliente();
+    this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
   }
