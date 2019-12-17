@@ -2,7 +2,9 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
+import { Pedido } from 'src/app/class/pedido';
 import { Articulo } from 'src/app/class/articulo';
+import { Cliente } from 'src/app/class/cliente';
 import { Sucursal } from 'src/app/class/sucursal';
 import { Expreso } from 'src/app/class/expreso';
 
@@ -47,8 +49,10 @@ export class CarritoComponent implements OnInit {
     this.expreso = new Expreso(0, '');
   }
 
+  public nuevoPedido() { }
+
   /**
-   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion
+   * trae los items que tengan el atributo estado = 'abierto' y sean del cliente en sesion
    */
   public listarPedidoAbierto() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
