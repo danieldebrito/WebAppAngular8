@@ -43,8 +43,8 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
-    this.sucursal = this.sucursales[0];
-    this.expreso = this.clienteExpresoService.Listar()[0];
+    // this.sucursal = this.listaSucursalesCliente()[0];
+    // this.expreso = this.clienteExpresoService.Listar()[0];
   }
 
   /**
