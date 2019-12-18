@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { BaseService } from 'src/app/services/base.service';
 
 @Injectable({
@@ -10,25 +10,39 @@ export class SucursalesService {
 
   constructor(public miHttp: BaseService) { }
 
-  public Listar(): Observable<Sucursal[]> {
-    return this.miHttp.httpGetO<Sucursal[]>('/cliente_sucursales/');
+  public Listar(): Observable<ClienteSucursal[]> {
+    return this.miHttp.httpGetO<ClienteSucursal[]>('/cliente_sucursales/');
   }
 
-  public ListarPorCliente(id: string): Observable<Sucursal[]> {
-    return this.miHttp.httpGetO<Sucursal[]>('/cliente_sucursales/sucursales/' + '"' + id + '"');
+  public ListarPorCliente(id: string): Observable<ClienteSucursal[]> {
+    return this.miHttp.httpGetO<ClienteSucursal[]>('/cliente_sucursales/sucursales/' + '"' + id + '"');
   }
 
   public Baja(id: string): Promise<object> {
     return this.miHttp.httpDeleteP('/cliente_sucursales/' + '"' + id + '"');
   }
 
-  public TraerUno(id: string): Observable<Sucursal> {
-    return this.miHttp.httpGetO<Sucursal>('/cliente_sucursales/' + '"' + id + '"');
+  public TraerUno(id: string): Observable<ClienteSucursal> {
+    return this.miHttp.httpGetO<ClienteSucursal>('/cliente_sucursales/' + '"' + id + '"');
   }
 
+  /*
+        public idSucursal: string,
+        public idCliente: string,
+        public idClienteExpreso: string,
+        public nombreSucursal: string,
+        public calle: string,
+        public numero: string,
+        public cp: string,
+        public localidad: string,
+        public provincia: string
+
+  */
+
   public Alta(
-    id_cliente: string,
-    nombre_sucursal: string,
+    idCliente: string,
+    idClienteExpreso: number,
+    nombreSucursal: string,
     calle: string,
     numero: number,
     cp: string,
@@ -36,8 +50,9 @@ export class SucursalesService {
     provincia: string
   ): Promise<object> {
     const request: object = {
-      id_cliente,
-      nombre_sucursal,
+      idCliente,
+      idClienteExpreso,
+      nombreSucursal,
       calle,
       numero,
       cp,
@@ -48,9 +63,10 @@ export class SucursalesService {
   }
 
   public Update(
-    id_sucursal: number,
-    id_cliente: string,
-    nombre_sucursal: string,
+    idSucursal: number,
+    idCliente: string,
+    idClienteExpreso: number,
+    nombreSucursal: string,
     calle: string,
     numero: number,
     cp: string,
@@ -58,9 +74,10 @@ export class SucursalesService {
     provincia: string
   ): Promise<object> {
     const request: object = {
-      id_sucursal,
-      id_cliente,
-      nombre_sucursal,
+      idSucursal,
+      idCliente,
+      idClienteExpreso,
+      nombreSucursal,
       calle,
       numero,
       cp,

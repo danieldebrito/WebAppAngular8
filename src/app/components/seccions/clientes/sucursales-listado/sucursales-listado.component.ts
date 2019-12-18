@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // class
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { Cliente } from 'src/app/class/cliente';
 
 // services
@@ -28,7 +28,7 @@ export class SucursalesListadoComponent implements OnInit {
     this.identity = this.authService.getIdentityLocalStorage();
    }
 
-  mostrarDetalle(sucursal: Sucursal) {
+  mostrarDetalle(sucursal: ClienteSucursal) {
     this.redirectURL = '/sucursal';
     this.router.navigate([this.redirectURL]);
     localStorage.setItem('sucursalDetalle', JSON.stringify(sucursal));

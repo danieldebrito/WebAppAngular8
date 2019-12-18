@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 
 @Component({
   selector: 'app-sucursales-detalle',
@@ -8,7 +8,7 @@ import { Sucursal } from 'src/app/class/sucursal';
 })
 export class SucursalesDetalleComponent implements OnInit {
 
-  public sucursal: Sucursal;
+  public sucursal: ClienteSucursal;
 
   constructor() {
     this.sucursal = JSON.parse(localStorage.getItem('sucursalDetalle'));

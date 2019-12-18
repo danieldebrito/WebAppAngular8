@@ -1,10 +1,11 @@
 export class ClienteSucursal {
     constructor(
-        public id_sucursal: string,
-        public id_cliente: string,
-        public nombre_sucursal: string,
+        public idSucursal: string,
+        public idCliente: string,
+        public idClienteExpreso: number,
+        public nombreSucursal: string,
         public calle: string,
-        public numero: string,
+        public numero: number,
         public cp: string,
         public localidad: string,
         public provincia: string

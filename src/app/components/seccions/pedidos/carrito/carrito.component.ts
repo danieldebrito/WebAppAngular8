@@ -3,13 +3,14 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { Expreso } from 'src/app/class/expreso';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { ClienteExpresoService } from 'src/app/services/pedidos/cliente-expreso.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
@@ -27,8 +28,7 @@ export class CarritoComponent implements OnInit {
   public sucursales = [];
   public expresos = [];
   public expreso: Expreso;   // opcion elegida en select
-  public sucursal: Sucursal; // opcion elegida en select
-
+  public sucursal: ClienteSucursal; // opcion elegida en select
 
   public idCliente: string;
   public observaciones: string;
@@ -39,12 +39,12 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-
+    private clienteExpresoService: ClienteExpresoService,
     private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
     this.sucursal = this.sucursales[0];
-    this.expreso = new Expreso(0, '');
+    this.expreso = this.clienteExpresoService.Listar()[0];
   }
 
   /**
@@ -113,8 +113,8 @@ export class CarritoComponent implements OnInit {
   public crearPedido() {
     alert(
       this.idCliente +
-       ' suc ' + this.sucursal.id_sucursal +
-       ' exp ' + this.expreso.id_expreso +
+       ' suc ' + this.sucursal.nombreSucursal +
+       ' exp ' + this.expreso.nombre +
        ' estado ' +  'abierto' +
        ' feccha ' + this.pedidosService.getfecha() +
        ' obs ' +  this.observaciones
