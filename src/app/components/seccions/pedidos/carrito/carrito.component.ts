@@ -27,8 +27,12 @@ export class CarritoComponent implements OnInit {
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
-  public expreso: Expreso;   // opcion elegida en select
-  public sucursal: ClienteSucursal; // opcion elegida en select
+
+  public expreso: Expreso;
+  public sucursal: ClienteSucursal;
+
+  public expresoSelected: Expreso;   // opcion elegida en select
+  public sucursalSelected: ClienteSucursal; // opcion elegida en select
 
   public idCliente: string;
   public observaciones: string;
@@ -43,8 +47,7 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
-    // this.sucursal = this.listaSucursalesCliente()[0];
-    // this.expreso = this.clienteExpresoService.Listar()[0];
+    this.sucursalSelected = this.sucursal;
   }
 
   /**
@@ -92,6 +95,8 @@ export class CarritoComponent implements OnInit {
   listaSucursalesCliente() {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
+      this.sucursal = this.sucursales[0];
+      return response;
     });
   }
 
@@ -102,6 +107,8 @@ export class CarritoComponent implements OnInit {
   listaExpresos() {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
+      this.expreso = this.expresos[0];
+      return response;
     });
   }
 
@@ -116,7 +123,7 @@ export class CarritoComponent implements OnInit {
        ' suc ' + this.sucursal.nombreSucursal +
        ' exp ' + this.expreso.nombre +
        ' estado ' +  'abierto' +
-       ' feccha ' + this.pedidosService.getfecha() +
+       ' fecha ' + this.pedidosService.getfecha() +
        ' obs ' +  this.observaciones
        );
 /*
@@ -155,6 +162,16 @@ export class CarritoComponent implements OnInit {
         console.error('ERROR DEL SERVIDOR', error);
       }
     );
+  }
+
+  CambiaSucursalExpreso() {
+    alert(this.sucursalSelected.nombreSucursal);
+    if (this.sucursalSelected !== undefined) {
+      this.sucursal = this.sucursalSelected;
+    }
+    if (this.expresoSelected !== undefined) {
+      this.expreso = this.expresoSelected;
+    }
   }
 
   ngOnInit() {
