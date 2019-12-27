@@ -14,16 +14,32 @@
                     <p> 40-040 Autopiezas Salamanca</p>
                 </div>
 
-                <div>
-                    <select class="custom-select mr-1" [(ngModel)]="sucursalSelected" [ngModelOptions]="{standalone: true}">
+                <div class="col-sm-3">
+                    <strong><b>Direccion de Entrega :</b></strong>
+                    <select [(ngModel)]="sucursalSelected" [ngModelOptions]="{standalone: true}">
                         <option *ngFor="let item of sucursales">
                             {{ item.nombreSucursal }}
                         </option>
                     </select>
+
                 </div>
+
+                <!-- 
+
+                                    <div class="col-sm-3">
+                    <strong><b>Medio de Envío :</b></strong>
+                    <select [(ngModel)]="expresoSelected" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let expreso of expresos">
+                            {{ expreso.nombre }}
+                        </option>
+                    </select>
+                </div>
+
+                -->
 
                 <div>
                     <select class="custom-select mr-1" [(ngModel)]="expresoSelected" [ngModelOptions]="{standalone: true}">
+                        <option value="" disabled>Selecione la Linea</option>
                         <option *ngFor="let item of expresos">
                             {{ item.nombre }}
                         </option>

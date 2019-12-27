@@ -162,13 +162,14 @@ export class CarritoComponent implements OnInit {
   }
 
   CambiaSucursalExpreso() {
+    alert(this.sucursalSelected);
     if (this.sucursalSelected !== undefined) {
       // this.sucursal = this.sucursalSelected;
-      alert('SUCURSAL : ' + this.sucursalSelected);
+      alert('no e undefined');
     }
     if (this.expresoSelected !== undefined) {
       // this.expreso = this.expresoSelected;
-      alert('EXPRESO :  ' + this.expresoSelected);
+      alert('no e undefined ' + this.expresoSelected);
     }
   }
 
