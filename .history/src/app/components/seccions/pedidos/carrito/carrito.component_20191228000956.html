@@ -6,14 +6,15 @@
 
             <label>Fecha : 27/12/2018</label>
 
+            <hr>
+
             <div class="row">
                 <div class="col-sm-3">
                     <strong>Cliente : </strong>
                     <p> 40-040 Autopiezas Salamanca</p>
                 </div>
 
-                <div class="col-sm-3">
-                    <strong>Direccion de Envio: </strong>
+                <div>
                     <select class="custom-select mr-1" [(ngModel)]="sucursalSelected" [ngModelOptions]="{standalone: true}">
                         <option *ngFor="let item of sucursales">
                             {{ item.nombreSucursal }}
@@ -21,8 +22,7 @@
                     </select>
                 </div>
 
-                <div class="col-sm-3">
-                    <strong>Medio de Envio: </strong>
+                <div>
                     <select class="custom-select mr-1" [(ngModel)]="expresoSelected" [ngModelOptions]="{standalone: true}">
                         <option *ngFor="let item of expresos">
                             {{ item.nombre }}
@@ -30,14 +30,6 @@
                     </select>
                 </div>
 
-                <div class="col-sm-3">
-                    <button type="button" class="btn btn-primary">Bajar Excel</button>
-                    <button type="button" class="btn btn-primary">Bajar PDF</button>
-                </div>
-
-                <div class="col-sm-12">
-                    <hr>
-                </div>
 
                 <div class="col-sm-9">
                     <div>
@@ -72,7 +64,14 @@
                     </div>
                 </div>
 
+
                 <div class="col-sm-3">
+
+                    <div>
+                        <button type="button" class="btn btn-primary">Bajar Excel</button>
+                        <button type="button" class="btn btn-primary">Bajar PDF</button>
+                    </div>
+
                     <table class="table-responsive table-bordered">
                         <thead>
                             <tr>
