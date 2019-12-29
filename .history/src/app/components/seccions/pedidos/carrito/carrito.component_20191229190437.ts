@@ -115,13 +115,22 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
+    alert(
+      this.idCliente +
+       ' suc ' + this.sucursal.nombreSucursal +
+       ' exp ' + this.expreso.nombre +
+       ' estado ' +  'abierto' +
+       ' fecha ' + this.pedidosService.getfecha() +
+       ' obs ' +  this.observaciones
+       );
+/*
     this.pedidosService.Alta(
       this.idCliente,
-      0,
-      0, // this.idExpresoByName(this.expresoSelected),
+      this.sucursal.id_sucursal,
+      this.expreso.id_expreso,
       'abierto',
       this.pedidosService.getfecha(),
-      'hacer observ.' // this.observaciones
+      this.observaciones
     ).then(
       response => {
         this.cerrarPedido(response);
@@ -131,7 +140,7 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
-    );
+    );*/
   }
 
 
@@ -163,9 +172,9 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  public idExpresoByName(name: string) {
+  public readExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
-      return response.id_expreso;
+      return response;
     },
       error => {
         console.error(error);

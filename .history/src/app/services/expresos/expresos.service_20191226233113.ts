@@ -45,9 +45,5 @@ constructor(public miHttp: BaseService) { }
     };
     return this.miHttp.httpPostP('/expresos/update', request);
   }
-
-  public ReadByName(name: string): Observable<Expreso> {
-    return this.miHttp.httpGetO<Expreso>('/expresos/' + '"' + name + '"');
-  }
 }
 

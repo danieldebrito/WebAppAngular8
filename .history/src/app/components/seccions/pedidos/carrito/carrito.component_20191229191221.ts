@@ -2,20 +2,18 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
-import { Pedido } from 'src/app/class/pedido';
 import { Articulo } from 'src/app/class/articulo';
-import { Cliente } from 'src/app/class/cliente';
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { Expreso } from 'src/app/class/expreso';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { ClienteExpresoService } from 'src/app/services/pedidos/cliente-expreso.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-
 
 @Component({
   selector: 'app-carrito',
@@ -24,19 +22,18 @@ import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 })
 export class CarritoComponent implements OnInit {
 
-  public identity: Cliente;
   public articulo: Articulo;
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
-  public expreso: Expreso;   // opcion elegida en select
-  public sucursal: Sucursal; // opcion elegida en select
 
+  public expreso: Expreso;
+  public sucursal: ClienteSucursal;
 
-  public id_sucursal: number;
-  public id_expreso: number;
-  public envio: string;
-  public fecha: string;
+  public expresoSelected: string;   // opcion elegida en select
+  public sucursalSelected: string; // opcion elegida en select
+
+  public idCliente: string;
   public observaciones: string;
 
   constructor(
@@ -45,22 +42,29 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-    
     private authService: AuthService
-  ) { }
-
-  public nuevoPedido() { }
+  ) {
+    this.idCliente = this.authService.getIdentityLocalStorage().id;
+  }
 
   /**
-   * trae los items que tengan el atributo estado = 'abierto' y sean del cliente en sesion
+   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion
    */
   public listarPedidoAbierto() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.identity.id).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
       this.pedidoItems = response;
+      this.cuentaCantItems();
     },
       error => {
         console.error(error);
       });
+  }
+
+  /**
+   * cuenta cantidad de items en carrito
+   */
+  public cuentaCantItems() {
+    this.pedidoItemServ.cantItems = this.pedidoItems.length;
   }
 
   /**
@@ -85,47 +89,60 @@ export class CarritoComponent implements OnInit {
    * LISTA las sucursales del cliente en sesion
    * debe seleccionar una para cerrar el pedido.
    */
-  listaPorCliente() {
-    this.sucursalesService.ListarPorCliente(this.identity.id).subscribe(response => {
+  listaSucursalesCliente() {
+    this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
+      this.sucursal = this.sucursales[0];
+      return response;
     });
   }
 
   /**
- * LISTA los expresos
- * debe seleccionar uno para cerrar el pedido.
- */
+   * LISTA los expresos
+   * debe seleccionar uno para cerrar el pedido.
+   */
   listaExpresos() {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
+      this.expreso = this.expresos[0];
+      return response;
     });
   }
 
   /**
    * EN CONSTRUCCION
    * LA IDEA ES QUE CREE UN NUEVO PEDIDO TOMANDO LAS VARIABLES DE LA SESION DE USUARIO
-   *        this.id_sucursal,
-            this.id_expreso,
-            this.envio,
-            this.fecha,
-            this.observaciones
    */
 
   public crearPedido() {
+    alert(
+      this.idCliente +
+       ' suc ' + this.sucursal.nombreSucursal +
+       ' exp ' + this.expreso.nombre +
+       ' estado ' +  'abierto' +
+       ' fecha ' + this.pedidosService.getfecha() +
+       ' obs ' +  this.observaciones
+       );
+
+    let dds = this.readExpresoByName(this.expresoSelected);
+/*
     this.pedidosService.Alta(
-      this.id_sucursal,
-      this.id_expreso,
-      this.envio,
-      this.fecha,
-      this.observaciones).then(
-        response => {
-          return response;
-        }
-      ).catch(
-        error => {
-          console.error('ERROR DEL SERVIDOR', error);
-        }
-      );
+      this.idCliente,
+      this.sucursal.id_sucursal,
+      this.expreso.id_expreso,
+      'abierto',
+      this.pedidosService.getfecha(),
+      this.observaciones
+    ).then(
+      response => {
+        this.cerrarPedido(response);
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );*/
   }
 
 
@@ -134,8 +151,8 @@ export class CarritoComponent implements OnInit {
    * @param id_pedido => id de pedido
    * @param id_cliente => id de cliente
    */
-  public cerrarPedido(id_pedido, id_cliente) {
-    this.pedidoItemServ.cierraItems(id_pedido, id_cliente).then(
+  public cerrarPedido(idPedido) {
+    this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
       response => {
         return response;
       }
@@ -146,14 +163,34 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.identity = this.authService.getIdentityLocalStorage();
-    this.listarPedidoAbierto();
+  CambiaSucursalExpreso() {
+    if (this.sucursalSelected !== undefined) {
+      // this.sucursal = this.sucursalSelected;
+      alert('SUCURSAL : ' + this.sucursalSelected);
+    }
+    if (this.expresoSelected !== undefined) {
+      // this.expreso = this.expresoSelected;
+      alert('EXPRESO :  ' + this.expresoSelected);
+    }
   }
 
-  ngDoCheck() {
-    this.identity = this.authService.getIdentityLocalStorage();
-    this.listaPorCliente();
+  public readExpresoByName(name: string) {
+    this.expresosService.ReadByName(name).subscribe(response => {
+      return response.id_expreso;
+    },
+      error => {
+        console.error(error);
+      });
+  }
+
+  ngOnInit() {
+    this.listarPedidoAbierto();
+    this.listaSucursalesCliente();
     this.listaExpresos();
+    this.cuentaCantItems();
+  }
+
+  DoCheck() {
+    // this.identity = this.authService.getIdentityLocalStorage();
   }
 }
