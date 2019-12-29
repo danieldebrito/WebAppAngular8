@@ -125,8 +125,7 @@ export class CarritoComponent implements OnInit {
     ).then(
       response => {
         this.cerrarPedido(response);
-        // return response;
-        alert(response);
+        return response;
       }
     ).catch(
       error => {
