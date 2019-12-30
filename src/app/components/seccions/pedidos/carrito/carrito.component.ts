@@ -10,7 +10,6 @@ import { Expreso } from 'src/app/class/expreso';
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
-import { ClienteExpresoService } from 'src/app/services/pedidos/cliente-expreso.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
@@ -115,6 +114,16 @@ export class CarritoComponent implements OnInit {
    */
 
   public crearPedido() {
+
+    alert(
+      ' expreso selected :  ' + this.expresoSelected + ' formula :  ' +
+      this.idExpresoByName(this.expresoSelected) + 
+      ' expreso selected :  ' + this.expresoSelected
+    );
+
+
+/*
+
     alert(
       'id cliente' + this.idCliente +
       'id sucursal' + 0 +
@@ -122,7 +131,11 @@ export class CarritoComponent implements OnInit {
       'escato' + 'abierto' +
       'fecha' + this.pedidosService.getfecha() +
       'obs' + 'hacer observ.' // this.observaciones
-    ); /*
+    );
+
+*/
+
+    /*
     this.pedidosService.Alta(
       this.idCliente,
       0,
@@ -174,6 +187,7 @@ export class CarritoComponent implements OnInit {
 
   public idExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
+      alert('idExpresoByName : ' + response.id_expreso);
       return response.id_expreso;
     },
       error => {
