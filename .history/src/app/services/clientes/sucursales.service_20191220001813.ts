@@ -86,10 +86,4 @@ export class SucursalesService {
     };
     return this.miHttp.httpPostP('/cliente_sucursales/update', request);
   }
-
-  public ReadByName(name: string): Observable<ClienteSucursal> {
-    return this.miHttp.httpGetO<ClienteSucursal>('/cliente_sucursales/byName/' + '"' + name + '"');
-  }
-
-
 }

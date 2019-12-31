@@ -122,6 +122,20 @@ export class CarritoComponent implements OnInit {
       ' expreso selected :  ' + this.expresoSelected
     );
 
+
+/*
+
+    alert(
+      'id cliente' + this.idCliente +
+      'id sucursal' + 0 +
+      'expreso' + this.idExpresoByName(this.expresoSelected) +
+      'escato' + 'abierto' +
+      'fecha' + this.pedidosService.getfecha() +
+      'obs' + 'hacer observ.' // this.observaciones
+    );
+
+*/
+
     /*
     this.pedidosService.Alta(
       this.idCliente,
