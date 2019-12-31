@@ -68,7 +68,7 @@
         <div *ngIf='identity'>
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item dropdown" ngbDropdown>
-                    <a class="nav-link" routerLink="/carrito"><i class="fa fa-cart-plus"></i>&nbsp; Carrito ( {{ cantItemsCarrito }} )</a>
+                    <a class="nav-link" routerLink="/carrito">Carrito &nbsp<i class="fa fa-cart-plus"></i>&nbsp;( {{ cantItemsCarrito }} )</a>
                 </li>
 
                 <li class="nav-item dropdown" ngbDropdown>
@@ -77,7 +77,6 @@
                         <a class="dropdown-item" routerLink="/misDatos">Mis Datos</a>
                         <a class="dropdown-item" routerLink="/carrito" id="id03">Carrito</a>
                         <a class="dropdown-item" routerLink="/pedidos" id="id03">Pedidos</a>
-                        <a class="dropdown-item" routerLink="/pedidos" id="id03">Mensajes</a>
                         <a class="dropdown-item" (click)="logout()" routerLink="/home">Cerrar Sesión</a>
                     </div>
                 </li>
