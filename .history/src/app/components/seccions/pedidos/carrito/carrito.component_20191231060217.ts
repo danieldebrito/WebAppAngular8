@@ -128,11 +128,11 @@ export class CarritoComponent implements OnInit {
     /*
     this.pedidosService.Alta(
       this.idCliente,
-      this.idSucursalSelected,
+      0,
       this.idExpresoSelected,
-      'cerrado',
+      'abierto',
       this.pedidosService.getfecha(),
-      'obs.' // this.observaciones
+      'hacer observ.' // this.observaciones
     ).then(
       response => {
         this.cerrarPedido(response);
@@ -198,7 +198,8 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
-    this.SeleccionaSucursaldeHTML();
+    this.idExpresoByName(this.expresoSelected);
+    this.idSucursalByName(this.sucursalSelected);
   }
 
   DoCheck() {
