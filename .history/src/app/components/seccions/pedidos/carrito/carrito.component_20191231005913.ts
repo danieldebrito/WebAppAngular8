@@ -102,8 +102,6 @@ export class CarritoComponent implements OnInit {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
       this.expresoSelected = this.expresos[0].nombre;
-      this.idExpresoByName(this.expresoSelected);
-
       return response;
     });
   }

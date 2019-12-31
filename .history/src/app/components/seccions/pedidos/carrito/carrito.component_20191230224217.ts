@@ -26,8 +26,10 @@ export class CarritoComponent implements OnInit {
   public sucursales = [];
   public expresos = [];
 
+  public expreso: Expreso;
+  public sucursal: ClienteSucursal;
+
   public expresoSelected: string;   // opcion elegida en select
-  public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
 
   public idCliente: string;
@@ -89,7 +91,7 @@ export class CarritoComponent implements OnInit {
   listaSucursalesCliente() {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
-      this.sucursalSelected = this.sucursales[0].nombreSucursal;
+      this.sucursal = this.sucursales[0];
       return response;
     });
   }
@@ -101,9 +103,7 @@ export class CarritoComponent implements OnInit {
   listaExpresos() {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
-      this.expresoSelected = this.expresos[0].nombre;
-      this.idExpresoByName(this.expresoSelected);
-
+      this.expreso = this.expresos[0];
       return response;
     });
   }
@@ -115,13 +115,7 @@ export class CarritoComponent implements OnInit {
 
   public crearPedido() {
 
-    this.idExpresoByName(this.expresoSelected);
-
-    alert(
-      ' expreso selected :  ' + this.expresoSelected +
-      ' formula :  ' + this.idExpresoSelected +
-      ' expreso selected :  ' + this.expresoSelected
-    );
+    alert('crear pedido id: ' + this.idExpresoByName(this.expresoSelected));
 
 
 /*
@@ -177,13 +171,18 @@ export class CarritoComponent implements OnInit {
   }
 
   CambiaSucursalExpreso() {
-    this.idExpresoByName(this.expresoSelected);
+    if (this.sucursalSelected !== undefined) {
+      // this.sucursal = this.sucursalSelected;
+      alert('SUCURSAL : ' + this.sucursalSelected);
+    }
+    if (this.expresoSelected !== undefined) {
+      // this.expreso = this.expresoSelected;
+      alert('EXPRESO :  ' + this.expresoSelected);
+    }
   }
 
   public idExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
-
-      this.idExpresoSelected = response.id_expreso;
 
       return response.id_expreso;
     },

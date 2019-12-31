@@ -27,7 +27,6 @@ export class CarritoComponent implements OnInit {
   public expresos = [];
 
   public expresoSelected: string;   // opcion elegida en select
-  public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
 
   public idCliente: string;
@@ -102,8 +101,6 @@ export class CarritoComponent implements OnInit {
     this.expresosService.Listar().subscribe(response => {
       this.expresos = response;
       this.expresoSelected = this.expresos[0].nombre;
-      this.idExpresoByName(this.expresoSelected);
-
       return response;
     });
   }
@@ -115,11 +112,9 @@ export class CarritoComponent implements OnInit {
 
   public crearPedido() {
 
-    this.idExpresoByName(this.expresoSelected);
-
     alert(
-      ' expreso selected :  ' + this.expresoSelected +
-      ' formula :  ' + this.idExpresoSelected +
+      ' expreso selected :  ' + this.expresoSelected + ' formula :  ' +
+      this.idExpresoByName(this.expresoSelected) + 2 +
       ' expreso selected :  ' + this.expresoSelected
     );
 
@@ -177,14 +172,19 @@ export class CarritoComponent implements OnInit {
   }
 
   CambiaSucursalExpreso() {
-    this.idExpresoByName(this.expresoSelected);
+    if (this.sucursalSelected !== undefined) {
+      // this.sucursal = this.sucursalSelected;
+      alert('SUCURSAL : ' + this.sucursalSelected);
+    }
+    if (this.expresoSelected !== undefined) {
+      // this.expreso = this.expresoSelected;
+      alert('EXPRESO :  ' + this.expresoSelected);
+    }
   }
 
   public idExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
-
-      this.idExpresoSelected = response.id_expreso;
-
+      alert('idExpresoByName : ' + response.id_expreso);
       return response.id_expreso;
     },
       error => {
@@ -197,7 +197,6 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
-    this.idExpresoByName(this.expresoSelected);
   }
 
   DoCheck() {
