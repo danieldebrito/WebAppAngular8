@@ -29,8 +29,7 @@ export class CarritoComponent implements OnInit {
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
-  public idSucursalSelected;
-
+  public idsucursalSelected;
 
   public idCliente: string;
   public observaciones: string;
@@ -93,6 +92,7 @@ export class CarritoComponent implements OnInit {
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
       this.idSucursalByName(this.sucursalSelected);
+
       return response;
     });
   }
@@ -117,25 +117,26 @@ export class CarritoComponent implements OnInit {
    */
   public CerrarPedido() {
 
-
-    alert(
-      ' expreso selected :  ' + this.expresoSelected +
-      ' expreso id :  ' + this.idExpresoSelected +
-      ' sucursal selected :  ' + this.sucursalSelected +
-      ' sucursal id :  ' + this.idSucursalSelected
-    );
+    // this.idExpresoByName(this.expresoSelected);
 
     /*
+    alert(
+      ' EXPRESO ID =>  ' + this.idExpresoSelected +
+      ' EXPRESO => :  ' + this.expresoSelected +
+      ' SUCURSAL ID => : ' + this.idsucursalSelected +
+      ' SUCURSAL => : ' + this.sucursalSelected
+    );*/
+
     this.pedidosService.Alta(
       this.idCliente,
-      0,
+      this.idsucursalSelected,
       this.idExpresoSelected,
-      'abierto',
+      'cerrado',
       this.pedidosService.getfecha(),
       'hacer observ.' // this.observaciones
     ).then(
       response => {
-        this.cerrarPedido(response);
+        this.CerrarItems(response);  // responde el nro de pedido, y lo paso por parametro
         // return response;
         alert(response);
       }
@@ -143,7 +144,7 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
-    );*/
+    );
   }
 
 
@@ -152,7 +153,7 @@ export class CarritoComponent implements OnInit {
    * @param id_pedido => id de pedido
    * @param id_cliente => id de cliente
    */
-  public cerrarPedido(idPedido) {
+  public CerrarItems(idPedido) {
     this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
       response => {
         return response;
@@ -164,7 +165,7 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  SeleccionaSucursal() {
+  public SeleccionaSucursal() {
     this.idExpresoByName(this.expresoSelected);
     this.idSucursalByName(this.sucursalSelected);
   }
@@ -184,7 +185,7 @@ export class CarritoComponent implements OnInit {
   public idSucursalByName(name: string) {
     this.sucursalesService.ReadByName(name).subscribe(response => {
 
-      this.idSucursalSelected = response.idSucursal;
+      this.idsucursalSelected = response.idSucursal;
 
       return response.idSucursal;
     },

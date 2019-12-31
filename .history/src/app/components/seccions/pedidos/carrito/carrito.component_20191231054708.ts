@@ -92,7 +92,6 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
-      this.idSucursalByName(this.sucursalSelected);
       return response;
     });
   }
@@ -117,6 +116,7 @@ export class CarritoComponent implements OnInit {
    */
   public CerrarPedido() {
 
+    // this.idExpresoByName(this.expresoSelected);
 
     alert(
       ' expreso selected :  ' + this.expresoSelected +

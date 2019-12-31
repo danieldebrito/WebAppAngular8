@@ -29,8 +29,6 @@ export class CarritoComponent implements OnInit {
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
-  public idSucursalSelected;
-
 
   public idCliente: string;
   public observaciones: string;
@@ -92,7 +90,6 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
-      this.idSucursalByName(this.sucursalSelected);
       return response;
     });
   }
@@ -117,12 +114,12 @@ export class CarritoComponent implements OnInit {
    */
   public CerrarPedido() {
 
+    // this.idExpresoByName(this.expresoSelected);
 
     alert(
       ' expreso selected :  ' + this.expresoSelected +
-      ' expreso id :  ' + this.idExpresoSelected +
-      ' sucursal selected :  ' + this.sucursalSelected +
-      ' sucursal id :  ' + this.idSucursalSelected
+      ' formula :  ' + this.idExpresoSelected +
+      ' expreso selected :  ' + this.expresoSelected
     );
 
     /*
@@ -152,7 +149,7 @@ export class CarritoComponent implements OnInit {
    * @param id_pedido => id de pedido
    * @param id_cliente => id de cliente
    */
-  public cerrarPedido(idPedido) {
+  public CerrarItems(idPedido) {
     this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
       response => {
         return response;
@@ -164,9 +161,8 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  SeleccionaSucursal() {
+  CambiaSucursalExpreso() {
     this.idExpresoByName(this.expresoSelected);
-    this.idSucursalByName(this.sucursalSelected);
   }
 
   public idExpresoByName(name: string) {
@@ -181,25 +177,12 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-  public idSucursalByName(name: string) {
-    this.sucursalesService.ReadByName(name).subscribe(response => {
-
-      this.idSucursalSelected = response.idSucursal;
-
-      return response.idSucursal;
-    },
-      error => {
-        console.error(error);
-      });
-  }
-
   ngOnInit() {
     this.listarPedidoAbierto();
     this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
     this.idExpresoByName(this.expresoSelected);
-    this.idSucursalByName(this.sucursalSelected);
   }
 
   DoCheck() {
