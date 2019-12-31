@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
@@ -41,8 +40,7 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-    private authService: AuthService,
-    private toastr: ToastrService
+    private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
   }
@@ -58,10 +56,6 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error(error);
       });
-  }
-
-  public LimpiarListaDeItems() {
-    this.pedidoItems = [];
   }
 
   /**
@@ -117,8 +111,8 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
-   * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido, antes tiene -1
-   * tambien al pedido le cambia el estado a cerrado
+   * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido
+   * tambien a los item le cambia el estado a cerrados
    */
   public CerrarPedido() {
     this.pedidosService.Alta(
@@ -131,17 +125,13 @@ export class CarritoComponent implements OnInit {
     ).then(
       response => {
         this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
-        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
-        this.LimpiarListaDeItems();
-        this.toastr.success('Pedido Generado', 'juntas MEYRO');
+        this.ListarItemsAbiertos();  // recargo la lista de items, quedaria vacia.
       }
     ).catch(
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
     );
-    // this.ListarItemsAbiertos();  // recargo la lista de items, quedaria vacia.
-
   }
 
 

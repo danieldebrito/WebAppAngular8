@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
@@ -41,8 +40,7 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-    private authService: AuthService,
-    private toastr: ToastrService
+    private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
   }
@@ -133,7 +131,6 @@ export class CarritoComponent implements OnInit {
         this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
         console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
         this.LimpiarListaDeItems();
-        this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
       error => {

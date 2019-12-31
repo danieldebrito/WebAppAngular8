@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
@@ -41,16 +40,15 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-    private authService: AuthService,
-    private toastr: ToastrService
+    private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
   }
 
   /**
-   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
+   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion
    */
-  public ListarItemsAbiertos() {
+  public listarPedidoAbierto() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaCantItems();
@@ -60,12 +58,8 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-  public LimpiarListaDeItems() {
-    this.pedidoItems = [];
-  }
-
   /**
-   * cuenta cantidad de items cargados en carrito
+   * cuenta cantidad de items en carrito
    */
   public cuentaCantItems() {
     this.pedidoItemServ.cantItems = this.pedidoItems.length;
@@ -74,12 +68,12 @@ export class CarritoComponent implements OnInit {
   /**
    *
    * @param id de la entidad
-   * borra un item del carrito mediante id
+   * borra un item de la entidad mediante id
    */
   public borrarItem(id: string) {
     this.pedidoItemServ.Baja(id).then(
       response => {
-        this.ListarItemsAbiertos();
+        this.listarPedidoAbierto();
         return response;
       }
     ).catch(
@@ -117,8 +111,8 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
-   * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido, antes tiene -1
-   * tambien al pedido le cambia el estado a cerrado
+   * EN CONSTRUCCION
+   * LA IDEA ES QUE CREE UN NUEVO PEDIDO TOMANDO LAS VARIABLES DE LA SESION DE USUARIO
    */
   public CerrarPedido() {
     this.pedidosService.Alta(
@@ -130,18 +124,13 @@ export class CarritoComponent implements OnInit {
       'obs.' // this.observaciones
     ).then(
       response => {
-        this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
-        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
-        this.LimpiarListaDeItems();
-        this.toastr.success('Pedido Generado', 'juntas MEYRO');
+        this.CerrarItems(response);  // en el response yengo el id del pedido, lo paso como parametro.
       }
     ).catch(
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
     );
-    // this.ListarItemsAbiertos();  // recargo la lista de items, quedaria vacia.
-
   }
 
 
@@ -192,7 +181,7 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ListarItemsAbiertos();
+    this.listarPedidoAbierto();
     this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
