@@ -14,6 +14,7 @@ export class PedidosListadoComponent implements OnInit {
 
   public idCliente: string;
   public pedidosCliente: Pedido[];
+  public expresoNombre: string;
 
   constructor(
     private pedidosService: PedidosService,
@@ -26,6 +27,8 @@ export class PedidosListadoComponent implements OnInit {
   public ListarPedidosCliente() {
     this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(response => {
       this.pedidosCliente = response;
+      this.expresoNombre = this.TraerExpreso(response.idExpreso);
+
     },
       error => {
         console.error(error);
@@ -45,4 +48,5 @@ export class PedidosListadoComponent implements OnInit {
   ngOnInit() {
     this.ListarPedidosCliente();
   }
+
 }
