@@ -48,7 +48,7 @@
                                     <th>Codigo</th>
                                     <th nowrap>Descripción</th>
                                     <th nowrap>Stock</th>
-                                    <th nowrap>P.Lista</th>
+                                    <th nowrap>Precio</th>
                                     <th nowrap>Dto.</th>
                                     <th nowrap>P.Neto</th>
                                     <th nowrap>Subtotal</th>
@@ -62,9 +62,9 @@
                                     <td nowrap class="izq"> {{ item.descripcion_corta }} </td>
                                     <td nowrap class="cent"> {{ item.stock }} </td>
                                     <td nowrap class="der"> {{ item.precio_lista }} </td>
-                                    <td nowrap class="der"> 20+15+10% </td>
-                                    <td nowrap class="der"> $ 89.35 </td>
-                                    <td nowrap class="der"> $ 446.75 </td>
+                                    <td nowrap class="der"> 20 % </td>
+                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
                                     <td class="cent"> <button type="button" class="btn btn-danger" (click)="borrarItem(item.idPedidoItem)">Quitar</button> </td>
                                 </tr>
                             </tbody>
@@ -86,7 +86,7 @@
                                 <td>$ 1200.00</td>
                             </tr>
                             <tr>
-                                <td>Dtos 20+10+15+10: </td>
+                                <td>Dtos.</td>
                                 <td>$ 200.00</td>
                             </tr>
                             <tr>
@@ -113,5 +113,7 @@
         </div>
 
     </form>
+
+    <hr>
 
 </div>
