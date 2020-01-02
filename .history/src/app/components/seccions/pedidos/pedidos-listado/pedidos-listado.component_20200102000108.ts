@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { AuthService } from 'src/app/services/clientes/auth.service';
-import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 
 import { Pedido } from 'src/app/class/pedido';
 
@@ -17,8 +16,7 @@ export class PedidosListadoComponent implements OnInit {
 
   constructor(
     private pedidosService: PedidosService,
-    private authService: AuthService,
-    private expresosService: ExpresosService
+    private authService: AuthService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().id;
   }
@@ -30,16 +28,6 @@ export class PedidosListadoComponent implements OnInit {
       error => {
         console.error(error);
       });
-  }
-
-  public TraerExpreso(id: string) {
-    this.expresosService.TraerUno(id).subscribe(response => {
-      return response.nombre;
-    },
-    error => {
-      console.error(error);
-
-    });
   }
 
   ngOnInit() {
