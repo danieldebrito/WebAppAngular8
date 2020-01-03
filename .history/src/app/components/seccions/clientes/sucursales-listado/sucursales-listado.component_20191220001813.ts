@@ -35,7 +35,7 @@ export class SucursalesListadoComponent implements OnInit {
   }
 
   cargarListaPorCliente() {
-    this.sucursalesService.ListarPorCliente(this.identity.idCliente).subscribe(response => {
+    this.sucursalesService.ListarPorCliente(this.identity.id).subscribe(response => {
       this.sucursales = response;
     });
   }
@@ -50,4 +50,5 @@ export class SucursalesListadoComponent implements OnInit {
     this.cargarListaPorCliente();
     this.identity = this.authService.getIdentityLocalStorage();
   }
+
 }

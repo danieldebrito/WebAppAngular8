@@ -11,31 +11,23 @@ export class ClientesService {
   constructor(public miHttp: BaseService) { }
 
   public altaCliente(
-    idCliente: string,
+    id: string,
     cuit: string,
     razonSocial: string,
-    condFiscal: string,
-    retIIBBcoef: string,
-    idDescuento: string,
-    userNombre: string,
+    comprador: string,
     email: string,
-    clave: string,
-    estado: string
-  ): Promise<object> {
+    clave: string
+  ): Promise<Object> {
 
-      const request: object = {
-        idCliente,
-        cuit,
-        razonSocial,
-        condFiscal,
-        retIIBBcoef,
-        idDescuento,
-        userNombre,
-        email,
-        clave,
-        estado
+      const request: Object = {
+        id: id,
+        cuit: cuit,
+        razonSocial: razonSocial,
+        comprador: comprador,
+        email: email,
+        clave: clave
     };
-      return this.miHttp.httpPostP('/clientes/', request);
+    return this.miHttp.httpPostP('/clientes/', request);
   }
 
   public traerUno(id: string): Observable<Cliente> {

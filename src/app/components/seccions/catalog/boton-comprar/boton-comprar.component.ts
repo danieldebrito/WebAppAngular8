@@ -25,7 +25,7 @@ export class BotonComprarComponent implements OnInit {
   }
 
   public cargaItem() {
-    this.pedidoItemServ.Alta(-1, this.identity.id, this.id_articulo, this.cantidad).then(
+    this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;

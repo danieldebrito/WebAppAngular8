@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Sucursal } from 'src/app/class/sucursal';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { Cliente } from 'src/app/class/cliente';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { AuthService } from 'src/app/services/clientes/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/clientes/auth.service';
 export class SucursalesNuevaComponent implements OnInit {
 
   public identity: Cliente;
-  public sucursal: Sucursal;
+  public sucursal: ClienteSucursal;
   public id_sucursal_alta;
   public redirectURL: string;
 
@@ -23,13 +23,14 @@ export class SucursalesNuevaComponent implements OnInit {
     private router: Router
   ) {
     this.identity = this.authService.getIdentityLocalStorage();
-    this.sucursal = new Sucursal(0, '', '', '', 0, '', '', '');
+    this.sucursal = new ClienteSucursal('', '', 0, '', '', 0, '', '', '');
   }
 
   public alta() {
     this.sucursalesService.Alta(
-      this.identity.id,
-      this.sucursal.nombre_sucursal,
+      this.identity.idCliente,
+      this.sucursal.idClienteExpreso,
+      this.sucursal.nombreSucursal,
       this.sucursal.calle,
       this.sucursal.numero,
       this.sucursal.cp,
@@ -51,7 +52,7 @@ export class SucursalesNuevaComponent implements OnInit {
   }
 
   public limpiarForm() {
-    this.sucursal = new Sucursal(0, '', '', '', 0, '', '', '');
+    this.sucursal = new ClienteSucursal('', '', 0, '', '', 0, '', '', '');
   }
 
   ngOnInit() { this.identity = this.authService.getIdentityLocalStorage(); }

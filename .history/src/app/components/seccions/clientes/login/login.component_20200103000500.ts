@@ -47,11 +47,11 @@ export class LoginComponent implements OnInit {
 
           if (response['Estado'] === 'OK') {
             if (!this.authService.redirectUrl) {
-              this.authService.redirectUrl = '/catalog';
+              this.authService.redirectUrl = '/catalogo';
               this.message = response['Mensaje'];
             }
 
-            this.cargaLocalStorage(this.login.id);                 // carga el usuario logueado
+            this.cargaLocalStorage(this.login.idCliente);                 // carga el usuario logueado
             this.error = false;                                    // alterna la vista
             this.router.navigate([this.authService.redirectUrl]);  // redirige a catalo en caso de logueo exitoso
           } else {

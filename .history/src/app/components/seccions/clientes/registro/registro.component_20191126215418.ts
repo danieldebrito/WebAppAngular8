@@ -17,21 +17,17 @@ export class RegistroComponent implements OnInit {
 
   constructor(servicio: ClientesService, private router: Router) {
     this.clienteService = servicio;
-    this.cliente = new Cliente ('', '', '', '', '', '', '', '', '', '');
+    this.cliente = new Cliente ('', '', '', '', '', '', '');
   }
 
   public altaCliente() {
     this.clienteService.altaCliente(
-      this.cliente.idCliente,
+      this.cliente.id,
       this.cliente.cuit,
       this.cliente.razonSocial,
-      this.cliente.condFiscal,
-      this.cliente.retIIBBcoef,
-      this.cliente.idDescuento,
-      this.cliente.userNombre,
+      this.cliente.comprador,
       this.cliente.email,
-      this.cliente.clave,
-      this.cliente.estado
+      this.cliente.clave
         ).then(
             response => {
                 this.mensaje = response;  //  agregar, no hay nada en el response

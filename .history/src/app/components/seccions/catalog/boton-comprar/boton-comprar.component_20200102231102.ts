@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, Input } from '@angular/core';
-
+import { ToastrService } from 'ngx-toastr';
 // class
 import { Cliente } from 'src/app/class/cliente';
 
@@ -19,24 +19,20 @@ export class BotonComprarComponent implements OnInit {
 
   constructor(
     private pedidoItemServ: PedidoItemsService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toastr: ToastrService) {
     this.cantidad = 1;
   }
 
   public cargaItem() {
-    this.pedidoItemServ.Alta(
-      this.identity.id,
-      '-1',
-      this.id_articulo,
-      this.cantidad,
-      'abierto'
-    ).then(
+    this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad).then(
       response => {
+        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
       }
     ).catch(
       error => {
-        console.error('ERROR DEL SERVIDOR', error);
+        console.error('ERROR DEL SERVIDOR, boton-comprar.ts', error);
       }
     );
   }
@@ -45,7 +41,7 @@ export class BotonComprarComponent implements OnInit {
     this.identity = this.authService.getIdentityLocalStorage();
   }
 
-  ngDoCheck() {
-    this.identity = this.authService.getIdentityLocalStorage();
+  DoCheck() {
+    // this.identity = this.authService.getIdentityLocalStorage();
   }
 }

@@ -28,7 +28,7 @@ export class SucursalesNuevaComponent implements OnInit {
 
   public alta() {
     this.sucursalesService.Alta(
-      this.identity.id,
+      this.identity.idCliente,
       this.sucursal.idClienteExpreso,
       this.sucursal.nombreSucursal,
       this.sucursal.calle,

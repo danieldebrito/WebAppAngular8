@@ -1,6 +1,6 @@
 export class Login {
     constructor(
-        public idCliente: string,
+        public id: string,
         public clave: string,
     ) { }
 }

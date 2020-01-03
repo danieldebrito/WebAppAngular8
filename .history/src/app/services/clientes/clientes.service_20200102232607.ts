@@ -9,6 +9,18 @@ import { Observable } from 'rxjs';
 export class ClientesService {
 
   constructor(public miHttp: BaseService) { }
+  /*
+  	public $idCliente;
+	public $cuit;
+	public $razonSocial;
+	public $condFiscal; // enum
+	public $retIIBBcoef;
+	public $idDescuento;
+	public $userNombre;
+	public $email;
+	public $clave;
+	public $estado;
+  */
 
   public altaCliente(
     idCliente: string,
@@ -35,7 +47,7 @@ export class ClientesService {
         clave,
         estado
     };
-      return this.miHttp.httpPostP('/clientes/', request);
+    return this.miHttp.httpPostP('/clientes/', request);
   }
 
   public traerUno(id: string): Observable<Cliente> {
