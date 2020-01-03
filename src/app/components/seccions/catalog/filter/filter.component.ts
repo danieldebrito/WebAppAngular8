@@ -18,7 +18,8 @@ export class FilterComponent implements OnInit {
   public isCollapsed = false;
   public isCollapsed2 = true;
   public isCollapsed3 = true;
-  // anternar entre grilla y detalle, true muestra grilla.
+
+  // alternar entre grilla y detalle, true muestra grilla.
   public show: boolean;
 
   // valores seleccionados en los selects.
@@ -69,7 +70,7 @@ export class FilterComponent implements OnInit {
 
   public cambiaVista() {
     // this.show = this.artService.show;
-}
+  }
 
   public Colunmas(items: Cards[]) {
     let arrayAuxLinea: string[] = [];
@@ -184,30 +185,29 @@ export class FilterComponent implements OnInit {
 
   public Filtrar() {
     this.cardsService.FiltrarP(
-        this.linea,
-        this.marca,
-        this.combustible,
-        this.motor,
-        this.modelo,
-        this.cilindrada,
-        this.competicion,
-        this.producto,
-        this.aplicacion).then(
-            response => {
-                this.dataFiltrada = response;
-                this.Colunmas(this.dataFiltrada);
-            }
-        )
-        .catch(
-            error => {
-                console.error('ERROR DEL SERVIDOR, FILTRO COMPONENT.TS => ', error);
-            }
-        );
-}
+      this.linea,
+      this.marca,
+      this.combustible,
+      this.motor,
+      this.modelo,
+      this.cilindrada,
+      this.competicion,
+      this.producto,
+      this.aplicacion).then(
+        response => {
+          this.dataFiltrada = response;
+          this.Colunmas(this.dataFiltrada);
+        }
+      )
+      .catch(
+        error => {
+          console.error('ERROR DEL SERVIDOR, FILTRO COMPONENT.TS => ', error);
+        }
+      );
+  }
 
-public Limpiar() {
-  this.cardsService.ListarO().subscribe(response => {
-      // this.filtroItems = response.slice(0, 50);   /* VISTA */
+  public Limpiar() {
+    this.cardsService.ListarO().subscribe(response => {
       this.dataFiltrada = response;
 
       this.linea = '';
@@ -221,12 +221,11 @@ public Limpiar() {
       this.aplicacion = '';
 
       this.LimpiaColumnas();
-
-  },
+    },
       error => {
-          console.error(error);
+        console.error(error);
       });
-}
+  }
 
   ngOnInit() {
     this.Limpiar();
