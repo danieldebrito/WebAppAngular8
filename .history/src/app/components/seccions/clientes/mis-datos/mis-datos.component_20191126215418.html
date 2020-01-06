@@ -1,0 +1,51 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-2">
+            <h2 class="text-left">Mis Datos</h2>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <form #formProducto="ngForm" (ngSubmit)="onSubmit()" id="form-producto1">
+                    <label for="fname"> Codigo de Cliente : </label>
+                    <input type="text" name="id" #nombre="ngModel" [(ngModel)]="cliente.id"
+                        placeholder="Ingrese su Codigo de Cliente..." required>
+
+                    <label for="fname"> Razón Social :</label>
+                    <input type="text" name="razonSocial: " #nombre="ngModel" [(ngModel)]="cliente.razonSocial"
+                        placeholder="Ingrese Razón Social..." required>
+
+                    <label for="lname">e-mail :</label>
+                    <input type="email" name="email" #nombre="ngModel" [(ngModel)]="cliente.email"
+                        placeholder="Ingrese su e-mail..." required>
+
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <form form #formProducto="ngForm" (ngSubmit)="onSubmit()" id="form-producto2">
+                    <label for="fname">CUIT</label>
+                    <input type="text" name="cuit" #nombre="ngModel" [(ngModel)]="cliente.cuit"
+                        placeholder="Ingrese su Nro. de CUIT..." required>
+
+                    <label for="fname">Responsable de Compras</label>
+                    <input type="text" name="comprador" #nombre="ngModel" [(ngModel)]="cliente.comprador"
+                        placeholder="Ingrese Nombre de Responsable de Compras..." required>
+
+                    <label for="lname">Clave</label>
+                    <input type="password" name="clave" #nombre="ngModel" [(ngModel)]="cliente.clave"
+                        placeholder="Ingrese Clave de 6 caracteres..." required>
+
+                    <br> <br>
+                    <input type="submit" value="Guardar Cambios">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
