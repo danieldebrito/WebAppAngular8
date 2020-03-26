@@ -1,4 +1,5 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
@@ -29,7 +30,7 @@ export class CarritoComponent implements OnInit {
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
-  public idsucursalSelected;
+  public idSucursalSelected;
 
   public idCliente: string;
   public observaciones: string;
@@ -40,15 +41,16 @@ export class CarritoComponent implements OnInit {
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {
-    this.idCliente = this.authService.getIdentityLocalStorage().id;
+    this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
   }
 
   /**
-   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion
+   * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
    */
-  public listarPedidoAbierto() {
+  public ListarItemsAbiertos() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaCantItems();
@@ -58,8 +60,12 @@ export class CarritoComponent implements OnInit {
       });
   }
 
+  public LimpiarListaDeItems() {
+    this.pedidoItems = [];
+  }
+
   /**
-   * cuenta cantidad de items en carrito
+   * cuenta cantidad de items cargados en carrito
    */
   public cuentaCantItems() {
     this.pedidoItemServ.cantItems = this.pedidoItems.length;
@@ -68,12 +74,12 @@ export class CarritoComponent implements OnInit {
   /**
    *
    * @param id de la entidad
-   * borra un item de la entidad mediante id
+   * borra un item del carrito mediante id
    */
   public borrarItem(id: string) {
     this.pedidoItemServ.Baja(id).then(
       response => {
-        this.listarPedidoAbierto();
+        this.ListarItemsAbiertos();
         return response;
       }
     ).catch(
@@ -89,8 +95,10 @@ export class CarritoComponent implements OnInit {
    */
   listaSucursalesCliente() {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
+
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
+      this.idSucursalByName(this.sucursalSelected);
       return response;
     });
   }
@@ -110,44 +118,36 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
-   * EN CONSTRUCCION
-   * LA IDEA ES QUE CREE UN NUEVO PEDIDO TOMANDO LAS VARIABLES DE LA SESION DE USUARIO
+   * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido, antes tiene -1
+   * tambien al pedido le cambia el estado a cerrado
    */
   public CerrarPedido() {
-
-    // this.idExpresoByName(this.expresoSelected);
-
-    alert(
-      ' EXPRESO ID =>  ' + this.idExpresoSelected +
-      ' EXPRESO => :  ' + this.expresoSelected +
-      ' SUCURSAL ID => : ' + this.idsucursalSelected +
-      ' SUCURSAL => : ' + this.sucursalSelected
-    );
-
-    /*
     this.pedidosService.Alta(
       this.idCliente,
-      0,
+      this.idSucursalSelected,
       this.idExpresoSelected,
-      'abierto',
+      'cerrado',
       this.pedidosService.getfecha(),
-      'hacer observ.' // this.observaciones
+      'obs.' // this.observaciones
     ).then(
       response => {
-        this.cerrarPedido(response);
-        // return response;
-        alert(response);
+        this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
+        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
+        this.LimpiarListaDeItems();
+        this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
       error => {
         console.error('ERROR DEL SERVIDOR', error);
       }
-    );*/
+    );
+    // this.ListarItemsAbiertos();  // recargo la lista de items, quedaria vacia.
+
   }
 
 
   /**
-   *   EN CONSTRUCCION CIERRA LOS ITEMS PARA ARMAR EL PEDIDO, CAMBIA ESTADO A CERRADO Y CARGA NRO DE PEDIDO
+   * EN CONSTRUCCION CIERRA LOS ITEMS PARA ARMAR EL PEDIDO, CAMBIA ESTADO A CERRADO Y CARGA NRO DE PEDIDO
    * @param id_pedido => id de pedido
    * @param id_cliente => id de cliente
    */
@@ -163,11 +163,14 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  public SeleccionaSucursal() {
+  
+  SeleccionaSucursaldeHTML() {
     this.idExpresoByName(this.expresoSelected);
-    this.idSucursalByName(this.expresoSelected);
+    this.idSucursalByName(this.sucursalSelected);
   }
+  
 
+  
   public idExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
 
@@ -178,12 +181,13 @@ export class CarritoComponent implements OnInit {
       error => {
         console.error(error);
       });
-  }
+  } 
 
+  
   public idSucursalByName(name: string) {
     this.sucursalesService.ReadByName(name).subscribe(response => {
-      alert(response.idSucursal);
-      this.idsucursalSelected = response.idSucursal;
+
+      this.idSucursalSelected = response.idSucursal;
 
       return response.idSucursal;
     },
@@ -191,17 +195,13 @@ export class CarritoComponent implements OnInit {
         console.error(error);
       });
   }
+  
 
   ngOnInit() {
-    this.listarPedidoAbierto();
+    this.ListarItemsAbiertos();
     this.listaSucursalesCliente();
     this.listaExpresos();
     this.cuentaCantItems();
-    this.idExpresoByName(this.expresoSelected);
-    this.idSucursalByName(this.sucursalSelected);
-  }
-
-  DoCheck() {
-    // this.identity = this.authService.getIdentityLocalStorage();
+    this.SeleccionaSucursaldeHTML();
   }
 }

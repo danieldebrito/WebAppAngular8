@@ -95,6 +95,7 @@ export class CarritoComponent implements OnInit {
    */
   listaSucursalesCliente() {
     this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
+
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
       this.idSucursalByName(this.sucursalSelected);
@@ -183,6 +184,8 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ReadByName(name).subscribe(response => {
 
       this.idSucursalSelected = response.idSucursal;
+
+      alert(this.idSucursalSelected);
 
       return response.idSucursal;
     },
