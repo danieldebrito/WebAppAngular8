@@ -47,7 +47,7 @@ export class CarritoComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
-    this.cliente = this.authService.getIdentityLocalStorage();
+    this.idCliente = this.authService.getIdentityLocalStorage();
   }
 
   /**
@@ -202,6 +202,8 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ReadByName(name).subscribe(response => {
 
       this.idSucursalSelected = response.idSucursal;
+
+      alert(this.idSucursalSelected);
 
       return response.idSucursal;
     },

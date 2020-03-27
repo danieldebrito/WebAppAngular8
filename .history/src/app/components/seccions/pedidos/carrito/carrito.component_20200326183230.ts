@@ -203,6 +203,8 @@ export class CarritoComponent implements OnInit {
 
       this.idSucursalSelected = response.idSucursal;
 
+      alert(this.idSucursalSelected);
+
       return response.idSucursal;
     },
       error => {

@@ -49,5 +49,10 @@ constructor(public miHttp: BaseService) { }
   public ReadByName(name: string): Observable<Expreso> {
     return this.miHttp.httpGetO<Expreso>('/expresos/byName/' + '"' + name + '"');
   }
+
+  public ListarPorCliente(idCliente: string): Observable<Expreso[]> {
+    return this.miHttp.httpGetO<Expreso[]>('/expresos/byCliente/' + '"' + idCliente + '"');
+  }
+
 }
 

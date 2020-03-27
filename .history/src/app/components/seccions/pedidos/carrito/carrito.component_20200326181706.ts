@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 // class
 import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
-import { Cliente } from 'src/app/class/cliente';
 import { ClienteSucursal } from 'src/app/class/clienteSucursal';
 import { Expreso } from 'src/app/class/expreso';
 
@@ -34,7 +33,6 @@ export class CarritoComponent implements OnInit {
   public idSucursalSelected;
 
   public idCliente: string;
-  public cliente: Cliente;
   public observaciones: string;
 
   constructor(
@@ -47,7 +45,6 @@ export class CarritoComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
-    this.cliente = this.authService.getIdentityLocalStorage();
   }
 
   /**
@@ -203,6 +200,8 @@ export class CarritoComponent implements OnInit {
 
       this.idSucursalSelected = response.idSucursal;
 
+      alert(this.idSucursalSelected);
+
       return response.idSucursal;
     },
       error => {
@@ -213,8 +212,7 @@ export class CarritoComponent implements OnInit {
   ngOnInit() {
     this.ListarItemsAbiertos();
     this.listaSucursalesCliente();
-    // this.listaExpresos();
-    this.listaExpresosPorCliente();
+    this.listaExpresos();
     this.cuentaCantItems();
     this.SeleccionaSucursaldeHTML();
   }
