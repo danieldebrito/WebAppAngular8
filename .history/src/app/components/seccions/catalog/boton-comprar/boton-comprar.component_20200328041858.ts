@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 // class
 import { Cliente } from 'src/app/class/cliente';
@@ -29,8 +29,6 @@ export class BotonComprarComponent implements OnInit {
   }
 
   public cargaItem() {
-
-    this.ListarItemsAbiertos();
 
     const long = this.pedidoItems.length;
     let flag = true;
@@ -73,6 +71,25 @@ export class BotonComprarComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
+
+      /*
+      const long = this.pedidoItems.length;
+
+      for (let i = 0; i < long ; i++)  {
+
+        if ( !(i === long) && this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+
+          this.updateItem(
+            this.pedidoItems[i].idPedidoItem,
+            this.pedidoItems[i].idPedido,
+            this.idCliente,
+            this.pedidoItems[i].idArticulo,
+            this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad);
+
+          this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
+        }
+
+    }*/
     },
       error => {
         console.error(error);
@@ -95,5 +112,9 @@ export class BotonComprarComponent implements OnInit {
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
     this.ListarItemsAbiertos();
+  }
+
+  DoCheck() {
+    // this.identity = this.authService.getIdentityLocalStorage();
   }
 }

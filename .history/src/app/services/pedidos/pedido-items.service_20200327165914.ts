@@ -8,13 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class PedidoItemsService {
 
+  public cantItems: number;
+
   constructor(public miHttp: BaseService) { }
 
   public Listar(): Observable<PedidoItem[]> {
     return this.miHttp.httpGetO<PedidoItem[]>('/pedidos_item/');
   }
 
-  public Baja(id: string): Promise<object> {
+  public Baja(id: number): Promise<object> {
     return this.miHttp.httpDeleteP('/pedidos_item/' + '"' + id + '"');
   }
 
@@ -31,45 +33,41 @@ export class PedidoItemsService {
   }
 
   public Alta(
-    id_cliente: string,
-    id_pedido: string,
-    id_articulo: string,
-    cantidad: number,
-    estado: string
-  ): Promise<Object> {
-    const request: Object = {
-      id_cliente: id_cliente,
-      id_pedido: id_pedido,
-      id_articulo: id_articulo,
-      cantidad: cantidad,
-      estado: estado
+    idPedido: number,
+    idCliente: string,
+    idArticulo: string,
+    cantidad: number
+  ): Promise<object> {
+    const request: object = {
+      idPedido,
+      idCliente,
+      idArticulo,
+      cantidad
     };
     return this.miHttp.httpPostP('/pedidos_item/', request);
   }  // alta
 
   public Update(
-    id_pedido_item: number,
-    id_cliente: string,
-    id_pedido: string,
-    id_articulo: string,
-    cantidad: number,
-    estado: string
+    idPedidoItem: number,
+    idPedido: number,
+    idCliente: string,
+    idArticulo: string,
+    cantidad: number
   ): Promise<object> {
     const request: object = {
-      id_pedido_item: id_pedido_item,
-      id_cliente: id_cliente,
-      id_pedido: id_pedido,
-      id_articulo: id_articulo,
-      cantidad: cantidad,
-      estado: estado
+      idPedidoItem,
+      idPedido,
+      idCliente,
+      idArticulo,
+      cantidad
     };
     return this.miHttp.httpPostP('/pedidos_item/update', request);
   }
 
-  public cierraItems(id_pedido: number, id_cliente: string): Promise<object> {
+  public cierraItems(idPedido: number, idCliente: string): Promise<object> {
     const request: object = {
-      id_pedido: id_pedido,
-      id_cliente: id_cliente
+      idPedido,
+      idCliente
     };
     return this.miHttp.httpPostP('/pedidos_item/updateItems/', request);
   }

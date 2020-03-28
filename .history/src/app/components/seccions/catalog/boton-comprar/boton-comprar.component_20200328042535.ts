@@ -30,8 +30,6 @@ export class BotonComprarComponent implements OnInit {
 
   public cargaItem() {
 
-    this.ListarItemsAbiertos();
-
     const long = this.pedidoItems.length;
     let flag = true;
 

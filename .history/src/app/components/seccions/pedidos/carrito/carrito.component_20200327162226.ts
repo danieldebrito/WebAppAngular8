@@ -58,24 +58,18 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
-      /*
       const long = this.pedidoItems.length;
 
       for (let i = 0; i < long ; i++)  {
 
-        if ( !(i === long) && this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+        if (this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
 
-          this.updateItem(
-            this.pedidoItems[i].idPedidoItem,
-            this.pedidoItems[i].idPedido,
-            this.idCliente,
-            this.pedidoItems[i].idArticulo,
-            this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad);
 
-          this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
+          this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad;
+          this.pedidoItems.splice(i + 1, 1);
+          alert('repetido');
         }
-
-    }*/
+    }
       this.cuentaCantItems();
     },
       error => {
@@ -99,7 +93,7 @@ export class CarritoComponent implements OnInit {
    * @param id de la entidad
    * borra un item del carrito mediante id
    */
-  public borrarItem(id: number) {
+  public borrarItem(id: string) {
     this.pedidoItemServ.Baja(id).then(
       response => {
         this.ListarItemsAbiertos();

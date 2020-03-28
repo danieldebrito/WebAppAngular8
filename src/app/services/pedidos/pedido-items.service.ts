@@ -16,7 +16,7 @@ export class PedidoItemsService {
     return this.miHttp.httpGetO<PedidoItem[]>('/pedidos_item/');
   }
 
-  public Baja(id: string): Promise<object> {
+  public Baja(id: number): Promise<object> {
     return this.miHttp.httpDeleteP('/pedidos_item/' + '"' + id + '"');
   }
 

@@ -58,7 +58,6 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
-      /*
       const long = this.pedidoItems.length;
 
       for (let i = 0; i < long ; i++)  {
@@ -75,7 +74,7 @@ export class CarritoComponent implements OnInit {
           this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
         }
 
-    }*/
+    }
       this.cuentaCantItems();
     },
       error => {

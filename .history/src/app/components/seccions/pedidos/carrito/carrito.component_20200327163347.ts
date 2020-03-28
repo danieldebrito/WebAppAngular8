@@ -58,12 +58,11 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
-      /*
       const long = this.pedidoItems.length;
 
       for (let i = 0; i < long ; i++)  {
 
-        if ( !(i === long) && this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+        if (this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
 
           this.updateItem(
             this.pedidoItems[i].idPedidoItem,
@@ -75,7 +74,7 @@ export class CarritoComponent implements OnInit {
           this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
         }
 
-    }*/
+    }
       this.cuentaCantItems();
     },
       error => {

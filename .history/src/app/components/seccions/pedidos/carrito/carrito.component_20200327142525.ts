@@ -58,24 +58,25 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
-      /*
       const long = this.pedidoItems.length;
-
       for (let i = 0; i < long ; i++)  {
-
-        if ( !(i === long) && this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
-
-          this.updateItem(
-            this.pedidoItems[i].idPedidoItem,
-            this.pedidoItems[i].idPedido,
-            this.idCliente,
-            this.pedidoItems[i].idArticulo,
-            this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad);
-
-          this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
+        if (this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+          this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad;
+          this.pedidoItems.splice(i + 1, 1);
+          alert('repetido');
         }
+    }
 
-    }*/
+/*
+      for (let i = 0; i < this.pedidoItems.length ; i++) {
+
+          if (this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+            alert('repetido');
+          }
+      }
+*/
+
+     // this.pedidoItems = response;
       this.cuentaCantItems();
     },
       error => {
@@ -99,7 +100,7 @@ export class CarritoComponent implements OnInit {
    * @param id de la entidad
    * borra un item del carrito mediante id
    */
-  public borrarItem(id: number) {
+  public borrarItem(id: string) {
     this.pedidoItemServ.Baja(id).then(
       response => {
         this.ListarItemsAbiertos();
@@ -127,7 +128,7 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
-   * LISTA los expresos todos!!!
+   * LISTA los expresos  HACER POR CLIENTE!!!!!
    * debe seleccionar uno para cerrar el pedido.
    */
   listaExpresos() {
@@ -181,19 +182,6 @@ export class CarritoComponent implements OnInit {
     );
     // this.ListarItemsAbiertos();  // recargo la lista de items, quedaria vacia.
 
-  }
-
-  public updateItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
-      response => {
-        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
-        return response;
-      }
-    ).catch(
-      error => {
-        console.error('ERROR DEL SERVIDOR, carrito component', error);
-      }
-    );
   }
 
 

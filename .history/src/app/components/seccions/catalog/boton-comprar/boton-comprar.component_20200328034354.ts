@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, DoCheck, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 // class
 import { Cliente } from 'src/app/class/cliente';
@@ -30,39 +30,35 @@ export class BotonComprarComponent implements OnInit {
 
   public cargaItem() {
 
-    this.ListarItemsAbiertos();
-
     const long = this.pedidoItems.length;
-    let flag = true;
 
     for (let i = 0; i < long; i++) {
 
       if (this.pedidoItems[i].idArticulo === this.id_articulo) {
+
         this.updateItem(
           this.pedidoItems[i].idPedidoItem,
           this.pedidoItems[i].idPedido,
           this.identity.idCliente,
           this.pedidoItems[i].idArticulo,
           this.pedidoItems[i].cantidad += this.cantidad);
-
-        flag = false;
         break;
+      } else {
+        this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad).then(
+          response => {
+            return response;
+          }
+        ).catch(
+          error => {
+            console.error('ERROR DEL SERVIDOR, boton-comprar.ts', error);
+          }
+        );
+
       }
+      this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
     }
 
-    if (flag) {
-      this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad).then(
-        response => {
-          return response;
-        }
-      ).catch(
-        error => {
-          console.error('ERROR DEL SERVIDOR, boton-comprar.ts', error);
-        }
-      );
-    }
 
-    this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
   }
 
   /**
@@ -73,6 +69,25 @@ export class BotonComprarComponent implements OnInit {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.idCliente).subscribe(response => {
 
       this.pedidoItems = response;
+
+      /*
+      const long = this.pedidoItems.length;
+
+      for (let i = 0; i < long ; i++)  {
+
+        if ( !(i === long) && this.pedidoItems[i].idArticulo === this.pedidoItems[i + 1].idArticulo ) {
+
+          this.updateItem(
+            this.pedidoItems[i].idPedidoItem,
+            this.pedidoItems[i].idPedido,
+            this.idCliente,
+            this.pedidoItems[i].idArticulo,
+            this.pedidoItems[i].cantidad += this.pedidoItems[i + 1].cantidad);
+
+          this.borrarItem(this.pedidoItems[i + 1].idPedidoItem);
+        }
+
+    }*/
     },
       error => {
         console.error(error);
@@ -82,6 +97,7 @@ export class BotonComprarComponent implements OnInit {
   public updateItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
     this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
+        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
       }
     ).catch(
@@ -95,5 +111,9 @@ export class BotonComprarComponent implements OnInit {
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
     this.ListarItemsAbiertos();
+  }
+
+  DoCheck() {
+    // this.identity = this.authService.getIdentityLocalStorage();
   }
 }

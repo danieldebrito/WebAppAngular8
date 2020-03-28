@@ -23,7 +23,7 @@ export class PedidosService {
     return this.miHttp.httpGetO<Pedido[]>('/pedidos/');
   }
 
-  public Baja(id: string): Promise<object> {
+  public Baja(id: number): Promise<object> {
     return this.miHttp.httpDeleteP('/pedidos/' + '"' + id + '"');
   }
 
