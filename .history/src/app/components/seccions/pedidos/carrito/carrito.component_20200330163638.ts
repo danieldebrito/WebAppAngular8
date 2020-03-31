@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
 import { Cliente } from 'src/app/class/cliente';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
+import { Expreso } from 'src/app/class/expreso';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
@@ -36,7 +38,7 @@ export class CarritoComponent implements OnInit {
   public cliente: Cliente;
   public observaciones: string;
 
-  public subtotal: any;
+  public subtotal;
 
   constructor(
     private pedidoItemServ: PedidoItemsService,
@@ -203,7 +205,8 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
       response => {
         this.subtotal = response ;
-        // this.subtotal.subtotal;
+
+        alert(response);
         return response;
       }
     ).catch(

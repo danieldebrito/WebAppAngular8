@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
 import { Cliente } from 'src/app/class/cliente';
+import { ClienteSucursal } from 'src/app/class/clienteSucursal';
+import { Expreso } from 'src/app/class/expreso';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
@@ -36,7 +38,7 @@ export class CarritoComponent implements OnInit {
   public cliente: Cliente;
   public observaciones: string;
 
-  public subtotal: any;
+  public subtotal: number;
 
   constructor(
     private pedidoItemServ: PedidoItemsService,
@@ -68,10 +70,10 @@ export class CarritoComponent implements OnInit {
  * LEE LOS ARTICULOS CARGADOS EN EL CARRITO DEL LS
  * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
  */
-  /*
-    public ListarItemsAbiertosLS() {
-      this.pedidoItemsLS = JSON.parse(localStorage.getItem('pedidoItemsLS'));
-    }*/
+/*
+  public ListarItemsAbiertosLS() {
+    this.pedidoItemsLS = JSON.parse(localStorage.getItem('pedidoItemsLS'));
+  }*/
 
 
   public LimpiarListaDeItems() {
@@ -103,17 +105,17 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  /**
-   * @param id de la entidad
-   * borra un item del carrito mediante id
-   */
-  /*
-    public borrarItemLS(item: PedidoItem) {
-  
-      this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
-      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
-      this.borrarItem(item.idPedidoItem);  // borra de la bd
-    }*/
+/**
+ * @param id de la entidad
+ * borra un item del carrito mediante id
+ */
+/*
+  public borrarItemLS(item: PedidoItem) {
+
+    this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
+    localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
+    this.borrarItem(item.idPedidoItem);  // borra de la bd
+  }*/
 
   /**
    * LISTA las sucursales del cliente en sesion
@@ -199,20 +201,6 @@ export class CarritoComponent implements OnInit {
     );
   }
 
-  public Subtotal(idCliente, idPedido) {
-    this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
-      response => {
-        this.subtotal = response ;
-        // this.subtotal.subtotal;
-        return response;
-      }
-    ).catch(
-      error => {
-        console.error('ERROR DEL SERVIDOR, carrito component', error);
-      }
-    );
-  }
-
 
   /**
    * EN CONSTRUCCION CIERRA LOS ITEMS PARA ARMAR EL PEDIDO, CAMBIA ESTADO A CERRADO Y CARGA NRO DE PEDIDO
@@ -270,7 +258,5 @@ export class CarritoComponent implements OnInit {
     this.listaExpresosPorCliente();
     this.cuentaCantItems();
     this.SeleccionaSucursaldeHTML();
-
-    this.Subtotal(this.idCliente, -1);
   }
 }

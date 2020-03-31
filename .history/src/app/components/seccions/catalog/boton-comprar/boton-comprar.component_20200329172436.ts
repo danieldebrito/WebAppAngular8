@@ -176,7 +176,6 @@ export class BotonComprarComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
-    this.ListarItemsAbiertos();
     // this.cargarLS();
   }
 }

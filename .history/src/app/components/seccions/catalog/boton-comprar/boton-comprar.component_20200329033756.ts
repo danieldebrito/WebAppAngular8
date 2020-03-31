@@ -29,37 +29,31 @@ export class BotonComprarComponent implements OnInit {
   }
 
   /**
-   * carga item a Local Storage y MySQL
+   * carga iten a Local Storage y MySQL
    */
-  /*
   public cargaItemLS() {
 
-    this.leerLS();
+    this.ListarItemsAbiertos();
 
-    const long = this.pedidoItemsLS.length;
+    const long = this.pedidoItems.length;
     let flag = true;
 
     for (let i = 0; i < long; i++) {
-      if (this.pedidoItemsLS[i].idArticulo === this.id_articulo) {
-        this.pedidoItemsLS[i].cantidad += this.cantidad;
+
+      if (this.pedidoItems[i].idArticulo === this.id_articulo) {
+        this.updateItem(
+          this.pedidoItems[i].idPedidoItem,
+          this.pedidoItems[i].idPedido,
+          this.identity.idCliente,
+          this.pedidoItems[i].idArticulo,
+          this.pedidoItems[i].cantidad += this.cantidad);
+
         flag = false;
         break;
       }
     }
 
     if (flag) {
-
-      const item: any = {
-        idPedidoItem: 0,
-        idPedido: -1,
-        idCliente: this.identity.idCliente,
-        idArticulo: this.id_articulo,
-        cantidad: this.cantidad
-      };
-
-      this.pedidoItemsLS.push(item);
-      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
-
       this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad).then(
         response => {
           return response;
@@ -72,7 +66,7 @@ export class BotonComprarComponent implements OnInit {
     }
 
     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
-  }*/
+  }
 
 
   /**
@@ -131,26 +125,23 @@ export class BotonComprarComponent implements OnInit {
  * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
  * y los guarda en el local storage
  */
-/*
   public cargarLS() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.idCliente).subscribe(response => {
       this.pedidoItems = response;
-      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
+      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItems));
     },
       error => {
         console.error(error);
       });
   }
-  */
 
   /**
    * lee el local sttorage y lo carga a pedidoItemsLS
    */
 
-   /*
   public leerLS() {
     this.pedidoItemsLS = JSON.parse(localStorage.getItem('pedidoItemsLS'));
-  }*/
+  }
 
   /**
    * 
@@ -176,7 +167,6 @@ export class BotonComprarComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
-    this.ListarItemsAbiertos();
-    // this.cargarLS();
+    this.cargarLS();
   }
 }

@@ -75,7 +75,7 @@ export class PedidoItemsService {
   public Subtotal(
     idCliente: string,
     idPedido: number
-  ): Promise<object> {
+  ): Promise<number> {
     const request: object = {
       idCliente,
       idPedido

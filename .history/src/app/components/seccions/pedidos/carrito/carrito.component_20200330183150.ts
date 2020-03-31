@@ -36,7 +36,7 @@ export class CarritoComponent implements OnInit {
   public cliente: Cliente;
   public observaciones: string;
 
-  public subtotal: any;
+  public subtotal;
 
   constructor(
     private pedidoItemServ: PedidoItemsService,
@@ -203,7 +203,8 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
       response => {
         this.subtotal = response ;
-        // this.subtotal.subtotal;
+
+        alert(response);
         return response;
       }
     ).catch(

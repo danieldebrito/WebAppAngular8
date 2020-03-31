@@ -31,7 +31,6 @@ export class BotonComprarComponent implements OnInit {
   /**
    * carga item a Local Storage y MySQL
    */
-  /*
   public cargaItemLS() {
 
     this.leerLS();
@@ -72,7 +71,7 @@ export class BotonComprarComponent implements OnInit {
     }
 
     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
-  }*/
+  }
 
 
   /**
@@ -131,7 +130,6 @@ export class BotonComprarComponent implements OnInit {
  * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
  * y los guarda en el local storage
  */
-/*
   public cargarLS() {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.idCliente).subscribe(response => {
       this.pedidoItems = response;
@@ -141,16 +139,14 @@ export class BotonComprarComponent implements OnInit {
         console.error(error);
       });
   }
-  */
 
   /**
    * lee el local sttorage y lo carga a pedidoItemsLS
    */
 
-   /*
   public leerLS() {
     this.pedidoItemsLS = JSON.parse(localStorage.getItem('pedidoItemsLS'));
-  }*/
+  }
 
   /**
    * 
@@ -176,7 +172,6 @@ export class BotonComprarComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
-    this.ListarItemsAbiertos();
-    // this.cargarLS();
+    this.cargarLS();
   }
 }

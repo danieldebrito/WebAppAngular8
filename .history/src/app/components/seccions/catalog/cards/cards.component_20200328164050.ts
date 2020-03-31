@@ -9,7 +9,7 @@ import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css']
 })
-export class CardsComponent {
+export class CardsComponent implements OnInit {
 
   @Input() Items: Cards[];
   @Output() showValue = new EventEmitter();

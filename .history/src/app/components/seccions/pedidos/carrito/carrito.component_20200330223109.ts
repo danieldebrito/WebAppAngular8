@@ -203,7 +203,7 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
       response => {
         this.subtotal = response ;
-        // this.subtotal.subtotal;
+
         return response;
       }
     ).catch(

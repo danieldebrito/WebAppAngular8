@@ -27,7 +27,7 @@ export class NavBarComponent implements OnInit, DoCheck {
     } else {
     this.pedidoItemServ.traerItemsClienteAbierto(this.identity.idCliente).subscribe(response => {
       this.cantItemsCarrito = response.length;
-      // localStorage.setItem('pedidoItemsLS', JSON.stringify(response));
+      localStorage.setItem('pedidoItemsLS', JSON.stringify(response));
 
     },
       error => {
