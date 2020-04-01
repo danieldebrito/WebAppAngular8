@@ -202,10 +202,9 @@ export class CarritoComponent implements OnInit {
   public Subtotal(idCliente, idPedido) {
     this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
       response => {
-        this.subtotal = response;
+        this.subtotal = response ;
         // this.subtotal.subtotal;
         alert(this.subtotal);
-
 
         return response;
       }
@@ -269,10 +268,11 @@ export class CarritoComponent implements OnInit {
 
     this.ListarItemsAbiertos();
     this.listaSucursalesCliente();
+    // this.listaExpresos();
     this.listaExpresosPorCliente();
     this.cuentaCantItems();
     this.SeleccionaSucursaldeHTML();
 
-    // this.Subtotal(this.idCliente, -1);
+    this.Subtotal(this.idCliente, -1);
   }
 }

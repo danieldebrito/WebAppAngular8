@@ -7,6 +7,6 @@ export class PedidoItem {
         public cantidad: number,
         public descripcion_corta: string,  // no esta en la api
         public stock: number,  // no esta en la api
-        public precio_lista: number
+        public precioLista: number
     ) { }
 }

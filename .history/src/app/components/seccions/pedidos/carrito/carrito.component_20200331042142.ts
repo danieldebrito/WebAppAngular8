@@ -269,10 +269,11 @@ export class CarritoComponent implements OnInit {
 
     this.ListarItemsAbiertos();
     this.listaSucursalesCliente();
+    // this.listaExpresos();
     this.listaExpresosPorCliente();
     this.cuentaCantItems();
     this.SeleccionaSucursaldeHTML();
 
-    // this.Subtotal(this.idCliente, -1);
+    this.Subtotal(this.idCliente, -1);
   }
 }
