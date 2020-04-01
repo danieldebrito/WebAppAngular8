@@ -54,7 +54,7 @@ export class CarritoComponent implements OnInit {
    * y sean del cliente en sesion
    */
   public getPedidoItems() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.cliente.idCliente).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaPedidoItems();
     },
@@ -111,10 +111,10 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  /**
- * LISTA los expresos POR CLIENTE!!!!!
- * debe seleccionar uno para cerrar el pedido.
- */
+    /**
+   * LISTA los expresos POR CLIENTE!!!!!
+   * debe seleccionar uno para cerrar el pedido.
+   */
   listarExpresosCliente() {
     this.expresosService.ListarPorCliente(this.cliente.idCliente).subscribe(response => {
       this.expresos = response;
@@ -170,8 +170,8 @@ export class CarritoComponent implements OnInit {
 
   }
 
-  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
@@ -230,18 +230,9 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
-
-    alert((this.pedidoItems[0].precio_lista * this.pedidoItems[0].cantidad));
-
-    for (let i = 0; i < this.pedidoItems.length; i++) {
-      alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
-      this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
-    }
-
-    /*
     this.pedidoItems.forEach(element => {
       this.subtotal += (element.precio_lista * element.cantidad);
-    });*/
+    });
   }
 
   ngOnInit() {
@@ -259,31 +250,31 @@ export class CarritoComponent implements OnInit {
 
 
 
+  
+  /*public Subtotal(idCliente, idPedido) {
+    this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
+      response => {
+        this.subtotal = response;
+        // this.subtotal.subtotal;
+        alert(this.subtotal);
 
-/*public Subtotal(idCliente, idPedido) {
-  this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
-    response => {
-      this.subtotal = response;
-      // this.subtotal.subtotal;
-      alert(this.subtotal);
+
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR, carrito component', error);
+      }
+    );
+  }
+  */
 
 
-      return response;
+    /*
+    public deletePedidoItemLS(item: PedidoItem) {
+
+      this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
+      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
+      this.deletePedidoItem(item.idPedidoItem);  // borra de la bd
     }
-  ).catch(
-    error => {
-      console.error('ERROR DEL SERVIDOR, carrito component', error);
-    }
-  );
-}
-*/
-
-
-/*
-public deletePedidoItemLS(item: PedidoItem) {
-
-  this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
-  localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
-  this.deletePedidoItem(item.idPedidoItem);  // borra de la bd
-}
 */

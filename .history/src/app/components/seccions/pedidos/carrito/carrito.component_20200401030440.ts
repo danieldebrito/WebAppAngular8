@@ -170,8 +170,8 @@ export class CarritoComponent implements OnInit {
 
   }
 
-  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;

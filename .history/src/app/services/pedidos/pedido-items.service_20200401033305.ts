@@ -36,8 +36,8 @@ export class PedidoItemsService {
     idPedido: number,
     idCliente: string,
     idArticulo: string,
-    cantidad: number,
-    precio_lista: number
+    precio_lista: number,
+    cantidad: number
   ): Promise<object> {
     const request: object = {
       idPedido,
@@ -54,7 +54,6 @@ export class PedidoItemsService {
     idPedido: number,
     idCliente: string,
     idArticulo: string,
-    precio_lista: number,
     cantidad: number
   ): Promise<object> {
     const request: object = {
@@ -62,7 +61,6 @@ export class PedidoItemsService {
       idPedido,
       idCliente,
       idArticulo,
-      precio_lista,
       cantidad
     };
     return this.miHttp.httpPostP('/pedidos_item/update', request);

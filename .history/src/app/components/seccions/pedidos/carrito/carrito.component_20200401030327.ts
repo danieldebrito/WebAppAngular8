@@ -170,8 +170,8 @@ export class CarritoComponent implements OnInit {
 
   }
 
-  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
@@ -231,7 +231,7 @@ export class CarritoComponent implements OnInit {
 
   public getSubtotal() {
 
-    alert((this.pedidoItems[0].precio_lista * this.pedidoItems[0].cantidad));
+    alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
 
     for (let i = 0; i < this.pedidoItems.length; i++) {
       alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));

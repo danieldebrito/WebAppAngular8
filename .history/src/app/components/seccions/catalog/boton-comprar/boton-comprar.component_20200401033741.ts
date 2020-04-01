@@ -79,24 +79,29 @@ export class BotonComprarComponent implements OnInit {
    * carga iten a MySQL
    */
   public cargaItem() {
+
     this.ListarItemsAbiertos();
+
     const long = this.pedidoItems.length;
     let flag = true;
+
     for (let i = 0; i < long; i++) {
+
       if (this.pedidoItems[i].idArticulo === this.id_articulo) {
         this.updateItem(
           this.pedidoItems[i].idPedidoItem,
           this.pedidoItems[i].idPedido,
           this.identity.idCliente,
           this.pedidoItems[i].idArticulo,
-          this.pedidoItems[i].cantidad += this.cantidad,
-          this.pedidoItems[i].precio_lista);
+          this.pedidoItems[i].cantidad += this.cantidad);
+
         flag = false;
         break;
       }
     }
+
     if (flag) {
-      this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.cantidad, 100).then(
+      this.pedidoItemServ.Alta(-1, this.identity.idCliente, this.id_articulo, this.precio_lista, this.cantidad).then(
         response => {
           return response;
         }
@@ -156,8 +161,8 @@ export class BotonComprarComponent implements OnInit {
    * @param cantidad 
    */
 
-  public updateItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+  public updateItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
         return response;
       }

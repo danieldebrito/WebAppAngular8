@@ -23,6 +23,7 @@ export class CarritoComponent implements OnInit {
 
   public articulo: Articulo;
   public pedidoItems: PedidoItem[] = [];
+  // public pedidoItemsLS: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
 
@@ -46,6 +47,7 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService,
     private toastr: ToastrService
   ) {
+    this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
     this.cliente = this.authService.getIdentityLocalStorage();
   }
 
@@ -54,7 +56,7 @@ export class CarritoComponent implements OnInit {
    * y sean del cliente en sesion
    */
   public getPedidoItems() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.cliente.idCliente).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.idCliente).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaPedidoItems();
     },
@@ -62,6 +64,16 @@ export class CarritoComponent implements OnInit {
         console.error(error);
       });
   }
+
+  /*
+ * LEE LOS ARTICULOS CARGADOS EN EL CARRITO DEL LS
+ * trae los items que tengan el idPedido = -1 y sean del cliente en sesion, para carcar en el carrito
+ */
+  /*
+    public getPedidoItemsLS() {
+      this.pedidoItemsLS = JSON.parse(localStorage.getItem('pedidoItemsLS'));
+    }*/
+
 
   public cleanPedidoItems() {
     this.pedidoItems = [];
@@ -96,13 +108,20 @@ export class CarritoComponent implements OnInit {
    * @param id de la entidad
    * borra un item del carrito mediante id
    */
+  /*
+    public deletePedidoItemLS(item: PedidoItem) {
+  
+      this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
+      localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
+      this.deletePedidoItem(item.idPedidoItem);  // borra de la bd
+    }*/
 
   /**
    * LISTA las sucursales del cliente en sesion
    * debe seleccionar una para cerrar el pedido.
    */
   listaSucursalesCliente() {
-    this.sucursalesService.ListarPorCliente(this.cliente.idCliente).subscribe(response => {
+    this.sucursalesService.ListarPorCliente(this.idCliente).subscribe(response => {
 
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
@@ -111,12 +130,12 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  /**
- * LISTA los expresos POR CLIENTE!!!!!
- * debe seleccionar uno para cerrar el pedido.
- */
+    /**
+   * LISTA los expresos POR CLIENTE!!!!!
+   * debe seleccionar uno para cerrar el pedido.
+   */
   listarExpresosCliente() {
-    this.expresosService.ListarPorCliente(this.cliente.idCliente).subscribe(response => {
+    this.expresosService.ListarPorCliente(this.idCliente).subscribe(response => {
       this.expresos = response;
       this.expresoSelected = this.expresos[0].nombre;
       this.idExpresoByName(this.expresoSelected);
@@ -170,8 +189,8 @@ export class CarritoComponent implements OnInit {
 
   }
 
-  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad).then(
       response => {
         this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
         return response;
@@ -230,21 +249,17 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
-
-    alert((this.pedidoItems[0].precio_lista * this.pedidoItems[0].cantidad));
-
-    for (let i = 0; i < this.pedidoItems.length; i++) {
-      alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
-      this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
-    }
-
-    /*
     this.pedidoItems.forEach(element => {
       this.subtotal += (element.precio_lista * element.cantidad);
-    });*/
+    });
   }
 
+
+
   ngOnInit() {
+    // lee los items del carrito del local storage los carga en this.pedidoItemsLS
+    // this.getPedidoItemsLS();
+
     this.getPedidoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
@@ -259,31 +274,20 @@ export class CarritoComponent implements OnInit {
 
 
 
-
-/*public Subtotal(idCliente, idPedido) {
-  this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
-    response => {
-      this.subtotal = response;
-      // this.subtotal.subtotal;
-      alert(this.subtotal);
-
-
-      return response;
-    }
-  ).catch(
-    error => {
-      console.error('ERROR DEL SERVIDOR, carrito component', error);
-    }
-  );
-}
-*/
+  
+  /*public Subtotal(idCliente, idPedido) {
+    this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
+      response => {
+        this.subtotal = response;
+        // this.subtotal.subtotal;
+        alert(this.subtotal);
 
 
-/*
-public deletePedidoItemLS(item: PedidoItem) {
-
-  this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
-  localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
-  this.deletePedidoItem(item.idPedidoItem);  // borra de la bd
-}
-*/
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR, carrito component', error);
+      }
+    );
+  }*/
