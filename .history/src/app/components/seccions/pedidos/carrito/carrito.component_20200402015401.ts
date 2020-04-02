@@ -234,7 +234,7 @@ export class CarritoComponent implements OnInit {
     for (let i = 0; i < this.pedidoItemServ.cantItems; i++) {
       // alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
       this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
-      // alert(this.subtotal);
+      alert(this.subtotal);
     }
 
     /*this.pedidoItems.forEach(element => {

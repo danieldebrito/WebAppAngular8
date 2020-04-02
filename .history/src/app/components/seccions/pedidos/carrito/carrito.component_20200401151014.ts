@@ -25,15 +25,14 @@ export class CarritoComponent implements OnInit {
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
-  public cantItems: number;
 
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
   public sucursalSelected: string; // opcion elegida en select
   public idSucursalSelected;
 
-  // public idCliente: string;
-  public clienteLogueado: Cliente;
+  public idCliente: string;
+  public cliente: Cliente;
   public observaciones: string;
 
   public subtotal: number;
@@ -47,7 +46,7 @@ export class CarritoComponent implements OnInit {
     private authService: AuthService,
     private toastr: ToastrService
   ) {
-    this.clienteLogueado = this.authService.getIdentityLocalStorage();
+    this.cliente = this.authService.getIdentityLocalStorage();
   }
 
   /**
@@ -55,7 +54,7 @@ export class CarritoComponent implements OnInit {
    * y sean del cliente en sesion
    */
   public getPedidoItems() {
-    this.pedidoItemServ.traerItemsClienteAbierto(this.clienteLogueado.idCliente).subscribe(response => {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.cliente.idCliente).subscribe(response => {
       this.pedidoItems = response;
       this.cuentaPedidoItems();
       this.getSubtotal();
@@ -99,7 +98,7 @@ export class CarritoComponent implements OnInit {
    * debe seleccionar una para cerrar el pedido.
    */
   listaSucursalesCliente() {
-    this.sucursalesService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
+    this.sucursalesService.ListarPorCliente(this.cliente.idCliente).subscribe(response => {
 
       this.sucursales = response;
       this.sucursalSelected = this.sucursales[0].nombreSucursal;
@@ -113,7 +112,7 @@ export class CarritoComponent implements OnInit {
  * debe seleccionar uno para cerrar el pedido.
  */
   listarExpresosCliente() {
-    this.expresosService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
+    this.expresosService.ListarPorCliente(this.cliente.idCliente).subscribe(response => {
       this.expresos = response;
       this.expresoSelected = this.expresos[0].nombre;
       this.idExpresoByName(this.expresoSelected);
@@ -145,7 +144,7 @@ export class CarritoComponent implements OnInit {
    */
   public CerrarPedido() {
     this.pedidosService.Alta(
-      this.clienteLogueado.idCliente,
+      this.idCliente,
       this.idSucursalSelected,
       this.idExpresoSelected,
       'cerrado',
@@ -186,7 +185,7 @@ export class CarritoComponent implements OnInit {
    * @param id_cliente => id de cliente
    */
   public CerrarItems(idPedido) {
-    this.pedidoItemServ.cierraItems(idPedido, this.clienteLogueado.idCliente).then(
+    this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
       response => {
         return response;
       }
@@ -228,13 +227,14 @@ export class CarritoComponent implements OnInit {
 
   public getSubtotal() {
 
+    // alert(this.pedidoItems.length);
 
+    // alert((this.pedidoItems[0].precio_lista * this.pedidoItems[0].cantidad));
 
     // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.pedidoItemServ.cantItems; i++) {
-      // alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
+    for (let i = 0; i < this.pedidoItems.length; i++) {
+      alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
       this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
-      // alert(this.subtotal);
     }
 
     /*this.pedidoItems.forEach(element => {
@@ -246,7 +246,11 @@ export class CarritoComponent implements OnInit {
     this.getPedidoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
-    // this.SeleccionaSucursaldeHTML();
+    this.cuentaPedidoItems();
+    this.SeleccionaSucursaldeHTML();
+
+   
+
     // this.Subtotal(this.idCliente, -1);
   }
 }

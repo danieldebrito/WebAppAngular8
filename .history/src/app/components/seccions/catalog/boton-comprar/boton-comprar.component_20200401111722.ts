@@ -17,9 +17,8 @@ import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 })
 export class BotonComprarComponent implements OnInit {
   public identity: Cliente;
-  @Input() id_articulo: string;
+  @Input() articulo: Articulo;
   public cantidad: number;
-  public articulo: Articulo;
 
   public pedidoItems: PedidoItem[] = [];
 
@@ -36,11 +35,10 @@ export class BotonComprarComponent implements OnInit {
    */
   public cargaItem() {
     this.ListarItemsAbiertos();
-
     const long = this.pedidoItems.length;
     let flag = true;
     for (let i = 0; i < long; i++) {
-      if (this.pedidoItems[i].idArticulo === this.id_articulo) {
+      if (this.pedidoItems[i].idArticulo === this.articulo.id_articulo) {
         this.updateItem(
           this.pedidoItems[i].idPedidoItem,
           this.pedidoItems[i].idPedido,
@@ -56,14 +54,12 @@ export class BotonComprarComponent implements OnInit {
 
       alert(this.articulo.descripcion_corta  );
 
-      this.traerArticulo(this.id_articulo);
-
       this.pedidoItemServ.Alta(
         -1,
         this.identity.idCliente,
         this.articulo.id_articulo,
         this.cantidad,
-        this.articulo.precio_lista ).then(
+        this.articulo.precio_lista).then(
         response => {
           return response;
         }
@@ -75,19 +71,6 @@ export class BotonComprarComponent implements OnInit {
     }
 
     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
-  }
-
-  /**
-   * 
-   * @param id 
-   */
-  public traerArticulo(id) {
-    this.artService.TraerUno(id).subscribe(response => {
-      this.articulo = response;
-    },
-      error => {
-        console.error(error);
-      });
   }
 
   /*
@@ -110,6 +93,7 @@ export class BotonComprarComponent implements OnInit {
    * @param idArticulo 
    * @param cantidad 
    */
+
   public updateItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
     this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
       response => {
@@ -122,10 +106,10 @@ export class BotonComprarComponent implements OnInit {
     );
   }
 
+
   ngOnInit() {
     this.identity = this.authService.getIdentityLocalStorage();
     this.ListarItemsAbiertos();
-    this.traerArticulo(this.id_articulo);
   }
 }
 

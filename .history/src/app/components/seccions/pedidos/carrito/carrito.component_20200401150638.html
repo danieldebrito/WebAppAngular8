@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <strong>Cliente : </strong>
-                    <p> {{ clienteLogueado.idCliente }} - {{ clienteLogueado.razonSocial }}</p>
+                    <p> {{ cliente.idCliente }} - {{ cliente.razonSocial }}</p>
                 </div>
 
                 <div class="col-sm-3">
@@ -81,7 +81,7 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal: </td>
-                                <td> {{ subtotal | number:'1.2-2' }} </td>
+                                <td> {{ subtotal }} </td>
                             </tr>
                             <tr>
                                 <td>Dtos.</td>

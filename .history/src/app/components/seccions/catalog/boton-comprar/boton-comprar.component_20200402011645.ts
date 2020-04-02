@@ -40,7 +40,7 @@ export class BotonComprarComponent implements OnInit {
     const long = this.pedidoItems.length;
     let flag = true;
     for (let i = 0; i < long; i++) {
-      if (this.pedidoItems[i].idArticulo === this.id_articulo) {
+      if (this.pedidoItems[i].idArticulo === this.articulo.id_articulo) {
         this.updateItem(
           this.pedidoItems[i].idPedidoItem,
           this.pedidoItems[i].idPedido,

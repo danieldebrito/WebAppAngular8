@@ -36,11 +36,10 @@ export class BotonComprarComponent implements OnInit {
    */
   public cargaItem() {
     this.ListarItemsAbiertos();
-
     const long = this.pedidoItems.length;
     let flag = true;
     for (let i = 0; i < long; i++) {
-      if (this.pedidoItems[i].idArticulo === this.id_articulo) {
+      if (this.pedidoItems[i].idArticulo === this.articulo.id_articulo) {
         this.updateItem(
           this.pedidoItems[i].idPedidoItem,
           this.pedidoItems[i].idPedido,
@@ -56,7 +55,7 @@ export class BotonComprarComponent implements OnInit {
 
       alert(this.articulo.descripcion_corta  );
 
-      this.traerArticulo(this.id_articulo);
+      const art = this.traerArticulo(this.articulo.id_articulo);
 
       this.pedidoItemServ.Alta(
         -1,

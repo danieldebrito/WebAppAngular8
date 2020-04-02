@@ -145,7 +145,7 @@ export class CarritoComponent implements OnInit {
    */
   public CerrarPedido() {
     this.pedidosService.Alta(
-      this.clienteLogueado.idCliente,
+      this.idCliente,
       this.idSucursalSelected,
       this.idExpresoSelected,
       'cerrado',
@@ -186,7 +186,7 @@ export class CarritoComponent implements OnInit {
    * @param id_cliente => id de cliente
    */
   public CerrarItems(idPedido) {
-    this.pedidoItemServ.cierraItems(idPedido, this.clienteLogueado.idCliente).then(
+    this.pedidoItemServ.cierraItems(idPedido, this.idCliente).then(
       response => {
         return response;
       }
@@ -234,7 +234,7 @@ export class CarritoComponent implements OnInit {
     for (let i = 0; i < this.pedidoItemServ.cantItems; i++) {
       // alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
       this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
-      // alert(this.subtotal);
+      alert(this.subtotal);
     }
 
     /*this.pedidoItems.forEach(element => {
