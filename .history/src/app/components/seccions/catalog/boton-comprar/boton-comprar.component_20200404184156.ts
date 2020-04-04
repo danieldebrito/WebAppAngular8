@@ -37,7 +37,7 @@ export class BotonComprarComponent implements OnInit {
     private toastr: ToastrService,
     public carritoItemsService: CarritoItemsService
   ) {
-     this.cantidad = 1;
+    // this.cantidad = 1;
   }
 
   public traerArticulo(id) {
@@ -60,7 +60,6 @@ export class BotonComprarComponent implements OnInit {
     this.carritoItem.idPedido = -1;
     this.carritoItem.idCliente = this.identity.idCliente;
     this.carritoItem.idArticulo = this.id_articulo;
-    this.carritoItem.descripcionCorta = this.articulo.descripcion_corta;
     this.carritoItem.cantidad = this.cantidad;
     this.carritoItem.precioLista = this.articulo.precio_lista;
 
@@ -78,7 +77,7 @@ export class BotonComprarComponent implements OnInit {
   public cargarCarrritoItem() {
 
     let flag = true;
-    this.getCarritoItems();
+    // this.getCarritoItems();
     let carritoItemAux: CarritoItem;
 
     this.carritoItems.forEach(element => {

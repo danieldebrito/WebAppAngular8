@@ -13,8 +13,6 @@ export class CarritoItemsService {
   carritoItemDoc: AngularFirestoreDocument<CarritoItem>;
   carritoItems: Observable<CarritoItem[]>;
 
-  public cantCarritoItems: number;
-
   constructor(public db: AngularFirestore) {
     // this.carritoItems = this.db.collection('carritoItems').valueChanges();
     this.carritoItemsCollection = this.db.collection('carritoItems');

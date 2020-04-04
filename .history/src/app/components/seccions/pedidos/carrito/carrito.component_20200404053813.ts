@@ -29,7 +29,7 @@ export class CarritoComponent implements OnInit {
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
-  public cantidad: number;
+  public cantItems: number;
 
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
@@ -83,6 +83,23 @@ export class CarritoComponent implements OnInit {
     this.pedidoItemServ.cantItems = this.pedidoItems.length;
   }
 
+  /**
+   *
+   * @param id de la entidad
+   * borra un item del carrito mediante id
+   */
+  public deletePedidoItem(id: number) {
+    this.pedidoItemServ.Baja(id).then(
+      response => {
+        this.getPedidoItems();
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );
+  }
 
   /**
    * LISTA las sucursales del cliente en sesion
@@ -157,6 +174,19 @@ export class CarritoComponent implements OnInit {
 
   }
 
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+      response => {
+        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR, carrito component', error);
+      }
+    );
+  }
+
   /**
    * EN CONSTRUCCION CIERRA LOS ITEMS PARA ARMAR EL PEDIDO, CAMBIA ESTADO A CERRADO Y CARGA NRO DE PEDIDO
    * @param id_pedido => id de pedido
@@ -181,7 +211,9 @@ export class CarritoComponent implements OnInit {
 
   public idExpresoByName(name: string) {
     this.expresosService.ReadByName(name).subscribe(response => {
+
       this.idExpresoSelected = response.id_expreso;
+
       return response.id_expreso;
     },
       error => {
@@ -191,7 +223,9 @@ export class CarritoComponent implements OnInit {
 
   public getSucursalByName(name: string) {
     this.sucursalesService.ReadByName(name).subscribe(response => {
+
       this.idSucursalSelected = response.idSucursal;
+
       return response.idSucursal;
     },
       error => {
@@ -200,18 +234,31 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
+
+
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.pedidoItemServ.cantItems; i++) {
+      // alert((this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad));
+      this.subtotal += (this.pedidoItems[i].precio_lista * this.pedidoItems[i].cantidad);
+      // alert(this.subtotal);
+    }
+
+    /*this.pedidoItems.forEach(element => {
+      this.subtotal += (element.precio_lista * element.cantidad);
+    });*/
   }
 
-  // FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
+// FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
 
   public getCarritoItems() {
-    this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
+    this.carritoItemsService.getCarritoItems().subscribe( carritoItems => {
       this.carritoItems = carritoItems;
     }
     );
   }
 
-  public deleteCarritoItem(event, carritoItem) {
+  public deleteCarritoItem( event, carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
   }
 
@@ -228,24 +275,7 @@ export class CarritoComponent implements OnInit {
 
 
 
-/*
-
-
-  public deletePedidoItem(id: number) {
-    this.pedidoItemServ.Baja(id).then(
-      response => {
-        this.getPedidoItems();
-        return response;
-      }
-    ).catch(
-      error => {
-        console.error('ERROR DEL SERVIDOR', error);
-      }
-    );
-  }
-
-
-public Subtotal(idCliente, idPedido) {
+/*public Subtotal(idCliente, idPedido) {
   this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
     response => {
       this.subtotal = response;
@@ -261,19 +291,6 @@ public Subtotal(idCliente, idPedido) {
     }
   );
 }
-
-  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
-    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
-      response => {
-        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
-        return response;
-      }
-    ).catch(
-      error => {
-        console.error('ERROR DEL SERVIDOR, carrito component', error);
-      }
-    );
-  }
 */
 
 

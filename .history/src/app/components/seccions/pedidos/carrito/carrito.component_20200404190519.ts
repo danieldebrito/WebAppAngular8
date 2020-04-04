@@ -29,7 +29,7 @@ export class CarritoComponent implements OnInit {
   public pedidoItems: PedidoItem[] = [];
   public sucursales = [];
   public expresos = [];
-  public cantidad: number;
+  public cantItems: number;
 
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;

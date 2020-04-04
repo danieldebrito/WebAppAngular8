@@ -2,12 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 // class
 import { Cliente } from 'src/app/class/cliente';
-// import { PedidoItem } from 'src/app/class/pedidoItem';
+import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
 import { CarritoItem } from 'src/app/class/carritoItem';
 
 // servicios
-// import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
+import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 
@@ -27,8 +27,8 @@ export class BotonComprarComponent implements OnInit {
   public articulo: Articulo;    //  articulo clickeado para comprar
   public cantidad: number; // cantidad clickeada para comprar
 
-  public carritoItems: CarritoItem[];  // listado de items del carrito
-  public carritoItem = {} as CarritoItem; // item a dar de alta
+  public carritoItems;
+
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
@@ -37,7 +37,7 @@ export class BotonComprarComponent implements OnInit {
     private toastr: ToastrService,
     public carritoItemsService: CarritoItemsService
   ) {
-     this.cantidad = 1;
+    this.cantidad = 1;
   }
 
   public traerArticulo(id) {
@@ -49,6 +49,8 @@ export class BotonComprarComponent implements OnInit {
       });
   }
 
+  //     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
+
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
@@ -57,47 +59,13 @@ export class BotonComprarComponent implements OnInit {
   }
 
   public addCarritoItem() {
-    this.carritoItem.idPedido = -1;
-    this.carritoItem.idCliente = this.identity.idCliente;
-    this.carritoItem.idArticulo = this.id_articulo;
-    this.carritoItem.descripcionCorta = this.articulo.descripcion_corta;
-    this.carritoItem.cantidad = this.cantidad;
-    this.carritoItem.precioLista = this.articulo.precio_lista;
 
-    this.carritoItemsService.addCarritoItem(this.carritoItem);
-  }
 
-  /**
-   *
-   * @param carritoItemUpdate le paso un elemento de ahi saca el id y los datos actualizados
-   */
-  updateCarritoItem(carritoItemUpdate: CarritoItem) {
-    this.carritoItemsService.updateCarritoItem(carritoItemUpdate);
-  }
 
-  public cargarCarrritoItem() {
 
-    let flag = true;
-    this.getCarritoItems();
-    let carritoItemAux: CarritoItem;
-
-    this.carritoItems.forEach(element => {
-      if (element.idArticulo === this.id_articulo) {
-        carritoItemAux = element; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
-        carritoItemAux.cantidad += this.carritoItem.cantidad;
-        this.updateCarritoItem(carritoItemAux);
-        flag = false;
-      }
-    });
-
-    if (flag) {
-      this.addCarritoItem();
-    }
-    this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
   }
 
   ngOnInit() {
-    this.getCarritoItems();
     this.identity = this.authService.getIdentityLocalStorage();
     this.traerArticulo(this.id_articulo);
   }

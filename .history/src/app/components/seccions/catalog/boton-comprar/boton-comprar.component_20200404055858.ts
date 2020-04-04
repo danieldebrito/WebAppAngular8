@@ -27,8 +27,10 @@ export class BotonComprarComponent implements OnInit {
   public articulo: Articulo;    //  articulo clickeado para comprar
   public cantidad: number; // cantidad clickeada para comprar
 
-  public carritoItems: CarritoItem[];  // listado de items del carrito
+  public carritoItems;  // listado de items del carrito
   public carritoItem = {} as CarritoItem; // item a dar de alta
+
+
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
@@ -37,7 +39,7 @@ export class BotonComprarComponent implements OnInit {
     private toastr: ToastrService,
     public carritoItemsService: CarritoItemsService
   ) {
-     this.cantidad = 1;
+    this.cantidad = 1;
   }
 
   public traerArticulo(id) {
@@ -49,6 +51,8 @@ export class BotonComprarComponent implements OnInit {
       });
   }
 
+  //     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
+
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
@@ -57,47 +61,19 @@ export class BotonComprarComponent implements OnInit {
   }
 
   public addCarritoItem() {
+
     this.carritoItem.idPedido = -1;
     this.carritoItem.idCliente = this.identity.idCliente;
     this.carritoItem.idArticulo = this.id_articulo;
-    this.carritoItem.descripcionCorta = this.articulo.descripcion_corta;
     this.carritoItem.cantidad = this.cantidad;
     this.carritoItem.precioLista = this.articulo.precio_lista;
 
     this.carritoItemsService.addCarritoItem(this.carritoItem);
-  }
 
-  /**
-   *
-   * @param carritoItemUpdate le paso un elemento de ahi saca el id y los datos actualizados
-   */
-  updateCarritoItem(carritoItemUpdate: CarritoItem) {
-    this.carritoItemsService.updateCarritoItem(carritoItemUpdate);
-  }
-
-  public cargarCarrritoItem() {
-
-    let flag = true;
-    this.getCarritoItems();
-    let carritoItemAux: CarritoItem;
-
-    this.carritoItems.forEach(element => {
-      if (element.idArticulo === this.id_articulo) {
-        carritoItemAux = element; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
-        carritoItemAux.cantidad += this.carritoItem.cantidad;
-        this.updateCarritoItem(carritoItemAux);
-        flag = false;
-      }
-    });
-
-    if (flag) {
-      this.addCarritoItem();
-    }
     this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
   }
 
   ngOnInit() {
-    this.getCarritoItems();
     this.identity = this.authService.getIdentityLocalStorage();
     this.traerArticulo(this.id_articulo);
   }

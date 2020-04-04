@@ -37,7 +37,7 @@ export class BotonComprarComponent implements OnInit {
     private toastr: ToastrService,
     public carritoItemsService: CarritoItemsService
   ) {
-     this.cantidad = 1;
+    // this.cantidad = 1;
   }
 
   public traerArticulo(id) {

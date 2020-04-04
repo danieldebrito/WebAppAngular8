@@ -37,7 +37,7 @@ export class BotonComprarComponent implements OnInit {
     private toastr: ToastrService,
     public carritoItemsService: CarritoItemsService
   ) {
-     this.cantidad = 1;
+    this.cantidad = 1;
   }
 
   public traerArticulo(id) {
@@ -60,7 +60,6 @@ export class BotonComprarComponent implements OnInit {
     this.carritoItem.idPedido = -1;
     this.carritoItem.idCliente = this.identity.idCliente;
     this.carritoItem.idArticulo = this.id_articulo;
-    this.carritoItem.descripcionCorta = this.articulo.descripcion_corta;
     this.carritoItem.cantidad = this.cantidad;
     this.carritoItem.precioLista = this.articulo.precio_lista;
 
@@ -68,7 +67,7 @@ export class BotonComprarComponent implements OnInit {
   }
 
   /**
-   *
+   * 
    * @param carritoItemUpdate le paso un elemento de ahi saca el id y los datos actualizados
    */
   updateCarritoItem(carritoItemUpdate: CarritoItem) {
@@ -81,25 +80,36 @@ export class BotonComprarComponent implements OnInit {
     this.getCarritoItems();
     let carritoItemAux: CarritoItem;
 
-    this.carritoItems.forEach(element => {
-      if (element.idArticulo === this.id_articulo) {
-        carritoItemAux = element; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
+    for (let i; i < this.carritoItems.length; i++) {
+      if (this.carritoItems[i].idArticulo === this.id_articulo) {
+        carritoItemAux = this.carritoItems[i]; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
         carritoItemAux.cantidad += this.carritoItem.cantidad;
         this.updateCarritoItem(carritoItemAux);
         flag = false;
       }
-    });
 
-    if (flag) {
-      this.addCarritoItem();
+      /*
+          this.carritoItems.forEach(element => {
+            if ( element.idArticulo === this.id_articulo ) {
+              carritoItemAux = element; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
+              carritoItemAux.cantidad += this.carritoItem.cantidad;
+              this.updateCarritoItem(carritoItemAux);
+              flag = false;
+            }
+          });*/
+      if (flag) {
+        this.addCarritoItem();
+      }
+
+      this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
     }
-    this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
   }
 
   ngOnInit() {
     this.getCarritoItems();
     this.identity = this.authService.getIdentityLocalStorage();
     this.traerArticulo(this.id_articulo);
+    // this.getCarritoItems();
   }
 }
 
