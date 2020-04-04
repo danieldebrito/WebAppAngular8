@@ -59,10 +59,10 @@
                                     <td nowrap class="cent"> <input class="inputCant" type="number" name="Cantidad" value="{{ item.cantidad }}"> </td>
                                     <td class="cent"> {{ item.idArticulo }} </td>
                                     <td nowrap class="izq"> {{ item.descripcion_corta }} </td>
-                                    <td nowrap class="der"> {{ item.precioLista | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> {{ item.precio_lista | number:'1.2-2' }} </td>
                                     <td nowrap class="der"> 20 % </td>
-                                    <td nowrap class="der"> {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
-                                    <td nowrap class="der"> {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
                                     <td class="cent"> <button type="button" class="btn btn-danger" (click)="deletePedidoItem(item.idPedidoItem)">Quitar</button> </td>
                                 </tr>
                             </tbody>

@@ -10,15 +10,13 @@ export class CarritoItemsService {
 
   carritoItemsCollection;
   carritoItemDoc;
-  carritoItems: Observable<CarritoItem[]>;
+  carritoItems: Observable<CarritoItem[]> ;
 
-  constructor(public db: AngularFirestore) {
-    this.carritoItems = this.db.collection('carritoItems').valueChanges();
+  constructor( public db: AngularFirestore) {
+    this.carritoItems = this.db.collection('carritoitems').valueChanges();
   }
 
-  public getCarritoItems() {
-    return this.carritoItems;
-  }
+
 
 
 }

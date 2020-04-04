@@ -252,8 +252,10 @@ export class CarritoComponent implements OnInit {
   getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe( carritoItems => {
       this.carritoItems = carritoItems;
+      console.log(carritoItems);
     }
-    );
+
+    )
   }
 
   ngOnInit() {

@@ -253,7 +253,8 @@ export class CarritoComponent implements OnInit {
     this.carritoItemsService.getCarritoItems().subscribe( carritoItems => {
       this.carritoItems = carritoItems;
     }
-    );
+
+    )
   }
 
   ngOnInit() {
@@ -262,7 +263,6 @@ export class CarritoComponent implements OnInit {
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
     // this.Subtotal(this.idCliente, -1);
-    this.getCarritoItems();
   }
 }
 

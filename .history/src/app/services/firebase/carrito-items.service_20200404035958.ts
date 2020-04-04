@@ -13,10 +13,10 @@ export class CarritoItemsService {
   carritoItems: Observable<CarritoItem[]>;
 
   constructor(public db: AngularFirestore) {
-    this.carritoItems = this.db.collection('carritoItems').valueChanges();
+    this.carritoItems = this.db.collection('carritoitems').valueChanges();
   }
 
-  public getCarritoItems() {
+  getCarritoItems() {
     return this.carritoItems;
   }
 

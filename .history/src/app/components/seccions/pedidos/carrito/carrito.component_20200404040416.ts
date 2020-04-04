@@ -249,20 +249,12 @@ export class CarritoComponent implements OnInit {
     });*/
   }
 
-  getCarritoItems() {
-    this.carritoItemsService.getCarritoItems().subscribe( carritoItems => {
-      this.carritoItems = carritoItems;
-    }
-    );
-  }
-
   ngOnInit() {
     this.getPedidoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
     // this.Subtotal(this.idCliente, -1);
-    this.getCarritoItems();
   }
 }
 
