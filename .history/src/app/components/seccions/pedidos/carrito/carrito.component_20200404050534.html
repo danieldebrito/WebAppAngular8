@@ -63,7 +63,7 @@
                                     <td nowrap class="der"> 20 % </td>
                                     <td nowrap class="der"> {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
                                     <td nowrap class="der"> {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
-                                    <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem($event, item)">Quitar</button> </td>
+                                    <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem($event, item.idCarritoItem)">Quitar</button> </td>
                                 </tr>
                             </tbody>
                         </table>

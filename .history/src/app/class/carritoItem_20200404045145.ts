@@ -1,5 +1,5 @@
 export interface CarritoItem {
-    idCarritoItem?: string;
+    idCarritoItem?: number;
     idPedido?: number;
     idCliente?: string;
     idArticulo?: string;

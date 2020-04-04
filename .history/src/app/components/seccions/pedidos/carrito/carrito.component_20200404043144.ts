@@ -249,17 +249,11 @@ export class CarritoComponent implements OnInit {
     });*/
   }
 
-// FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
-
-  public getCarritoItems() {
+  getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe( carritoItems => {
       this.carritoItems = carritoItems;
     }
     );
-  }
-
-  public deleteCarritoItem( event, carritoItem) {
-    this.carritoItemsService.deleteCarritoItem(carritoItem);
   }
 
   ngOnInit() {
