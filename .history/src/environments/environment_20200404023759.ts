@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebase: {
+  configFirebase: {
     apiKey: 'AIzaSyB2LyPg6h0LpIpvR7ZRAwKNkDvj2ZOQEeU',
     authDomain: 'carritoweb-97846.firebaseapp.com',
     databaseURL: 'https://carritoweb-97846.firebaseio.com',

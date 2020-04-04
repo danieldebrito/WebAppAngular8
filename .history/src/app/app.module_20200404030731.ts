@@ -122,7 +122,7 @@ import { environment } from '../environments/environment';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.configFirebase),
   ],
   providers: [],
   bootstrap: [AppComponent]
