@@ -41,5 +41,6 @@ export class NavBarComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.identity = this.authService.getIdentityLocalStorage();
+    // this.cuentaItemsCarrito();
   }
 }
