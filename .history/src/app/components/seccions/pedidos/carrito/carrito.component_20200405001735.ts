@@ -181,7 +181,7 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCarritoItems();
+    // this.getCarritoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();

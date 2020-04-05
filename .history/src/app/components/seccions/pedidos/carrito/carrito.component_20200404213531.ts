@@ -167,6 +167,13 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
+
+      this.carritoItems.forEach(element => {
+        this.subtotal += element.precioLista * element.cantidad;
+        console.log(this.subtotal);
+      });
+      console.log(this.carritoItems);
+
     });
   }
   public deleteCarritoItem(event, carritoItem) {
@@ -175,6 +182,7 @@ export class CarritoComponent implements OnInit {
 
   public getSubtotal() {
     this.getCarritoItems();
+    console.log(this.carritoItems);
     this.carritoItems.forEach(element => {
       this.subtotal += element.precioLista * element.cantidad;
     });

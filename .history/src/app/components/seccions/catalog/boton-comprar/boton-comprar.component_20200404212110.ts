@@ -83,7 +83,7 @@ export class BotonComprarComponent implements OnInit {
     this.carritoItems.forEach(element => {
       if (element.idArticulo === this.id_articulo) {
         carritoItemAux = element; // copio todo inclusive el id de ahi lo saca, y actualizo el campo que quiero
-        carritoItemAux.cantidad += this.cantidad;
+        carritoItemAux.cantidad += this.carritoItem.cantidad;
         this.updateCarritoItem(carritoItemAux);
         flag = false;
       }

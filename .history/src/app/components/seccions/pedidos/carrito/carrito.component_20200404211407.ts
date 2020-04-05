@@ -175,18 +175,20 @@ export class CarritoComponent implements OnInit {
 
   public getSubtotal() {
     this.getCarritoItems();
+    console.log(this.carritoItems);
     this.carritoItems.forEach(element => {
       this.subtotal += element.precioLista * element.cantidad;
     });
   }
 
   ngOnInit() {
-    this.getCarritoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
     // this.Subtotal(this.idCliente, -1);
+    this.getCarritoItems();
     // this.getSubtotal();
+    console.log(this.carritoItems);
   }
 }
 

@@ -44,7 +44,7 @@ export class CarritoComponent implements OnInit {
   public carritoItems: CarritoItem[];  // listado de items del carrito
 
   constructor(
-    //    private pedidoItemServ: PedidoItemsService,
+    private pedidoItemServ: PedidoItemsService,
     public artService: ArticulosService,
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
@@ -132,7 +132,15 @@ export class CarritoComponent implements OnInit {
    * @param id_cliente => id de cliente
    */
   public CerrarItems(idPedido) {
-
+    this.pedidoItemServ.cierraItems(idPedido, this.clienteLogueado.idCliente).then(
+      response => {
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );
   }
 
   SeleccionaSucursaldeHTML() {
@@ -167,8 +175,10 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-    });
+    }
+    );
   }
+
   public deleteCarritoItem(event, carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
   }
@@ -181,12 +191,13 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCarritoItems();
+    // this.getPedidoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
     // this.Subtotal(this.idCliente, -1);
-    // this.getSubtotal();
+    this.getCarritoItems();
+    this.getSubtotal();
   }
 }
 

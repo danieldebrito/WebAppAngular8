@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 // class
+import { PedidoItem } from 'src/app/class/pedidoItem';
 import { Articulo } from 'src/app/class/articulo';
 import { Cliente } from 'src/app/class/cliente';
 import { CarritoItem } from 'src/app/class/carritoItem';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
-// import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
+import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
@@ -41,10 +42,10 @@ export class CarritoComponent implements OnInit {
 
   public subtotal: number;
 
-  public carritoItems: CarritoItem[];  // listado de items del carrito
+  public carritoItems: CarritoItem[];
 
   constructor(
-    //    private pedidoItemServ: PedidoItemsService,
+    private pedidoItemServ: PedidoItemsService,
     public artService: ArticulosService,
     public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
@@ -54,6 +55,17 @@ export class CarritoComponent implements OnInit {
     public carritoItemsService: CarritoItemsService
   ) {
     this.clienteLogueado = this.authService.getIdentityLocalStorage();
+  }
+
+  public cleanPedidoItems() {
+    this.pedidoItems = [];
+  }
+
+  /**
+   * cuenta cantidad de items cargados en carrito
+   */
+  public cuentaPedidoItems() {
+    this.pedidoItemServ.cantItems = this.pedidoItems.length;
   }
 
 
@@ -99,6 +111,9 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
+
+
   /**
    * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido, antes tiene -1
    * tambien al pedido le cambia el estado a cerrado
@@ -115,6 +130,7 @@ export class CarritoComponent implements OnInit {
       response => {
         this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
         console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
+        this.cleanPedidoItems();
         this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
@@ -132,7 +148,15 @@ export class CarritoComponent implements OnInit {
    * @param id_cliente => id de cliente
    */
   public CerrarItems(idPedido) {
-
+    this.pedidoItemServ.cierraItems(idPedido, this.clienteLogueado.idCliente).then(
+      response => {
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );
   }
 
   SeleccionaSucursaldeHTML() {
@@ -160,33 +184,29 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-
+  public getSubtotal() {
+  }
 
   // FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
 
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-    });
+    }
+    );
   }
+
   public deleteCarritoItem(event, carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
   }
 
-  public getSubtotal() {
-    this.getCarritoItems();
-    this.carritoItems.forEach(element => {
-      this.subtotal += element.precioLista * element.cantidad;
-    });
-  }
-
   ngOnInit() {
-    this.getCarritoItems();
+    // this.getPedidoItems();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
     // this.Subtotal(this.idCliente, -1);
-    // this.getSubtotal();
+    this.getCarritoItems();
   }
 }
 
