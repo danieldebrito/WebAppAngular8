@@ -167,17 +167,6 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-
-      carritoItems.forEach(element => {
-        this.subtotal += element.precioLista * element.cantidad;
-
-        // console.log(this.subtotal);
-        // console.log(element.precioLista);
-        // console.log(element.cantidad);
-
-        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
-
-      });
     });
   }
   public deleteCarritoItem(event, carritoItem) {
@@ -202,6 +191,6 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
-    // this.getSubtotal();
+    this.getSubtotal();
   }
 }

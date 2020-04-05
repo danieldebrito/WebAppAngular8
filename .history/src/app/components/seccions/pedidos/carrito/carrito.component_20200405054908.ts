@@ -167,17 +167,6 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-
-      carritoItems.forEach(element => {
-        this.subtotal += element.precioLista * element.cantidad;
-
-        // console.log(this.subtotal);
-        // console.log(element.precioLista);
-        // console.log(element.cantidad);
-
-        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
-
-      });
     });
   }
   public deleteCarritoItem(event, carritoItem) {
@@ -185,16 +174,17 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
-    // this.getCarritoItems();
+    this.getCarritoItems();
     this.carritoItems.forEach(element => {
       this.subtotal += element.precioLista * element.cantidad;
-      alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
     });
   }
 
-  updateCantidadCarritoItem(item: CarritoItem, event: any) {
-    item.cantidad = event.target.value;
-    this.carritoItemsService.updateCarritoItem(item);
+  updateCantidadCarritoItem(item: CarritoItem, cant: number ) {
+/*
+    item.cantidad = this.cantidad;
+    this.carritoItemsService.updateCarritoItem(item);*/
+    alert(cant);
   }
 
   ngOnInit() {
@@ -202,6 +192,79 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
+    // this.Subtotal(this.idCliente, -1);
     // this.getSubtotal();
   }
 }
+
+
+
+
+/*
+
+
+  public getPedidoItems() {
+    this.pedidoItemServ.traerItemsClienteAbierto(this.clienteLogueado.idCliente).subscribe(response => {
+      this.pedidoItems = response;
+      this.cuentaPedidoItems();
+      this.getSubtotal();
+    },
+      error => {
+        console.error(error);
+      });
+  }
+
+  public deletePedidoItem(id: number) {
+    this.pedidoItemServ.Baja(id).then(
+      response => {
+        this.getPedidoItems();
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );
+  }
+
+
+public Subtotal(idCliente, idPedido) {
+  this.pedidoItemServ.Subtotal(idCliente, idPedido).then(
+    response => {
+      this.subtotal = response;
+      // this.subtotal.subtotal;
+      alert(this.subtotal);
+
+
+      return response;
+    }
+  ).catch(
+    error => {
+      console.error('ERROR DEL SERVIDOR, carrito component', error);
+    }
+  );
+}
+
+  public updatePedidoItem(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista) {
+    this.pedidoItemServ.Update(idPedidoItem, idPedido, idCliente, idArticulo, cantidad, precio_lista).then(
+      response => {
+        this.toastr.success('Cargado a Carrito', 'juntas MEYRO');
+        return response;
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR, carrito component', error);
+      }
+    );
+  }
+*/
+
+
+/*
+public deletePedidoItemLS(item: PedidoItem) {
+
+  this.pedidoItemsLS.splice(this.pedidoItemsLS.indexOf(item), 1);  // borra de ls
+  localStorage.setItem('pedidoItemsLS', JSON.stringify(this.pedidoItemsLS));
+  this.deletePedidoItem(item.idPedidoItem);  // borra de la bd
+}
+*/

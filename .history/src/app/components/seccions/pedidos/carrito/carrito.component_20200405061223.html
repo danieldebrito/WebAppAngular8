@@ -56,7 +56,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of carritoItems">
-                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="cantidad" value="{{ item.cantidad }}" let cant=value (change)="updateCantidadCarritoItem(item, cantidad)"> </td>
                                     <td class="cent"> {{ item.idArticulo }} </td>
                                     <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                                     <td nowrap class="der"> {{ item.precioLista | number:'1.2-2' }} </td>

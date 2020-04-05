@@ -39,7 +39,7 @@ export class CarritoComponent implements OnInit {
   public clienteLogueado: Cliente;
   public observaciones: string;
 
-  public subtotal: number;
+  public subtotal;
 
   public carritoItems: CarritoItem[];  // listado de items del carrito
 
@@ -169,13 +169,9 @@ export class CarritoComponent implements OnInit {
       this.carritoItems = carritoItems;
 
       carritoItems.forEach(element => {
-        this.subtotal += element.precioLista * element.cantidad;
+        this.subtotal +=  parseInt(element.precioLista) * element.cantidad;
 
-        // console.log(this.subtotal);
-        // console.log(element.precioLista);
-        // console.log(element.cantidad);
-
-        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
+        alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
 
       });
     });

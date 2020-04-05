@@ -39,7 +39,7 @@ export class CarritoComponent implements OnInit {
   public clienteLogueado: Cliente;
   public observaciones: string;
 
-  public subtotal: number;
+  public subtotal;
 
   public carritoItems: CarritoItem[];  // listado de items del carrito
 

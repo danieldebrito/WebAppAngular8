@@ -170,12 +170,7 @@ export class CarritoComponent implements OnInit {
 
       carritoItems.forEach(element => {
         this.subtotal += element.precioLista * element.cantidad;
-
-        // console.log(this.subtotal);
-        // console.log(element.precioLista);
-        // console.log(element.cantidad);
-
-        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
+        alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
 
       });
     });

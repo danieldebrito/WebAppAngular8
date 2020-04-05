@@ -167,17 +167,6 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-
-      carritoItems.forEach(element => {
-        this.subtotal += element.precioLista * element.cantidad;
-
-        // console.log(this.subtotal);
-        // console.log(element.precioLista);
-        // console.log(element.cantidad);
-
-        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
-
-      });
     });
   }
   public deleteCarritoItem(event, carritoItem) {
@@ -185,16 +174,17 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
-    // this.getCarritoItems();
+    this.getCarritoItems();
     this.carritoItems.forEach(element => {
       this.subtotal += element.precioLista * element.cantidad;
-      alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
     });
   }
 
   updateCantidadCarritoItem(item: CarritoItem, event: any) {
-    item.cantidad = event.target.value;
-    this.carritoItemsService.updateCarritoItem(item);
+/*
+    item.cantidad = this.cantidad;
+    this.carritoItemsService.updateCarritoItem(item);*/
+    alert(event.target.value);
   }
 
   ngOnInit() {

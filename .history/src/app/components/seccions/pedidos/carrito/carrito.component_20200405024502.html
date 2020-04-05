@@ -56,13 +56,13 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of carritoItems">
-                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="Cantidad" value="{{ item.cantidad }}"> </td>
                                     <td class="cent"> {{ item.idArticulo }} </td>
                                     <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                                     <td nowrap class="der"> {{ item.precioLista | number:'1.2-2' }} </td>
                                     <td nowrap class="der"> 20 % </td>
                                     <td nowrap class="der"> {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
-                                    <td nowrap class="der"> {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                                    <td nowrap class="der" (click)="updateCantidadCarritoItem(item)"> {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
                                     <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem($event, item)">Quitar</button> </td>
                                 </tr>
                             </tbody>
