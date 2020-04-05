@@ -1,0 +1,44 @@
+<div class="container p-2">
+
+    <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+
+    <div class="row">
+        <div class="col-md-3 p-2" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
+
+            <div class="card">
+
+                <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
+
+                <div class="card-body">
+                    {{ item.producto | titlecase }} <br>
+                    <h5 class="card-title">{{ item.id_articulo }}</h5>
+                    {{ item.aplicacionEspecifica }} <br>
+                    <b>Material:</b>&nbsp;{{ item.materialDetalle }} - {{ item.espesor }} mm
+                    <p class="card-text">
+                        <b>{{ item.marca }}</b> {{ item.modelo }} <br>
+                        <b>Motor: </b> {{ item.motor }} - {{ item.cilindrada }} cc - {{ item.combustible }} -
+                        <b>{{ item.competicion | competicion }}</b>
+                    </p>
+
+                    <button type="button" routerLink="/detalle" class="btn btn-outline-danger btn-sm">
+                        Mas Info
+                    </button>&nbsp;
+
+                    <button type="button" routerLink="/detalle" class="btn btn-outline-success btn-sm">
+                        Nueva
+                    </button>&nbsp;
+
+                    <button type="button" routerLink="/detalle" class="btn btn-outline-primary btn-sm">
+                        En Promo
+                    </button>
+
+                </div>
+
+                <div class="card-footer">
+                    <app-boton-comprar [id_articulo]='item.id_articulo'></app-boton-comprar>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
