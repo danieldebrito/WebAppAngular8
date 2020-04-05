@@ -161,13 +161,12 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-      this.getSubtotal();
     });
   }
 
   public getSubtotal() {
-    this.subtotal = 0;
     this.carritoItems.forEach(element => {
+      this.subtotal = 0;
       this.subtotal += (element.precioLista * element.cantidad);
     });
   }
@@ -187,6 +186,6 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
-
+    // this.getSubtotal();
   }
 }

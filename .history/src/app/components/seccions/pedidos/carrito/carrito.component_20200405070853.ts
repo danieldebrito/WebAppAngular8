@@ -54,7 +54,6 @@ export class CarritoComponent implements OnInit {
     public carritoItemsService: CarritoItemsService
   ) {
     this.clienteLogueado = this.authService.getIdentityLocalStorage();
-    this.subtotal = 0;
   }
 
 
@@ -72,10 +71,10 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  /**
-   * LISTA los expresos POR CLIENTE!!!!!
-   * debe seleccionar uno para cerrar el pedido.
-   */
+/**
+ * LISTA los expresos POR CLIENTE!!!!!
+ * debe seleccionar uno para cerrar el pedido.
+ */
   listarExpresosCliente() {
     this.expresosService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
       this.expresos = response;
@@ -161,20 +160,30 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-      this.getSubtotal();
+
+      carritoItems.forEach(element => {
+        this.subtotal += element.precioLista * element.cantidad;
+
+        console.log( typeof this.subtotal);
+        console.log(  typeof  element.precioLista);
+        console.log(  typeof  element.cantidad);
+        console.log( typeof element.precioLista * element.cantidad);
+
+        // alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
+
+      });
     });
+  }
+  public deleteCarritoItem(event, carritoItem) {
+    this.carritoItemsService.deleteCarritoItem(carritoItem);
   }
 
   public getSubtotal() {
-    this.subtotal = 0;
+    // this.getCarritoItems();
     this.carritoItems.forEach(element => {
-      this.subtotal += (element.precioLista * element.cantidad);
+      this.subtotal += element.precioLista * element.cantidad;
+      alert('subtotal ' + this.subtotal + 'precioLista * cantidad ' + element.precioLista * element.cantidad);
     });
-  }
-
-  public deleteCarritoItem(event, carritoItem) {
-    this.carritoItemsService.deleteCarritoItem(carritoItem);
-    this.getSubtotal();
   }
 
   updateCantidadCarritoItem(item: CarritoItem, event: any) {
@@ -187,6 +196,6 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
-
+    // this.getSubtotal();
   }
 }

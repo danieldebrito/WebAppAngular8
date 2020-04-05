@@ -72,10 +72,10 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  /**
-   * LISTA los expresos POR CLIENTE!!!!!
-   * debe seleccionar uno para cerrar el pedido.
-   */
+/**
+ * LISTA los expresos POR CLIENTE!!!!!
+ * debe seleccionar uno para cerrar el pedido.
+ */
   listarExpresosCliente() {
     this.expresosService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
       this.expresos = response;
@@ -161,20 +161,17 @@ export class CarritoComponent implements OnInit {
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
       this.carritoItems = carritoItems;
-      this.getSubtotal();
-    });
-  }
 
-  public getSubtotal() {
-    this.subtotal = 0;
-    this.carritoItems.forEach(element => {
-      this.subtotal += (element.precioLista * element.cantidad);
+      this.carritoItems.forEach(element => {
+        this.subtotal = 0;
+        this.subtotal += (element.precioLista * element.cantidad);
+      });
     });
   }
 
   public deleteCarritoItem(event, carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
-    this.getSubtotal();
+    this.getCarritoItems();
   }
 
   updateCantidadCarritoItem(item: CarritoItem, event: any) {
@@ -187,6 +184,6 @@ export class CarritoComponent implements OnInit {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     // this.SeleccionaSucursaldeHTML();
-
+    // this.getSubtotal();
   }
 }
