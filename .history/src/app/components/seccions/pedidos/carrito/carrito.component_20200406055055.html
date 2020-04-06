@@ -6,7 +6,7 @@
 
             <label>Fecha : {{ hoy | date: 'dd/MM/yyyy' }} </label>
 
-            <div class="row">
+            <div class="row" id="excel-table">
                 <div class="col-sm-3">
                     <strong>Cliente : </strong>
                     <p> {{ clienteLogueado.idCliente }} {{ clienteLogueado.razonSocial }}</p>
@@ -40,7 +40,7 @@
 
                 <div class="col-sm-9">
                     <div>
-                        <table class="table-responsive table-bordered" id="excel-table">
+                        <table class="table-responsive table-bordered">
                             <thead>
                                 <tr>
                                     <th nowrap class="cant">Cantidad</th>
