@@ -1,0 +1,17 @@
+/* para que no se pise con la navbar */
+
+.container {
+    padding-top: 4rem;
+}
+
+.btn {
+    margin-right: 3px;
+}
+
+#buscador {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

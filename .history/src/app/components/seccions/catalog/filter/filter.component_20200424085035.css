@@ -7,3 +7,9 @@
 .btn {
     margin-right: 3px;
 }
+
+#buscador {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}

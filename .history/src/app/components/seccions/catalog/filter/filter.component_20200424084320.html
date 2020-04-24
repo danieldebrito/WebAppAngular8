@@ -37,14 +37,12 @@
         </div>
 
         <div id="collapseExample2" [ngbCollapse]="isCollapsed2">
-            <div id="buscador" class="card">
+            <div class="card">
                 <div class="card-body">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input type="text" class="form-control mr-sm-2" [(ngModel)]="idArticulo" id="idArticulo" name="idArticulo" [ngModelOptions]="{standalone: true}" placeholder="Codigo del producto">
-                        <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="getByID()">BUSCAR</button>&nbsp;
-                        <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="isCollapsed2 = !isCollapsed2">Cerrar
+                    <input type="text" class="form-control" [(ngModel)]="idArticulo" id="idArticulo" name="idArticulo" [ngModelOptions]="{standalone: true}" placeholder="Codigo del producto">
+                    <button type="button" class="btn btn-outline-danger" (click)="getByID()">BUSCAR</button>&nbsp;
+                    <button type="button" class="btn btn-outline-danger" (click)="isCollapsed2 = !isCollapsed2">Cerrar
                         Menu</button>
-                    </form>
                 </div>
             </div>
         </div>
