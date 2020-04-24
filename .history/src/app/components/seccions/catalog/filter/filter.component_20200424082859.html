@@ -7,7 +7,7 @@
             <p>
                 <button type="button" class="btn btn-outline-danger" (click)="colapsar1()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">
 
-                    <i class="fa fa-check-double"></i>&nbsp;
+                    <i class="fa fa-filter"></i>&nbsp;
                     <strong>Filtro</strong>
                 </button> &nbsp;
 
@@ -25,12 +25,12 @@
 
                 <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3" routerLink="/carrito">
 
-                    <i class="fa fa-cart-plus"></i>&nbsp;
+                    <i class="fa fa-shopping-cart"></i>&nbsp;
                     <strong>Ir a Carrito</strong>
-
                 </button>&nbsp;
 
                 <button class="btn btn-outline-danger" (click)="isCollapsed = !isCollapsed">
+                    <i class="fa fa-window-close"></i>&nbsp;
                     <strong>Cerrar Menu</strong>
                 </button>
             </p>
@@ -41,7 +41,8 @@
             <div class="card">
                 <div class="card-body">
                     <input type="text" placeholder="Ejemplo: 01-2000 S">&nbsp;
-                    <button type="button" class="btn btn-outline-danger">BUSCAR</button>&nbsp;
+                    <input type="text" class="form-control" [(ngModel)]="idArticulo" id="idArticulo" name="idArticulo" [ngModelOptions]="{standalone: true}" placeholder="Codigo del producto">
+                    <button type="button" class="btn btn-outline-danger" (click)="getByID()">BUSCAR</button>&nbsp;
                     <button type="button" class="btn btn-outline-danger" (click)="isCollapsed2 = !isCollapsed2">Cerrar
                         Menu</button>
                 </div>

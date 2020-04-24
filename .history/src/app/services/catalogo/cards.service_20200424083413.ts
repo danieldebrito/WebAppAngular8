@@ -16,7 +16,7 @@ export class CardsService {
   }
 
   public getById(id): Observable<Cards[]> {
-    return this.miHttp.httpGetO<Cards[]>('/cards/' + id);
+    return this.miHttp.httpGetO<Cards[]>('/cards/ ' + '"' + id + '"');
   }
 
   public FiltrarP(

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 // class
-import { ArtMarModMot } from 'src/app/class/ArtMarModMot';
+import { Cards } from 'src/app/class/cards';
 // services
-import { AmmmService } from 'src/app/services/catalogo/ammm.service';
+import { CardsService } from 'src/app/services/catalogo/cards.service';
 
 @Component({
   selector: 'app-filter',
@@ -12,6 +11,9 @@ import { AmmmService } from 'src/app/services/catalogo/ammm.service';
 })
 export class FilterComponent implements OnInit {
 
+  // idArticulo a buscar menu de buscar por codigo
+  public idArticulo;
+
   // los datos filtrados
   public dataFiltrada;
 
@@ -19,7 +21,8 @@ export class FilterComponent implements OnInit {
   public isCollapsed = false;
   public isCollapsed2 = true;
   public isCollapsed3 = true;
-  // anternar entre grilla y detalle, true muestra grilla.
+
+  // alternar entre grilla y detalle, true muestra grilla.
   public show: boolean;
 
   // valores seleccionados en los selects.
@@ -45,9 +48,8 @@ export class FilterComponent implements OnInit {
   public columnaApp: string[];
 
   constructor(
-    private ammmService: AmmmService,
-    private spinner: NgxSpinnerService
-    ) {
+    private cardsService: CardsService
+  ) {
     this.show = true;
   }
 
@@ -71,9 +73,9 @@ export class FilterComponent implements OnInit {
 
   public cambiaVista() {
     // this.show = this.artService.show;
-}
+  }
 
-  public Colunmas(items: ArtMarModMot[]) {
+  public Colunmas(items: Cards[]) {
     let arrayAuxLinea: string[] = [];
     let arrayAuxMarca: string[] = [];
     let arrayAuxComb: string[] = [];
@@ -98,15 +100,15 @@ export class FilterComponent implements OnInit {
       const tam = items.length;
 
       for (let i = 0; i < tam; i++) {
-        arrayAuxLinea.push(items[i].id_linea);
-        arrayAuxMarca.push(items[i].id_marca);
-        arrayAuxComb.push(items[i].id_combustible);
+        arrayAuxLinea.push(items[i].linea);
+        arrayAuxMarca.push(items[i].marca);
+        arrayAuxComb.push(items[i].combustible);
         arrayAuxMotor.push(items[i].motor);
         arrayAuxModelo.push(items[i].modelo);
         arrayAuxCilind.push(items[i].cilindrada);
-        arrayAuxStd.push(items[i].id_combustible);
-        arrayAuxProd.push(items[i].id_producto);
-        arrayAuxApp.push(items[i].id_aplicacion);
+        arrayAuxStd.push(items[i].competicion);
+        arrayAuxProd.push(items[i].producto);
+        arrayAuxApp.push(items[i].aplicacion);
       }
 
       arrayAuxLinea = arrayAuxLinea.sort();
@@ -185,33 +187,30 @@ export class FilterComponent implements OnInit {
   }
 
   public Filtrar() {
-    this.spinner.show();
-    this.ammmService.FiltrarP(
-        this.linea,
-        this.marca,
-        this.combustible,
-        this.motor,
-        this.modelo,
-        this.cilindrada,
-        this.competicion,
-        this.producto,
-        this.aplicacion).then(
-            response => {
-                this.dataFiltrada = response;
-                this.Colunmas(this.dataFiltrada);
-                this.spinner.hide();
-            }
-        )
-        .catch(
-            error => {
-                console.error('ERROR DEL SERVIDOR, FILTRO COMPONENT.TS => ', error);
-            }
-        );
-}
+    this.cardsService.FiltrarP(
+      this.linea,
+      this.marca,
+      this.combustible,
+      this.motor,
+      this.modelo,
+      this.cilindrada,
+      this.competicion,
+      this.producto,
+      this.aplicacion).then(
+        response => {
+          this.dataFiltrada = response;
+          this.Colunmas(this.dataFiltrada);
+        }
+      )
+      .catch(
+        error => {
+          console.error('ERROR DEL SERVIDOR, FILTRO COMPONENT.TS => ', error);
+        }
+      );
+  }
 
-public Limpiar() {
-  this.ammmService.ListarO().subscribe(response => {
-      // this.filtroItems = response.slice(0, 50);   /* VISTA */
+  public Limpiar() {
+    this.cardsService.ListarO().subscribe(response => {
       this.dataFiltrada = response;
 
       this.linea = '';
@@ -225,11 +224,18 @@ public Limpiar() {
       this.aplicacion = '';
 
       this.LimpiaColumnas();
-  },
+    },
       error => {
-          console.error(error);
+        console.error(error);
       });
-}
+  }
+
+  public getByID() {
+    this.cardsService.getById(this.idArticulo).subscribe(response => {
+      this.dataFiltrada = response;
+      alert(this.idArticulo);
+    });
+  }
 
   ngOnInit() {
     this.Limpiar();

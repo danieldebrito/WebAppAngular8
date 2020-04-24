@@ -11,6 +11,9 @@ import { CardsService } from 'src/app/services/catalogo/cards.service';
 })
 export class FilterComponent implements OnInit {
 
+  // idArticulo a buscar menu de buscar por codigo
+  public idArticulo;
+
   // los datos filtrados
   public dataFiltrada;
 
@@ -225,6 +228,12 @@ export class FilterComponent implements OnInit {
       error => {
         console.error(error);
       });
+  }
+
+  public getByID() {
+    this.cardsService.getById(this.idArticulo).subscribe(response => {
+      this.dataFiltrada = response;
+    });
   }
 
   ngOnInit() {
