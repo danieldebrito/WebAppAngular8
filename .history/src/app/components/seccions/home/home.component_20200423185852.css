@@ -1,0 +1,7 @@
+.jumbotron {
+    background-image: url("../../../../assets/home_carrousel/slide-03.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.8);
+    filter: brightness(0.4);
+}
