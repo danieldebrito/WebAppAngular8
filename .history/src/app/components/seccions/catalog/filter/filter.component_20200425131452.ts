@@ -238,18 +238,15 @@ export class FilterComponent implements OnInit {
     });
   }
 
-  public buscarPorFrase() {
-    this.cardsService.buscarPorFrase(this.fraseBusqueda).subscribe(response => {
-      this.dataFiltrada = response;
-    });
-  }
+public buscarPorFrase() {
+  this.cardsService.buscarPorFrase(this.fraseBusqueda).subscribe(response => {
+    this.dataFiltrada = response;
+  });
+}
 
-  public buscarPorFraseLimpiar() {
-    this.cardsService.ListarO().subscribe(response => {
-      this.dataFiltrada = response;
-    });
-  }
-
+buscarPorFraseLimpiar() {
+  this.fraseBusqueda = '';
+}
 
 
   ngOnInit() {

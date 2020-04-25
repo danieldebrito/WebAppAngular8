@@ -8,13 +8,13 @@
                 <button type="button" class="btn btn-outline-danger" (click)="colapsar1()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseExample">
 
                     <i class="fa fa-filter"></i>&nbsp;
-                    <strong>Filtros</strong>
+                    <strong>Filtro</strong>
                 </button> &nbsp;
 
                 <button type="button" class="btn btn-outline-danger" (click)="colapsar2()" [attr.aria-expanded]="isCollapsed2" aria-controls="collapseExample2">
 
                     <i class="fa fa-search"></i>&nbsp;
-                    <strong>Busqueda por Código Meyro</strong>
+                    <strong>Busqueda por Codigo Meyro</strong>
                 </button> &nbsp;
 
                 <button type="button" class="btn btn-outline-danger" (click)="colapsar3()" [attr.aria-expanded]="isCollapsed3" aria-controls="collapseExample3">
@@ -35,16 +35,12 @@
             <div id="buscador" class="card">
                 <div class="card-body">
                     <form class="form-inline my-2 my-lg-0">
-                        <input type="text" class="form-control mr-sm-2" [(ngModel)]="idArticulo" id="idArticulo" name="idArticulo" [ngModelOptions]="{standalone: true}" placeholder="Ejemplo: 01-6550 S">
+                        <input type="text" class="form-control mr-sm-2" [(ngModel)]="idArticulo" id="idArticulo" name="idArticulo" [ngModelOptions]="{standalone: true}" placeholder="Codigo del producto">
                         <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="getByID()">
                             BUSCAR
                         </button>&nbsp;
-                        <button type="reset" class="btn btn-outline-danger my-2 my-sm-0" (click)="buscarPorFraseLimpiar()">
-                            LIMPIAR
-                        </button>&nbsp;
                         <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="isCollapsed2 = !isCollapsed2">
-                            <i class="fa fa-window-close"></i>&nbsp;
-                            <strong>CERRAR MENU</strong>
+                            Cerrar Menu
                         </button>
                     </form>
                 </div>
@@ -59,12 +55,11 @@
                         <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="buscarPorFrase()">
                             BUSCAR
                         </button>&nbsp;
-                        <button type="reset" class="btn btn-outline-danger my-2 my-sm-0" (click)="buscarPorFraseLimpiar()">
+                        <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="fraseBusqueda.value = ''">
                             LIMPIAR
                         </button>&nbsp;
                         <button type="button" class="btn btn-outline-danger my-2 my-sm-0" (click)="isCollapsed3 = !isCollapsed3">
-                            <i class="fa fa-window-close"></i>&nbsp;
-                            <strong>CERRAR MENU</strong>
+                            Cerrar Menu
                         </button>
                     </form>
                 </div>
@@ -197,13 +192,13 @@
                                         <li>
                                             <button class="btn btn-outline-danger" (click)="isCollapsed = !isCollapsed">
                                                 <i class="fa fa-window-close"></i>&nbsp;
-                                                <strong>CERRAR MENU</strong>
+                                                <strong>Cerrar Menu</strong>
                                             </button>
                                         </li>
                                         <hr>
                                         <li>
                                             <button class="btn btn-outline-danger btn-sm" (click)="Limpiar()">
-                                                <strong>LIMPIAR</strong>
+                                                <strong>Limpiar Filtros</strong>
                                             </button>
                                         </li>
                                     </div>
