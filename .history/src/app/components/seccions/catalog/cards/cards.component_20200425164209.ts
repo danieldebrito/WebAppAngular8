@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit ,  EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Cards } from 'src/app/class/cards';
 import { Router } from '@angular/router';
 import { Articulo } from 'src/app/class/articulo';
@@ -9,7 +9,7 @@ import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css']
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent {
 
   @Input() Items: Cards[];
   @Output() showValue = new EventEmitter();
@@ -42,10 +42,6 @@ export class CardsComponent implements OnInit {
   }
 
   public scrollTop() {
-    window.scroll(0, 0);
-  }
-
-  ngOnInit() {
-    this.scrollTop();
+    alert('hola');
   }
 }

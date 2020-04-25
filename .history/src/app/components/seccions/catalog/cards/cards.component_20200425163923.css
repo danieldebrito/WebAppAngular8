@@ -1,0 +1,7 @@
+ul {
+    list-style-type: none;
+}
+
+.my-pagination .ngx-pagination .current {
+    background: red;
+}

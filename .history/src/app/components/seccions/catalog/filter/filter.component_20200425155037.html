@@ -215,10 +215,10 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="cont p-2">
-    <app-cards [Items]='dataFiltrada' (showValue)="cambiaVista()" *ngIf="show"></app-cards>
-</div>
+    <app-cards [Items]='dataFiltrada' (showValue)="cambiaVista()" *ngIf="show">
+        <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+    </app-cards>
+    <app-detail (showValue)="cambiaVista()" *ngIf="!show"></app-detail>
 
-<app-detail (showValue)="cambiaVista()" *ngIf="!show"></app-detail>
+</div>

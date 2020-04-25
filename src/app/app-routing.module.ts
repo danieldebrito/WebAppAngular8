@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './components/seccions/home/home.component';
-import { CatalogComponent } from './components/seccions/catalog/catalog.component';
+import { FilterComponent } from './components/seccions/catalog/filter/filter.component';
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
 import { ContactComponent } from './components/seccions/contact/contact.component';
 import { LoginComponent } from './components/seccions/clientes/login/login.component';
@@ -33,7 +33,7 @@ import { PedidosListadoComponent } from './components/seccions/pedidos/pedidos-l
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'catalogo', component: CatalogComponent },
+  { path: 'catalogo', component: FilterComponent },
   { path: 'detalle', component: DetailComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },

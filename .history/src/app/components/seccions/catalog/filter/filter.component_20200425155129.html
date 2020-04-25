@@ -215,10 +215,8 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="cont p-2">
     <app-cards [Items]='dataFiltrada' (showValue)="cambiaVista()" *ngIf="show"></app-cards>
-</div>
+    <app-detail (showValue)="cambiaVista()" *ngIf="!show"></app-detail>
 
-<app-detail (showValue)="cambiaVista()" *ngIf="!show"></app-detail>
+</div>

@@ -3,13 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './components/seccions/home/home.component';
-import { CatalogComponent } from './components/seccions/catalog/catalog.component';
+import { FilterComponent } from './components/seccions/catalog/filter/filter.component';
 import { DetailComponent } from './components/seccions/catalog/detail/detail.component';
 import { ContactComponent } from './components/seccions/contact/contact.component';
-import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
 import { LoginComponent } from './components/seccions/clientes/login/login.component';
 import { PageNotFoundComponent } from './components/seccions/page-not-found/page-not-found.component';
-import { QuienSoyComponent } from './components/seccions/quien-soy/quien-soy.component';
+import { QuienSoyComponent } from './components/seccions/ayuda/quien-soy/quien-soy.component';
 import { RegistroComponent } from './components/seccions/clientes/registro/registro.component';
 import { RecupPasswordComponent } from './components/seccions/clientes/recup-password/recup-password.component';
 import { ClienteTabsComponent } from './components/seccions/clientes/cliente-tabs/cliente-tabs.component';
@@ -17,12 +16,24 @@ import { PedidosTabsComponent } from './components/seccions/pedidos/pedidos-tabs
 import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
 import { SucursalesNuevaComponent } from './components/seccions/clientes/sucursales-nueva/sucursales-nueva.component';
 import { SucursalesDetalleComponent } from './components/seccions/clientes/sucursales-detalle/sucursales-detalle.component';
+// nosotros
+import { HistoriaComponent } from './components/seccions/nosotros/historia/historia.component';
+import { CertificacionesComponent } from './components/seccions/nosotros/certificaciones/certificaciones.component';
+import { ProductosComponent } from './components/seccions/nosotros/productos/productos.component';
+import { InstruccionesComponent } from './components/seccions/ayuda/instrucciones/instrucciones.component';
+import { NovedadesComponent } from './components/seccions/nosotros/novedades/novedades.component';
+// dto tecnico
+import { BlogComponent } from './components/seccions/dtoTecnico/blog/blog.component';
+import { AprieteComponent } from './components/seccions/dtoTecnico/apriete/apriete.component';
+import { RetenesInfoComponent } from './components/seccions/dtoTecnico/retenes-info/retenes-info.component';
+import { BulonesInfoComponent } from './components/seccions/dtoTecnico/bulones-info/bulones-info.component';
+// pedidos
+import { PedidosListadoComponent } from './components/seccions/pedidos/pedidos-listado/pedidos-listado.component';
+
 
 const appRoutes: Routes = [
-  // mantenimiento
-  // { path: 'correctivos', component: CorrectivoTabsComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'catalog', component: CatalogComponent },
+  { path: 'catalogo', component: FilterComponent },
   { path: 'detalle', component: DetailComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'blog', component: BlogComponent },
@@ -35,6 +46,15 @@ const appRoutes: Routes = [
   { path: 'control', component: PanelControlComponent },
   { path: 'sucursal', component: SucursalesDetalleComponent },
   { path: 'sucursalNueva', component: SucursalesNuevaComponent },
+  { path: 'historia', component: HistoriaComponent },
+  { path: 'novedades', component: NovedadesComponent },
+  { path: 'certificaciones', component: CertificacionesComponent },
+  { path: 'productos', component: ProductosComponent },
+  { path: 'instrucciones', component: InstruccionesComponent },
+  { path: 'apriete', component: AprieteComponent },
+  { path: 'retenes', component: RetenesInfoComponent },
+  { path: 'bulones', component: BulonesInfoComponent },
+  { path: 'pedidos', component: PedidosListadoComponent },
   {
     path: '',
     redirectTo: '/home',

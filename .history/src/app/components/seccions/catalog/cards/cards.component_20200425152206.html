@@ -1,11 +1,12 @@
-<div class="container">
-    <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
-</div>
-
 <div class="container p-2">
+    <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+
+
     <div class="card-group">
         <div class="col-md-3 p-3" *ngFor="let item of Items | paginate: { itemsPerPage: 20, currentPage: p }">
+
             <div class="card">
+
                 <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
 
                 <div class="card-body">
@@ -36,11 +37,10 @@
                 <div class="card-footer">
                     <app-boton-comprar [id_articulo]='item.id_articulo'></app-boton-comprar>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
-</div>
+<hr>
