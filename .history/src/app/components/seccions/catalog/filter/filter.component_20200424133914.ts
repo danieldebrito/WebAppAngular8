@@ -238,9 +238,9 @@ export class FilterComponent implements OnInit {
     });
   }
 
-public buscarPorFrase() {
-      const saludoPalabras = this.fraseBusqueda.split(' ');
-      alert(saludoPalabras);
+public separarPalabras() {
+  let saludo  = "Bienvenidos a EDteam",
+    saludoPalabras = saludo.split(' ') // ['Bienvenidos', 'a', 'EDteam']
 }
 
 
