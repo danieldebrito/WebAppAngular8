@@ -242,6 +242,7 @@ public buscarPorFrase() {
   this.cardsService.buscarPorFrase(this.fraseBusqueda).subscribe(response => {
     this.dataFiltrada = response;
   });
+  alert(fraseBusqueda);
 }
 
 

@@ -20,7 +20,7 @@ export class CardsService {
   }
 
   public buscarPorFrase(frase: string): Observable<Cards[]> {
-    return this.miHttp.httpGetO<Cards[]>('/cards/buscarFrase/' + frase);
+    return this.miHttp.httpGetO<Cards[]>('/cards/' + frase);
   }
 
   public FiltrarP(
