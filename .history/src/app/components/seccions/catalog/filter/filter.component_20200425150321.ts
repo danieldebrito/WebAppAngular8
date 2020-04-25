@@ -4,7 +4,6 @@ import { Cards } from 'src/app/class/cards';
 // services
 import { CardsService } from 'src/app/services/catalogo/cards.service';
 
-
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',

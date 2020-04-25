@@ -2,8 +2,8 @@
 
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
 
-    <div class="card-group">
-        <div class="col-md-3 p-3" *ngFor="let item of Items | paginate: { itemsPerPage: 20, currentPage: p }">
+    <div class="row">
+        <div class="col-3 p-2" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
 
             <div class="card">
 
@@ -43,4 +43,12 @@
     </div>
 </div>
 
-<hr>
+<div class="card-columns">
+    <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title that wraps to a new line</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+    </div>
+</div>
