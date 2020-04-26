@@ -5,7 +5,7 @@ export class Pedido {
         public idCliente: string,
         public idDescuento: number,
         public idExpreso: number,
-        public idPedido: string,
+        public idPedido: number,
         public idSucursal: number,
         public observaciones: string
     ) { }

@@ -37,7 +37,6 @@ th {
 
 .cant {
     width: 30%;
-    vertical-align: middle;
 }
 
 .der {
@@ -47,12 +46,10 @@ th {
 
 .izq {
     text-align: left;
-    vertical-align: middle;
 }
 
 .cent {
     text-align: center;
-    vertical-align: middle;
 }
 
 .bgd {

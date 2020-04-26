@@ -16,6 +16,7 @@ export class CarritoItemsService {
   public cantCarritoItems: number;
 
   constructor(public db: AngularFirestore) {
+    // this.carritoItems = this.db.collection('carritoItems').valueChanges();
     this.carritoItemsCollection = this.db.collection('carritoItems');
     this.carritoItems = this.carritoItemsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
