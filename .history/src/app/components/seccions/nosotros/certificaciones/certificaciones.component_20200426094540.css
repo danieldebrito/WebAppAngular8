@@ -1,0 +1,9 @@
+/* para que no se pise con la navbar */
+
+.container {
+    padding-top: 4rem;
+}
+
+ul {
+    list-style-type: square;
+}
