@@ -1,0 +1,43 @@
+<form class="form-inline">
+    <div class="row">
+        <div class="container">
+            <select class="col-5 custom-select mr-1">
+                <option selected>Materiales</option>
+                <option value="1">Corcho y Goma 3 mm</option>
+                <option value="2">Goma Sintetica</option>
+                <option value="3">Fibra 1.50 mm</option>
+                <option value="4">Corcho y Goma con Fibra comprimida 1.50 mm</option>
+            </select>
+
+            <select class=" col-5 custom-select mr-1">
+                <option selected>Precios </option>
+                <option value="1">PL $ 99990.99</option>
+                <option value="2">PC $ 99999.99</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<hr>
+
+<form class="form-inline">
+    <div class="row">
+        <div class="container">
+
+
+            <input class="col-4 form-control" type="number" name="cantidad" [(ngModel)]="cantidad" placeholder="Cant."> &nbsp;
+
+            <button (click)="cargarCarrritoItem()" class="col-2 form-control btn btn btn-outline-danger"> 
+            <i class="fa fa-cart-plus"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav>
