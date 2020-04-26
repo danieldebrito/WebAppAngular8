@@ -1,5 +1,5 @@
-.container {
-    padding-top: 4rem;
+.btn {
+    margin-right: 3px;
 }
 
 .filtro {
@@ -31,21 +31,12 @@ th {
     text-align: center;
 }
 
-.table-responsive {
-    width: 100%;
-    height: 100%;
-}
-
 .card-header {
     text-align: left;
 }
 
 .cant {
     width: 30%;
-}
-
-.inputCant {
-    width: 50%;
 }
 
 .der {
@@ -70,6 +61,36 @@ textarea {
     padding: 1%;
 }
 
-.btn {
-    margin: 3px;
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+}
+
+.header {
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 102px;
+}
+
+.container {
+    overflow-x: auto;
+}
+
+.cant {
+    width: 35px !important;
 }

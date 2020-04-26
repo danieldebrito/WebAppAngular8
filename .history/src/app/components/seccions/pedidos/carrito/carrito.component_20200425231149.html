@@ -4,12 +4,12 @@
         <div class="bgd">
             <h4>PEDIDO ON LINE</h4>
 
-            <label>Fecha : 27/12/2018</label>
+            <label>Fecha : {{ hoy | date: 'dd/MM/yyyy' }} </label>
 
             <div class="row">
                 <div class="col-sm-3">
                     <strong>Cliente : </strong>
-                    <p> {{ cliente.idCliente }} - {{ cliente.razonSocial }}</p>
+                    <p> {{ clienteLogueado.idCliente }} {{ clienteLogueado.razonSocial }}</p>
                 </div>
 
                 <div class="col-sm-3">
@@ -31,8 +31,7 @@
                 </div>
 
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-primary">Bajar Excel</button>
-                    <button type="button" class="btn btn-primary">Bajar PDF</button>
+                    <button type="button" class="btn btn-primary" (click)="exportexcel()">Bajar Excel</button>
                 </div>
 
                 <div class="col-sm-12">
@@ -41,31 +40,31 @@
 
                 <div class="col-sm-9">
                     <div>
-                        <table class="table-responsive table-bordered">
-                            <thead>
+                        <table class="table" id="excel-table">
+                            <thead class="thead-danger">
                                 <tr>
-                                    <th nowrap class="cant">Cantidad</th>
-                                    <th>Codigo</th>
-                                    <th nowrap>Descripción</th>
-                                    <th nowrap>Stock</th>
-                                    <th nowrap>Precio</th>
-                                    <th nowrap>Dto.</th>
-                                    <th nowrap>P.Neto</th>
-                                    <th nowrap>Subtotal</th>
-                                    <th>Accion</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Aplicación</th>
+                                    <th scope="col">P.Lista</th>
+                                    <th scope="col">Dto.</th>
+                                    <th scope="col">P.Neto</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Quitar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of pedidoItems">
-                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="Cantidad" value="{{ item.cantidad }}"> </td>
-                                    <td class="cent"> {{ item.idArticulo }} </td>
-                                    <td nowrap class="izq"> {{ item.descripcion_corta }} </td>
-                                    <td nowrap class="cent"> {{ item.stock }} </td>
-                                    <td nowrap class="der"> {{ item.precio_lista }} </td>
+                                <tr *ngFor="let item of carritoItems">
+                                    <td nowrap class="cent"> <input class="inputCant" type="number" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                    <td nowrap class="cent"> {{ item.idArticulo }} </td>
+                                    <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
+                                    <td nowrap class="der"> {{ item.precioLista | number:'1.2-2' }} </td>
                                     <td nowrap class="der"> 20 % </td>
-                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 | number:'1.2-2' }} </td>
-                                    <td nowrap class="der"> {{ item.precio_lista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
-                                    <td class="cent"> <button type="button" class="btn btn-danger" (click)="borrarItem(item.idPedidoItem)">Quitar</button> </td>
+                                    <td nowrap class="der"> {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                                    <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem($event, item)">
+                                        <i class="fa fa-trash"></i>
+                                    </button> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -83,15 +82,15 @@
                         <tbody>
                             <tr>
                                 <td>Subtotal: </td>
-                                <td>$ 1200.00</td>
+                                <td nowrap> $ {{ subtotal | number:'1.2-2' }} </td>
                             </tr>
                             <tr>
-                                <td>Dtos.</td>
-                                <td>$ 200.00</td>
+                                <td>Descuento :</td>
+                                <td nowrap style="color:#FF0000"> ( $ {{ subtotal - (subtotal * 0.8) | number:'1.2-2' }} ) </td>
                             </tr>
                             <tr>
-                                <td>Total NETO SIN IVA: </td>
-                                <td>$ 1000.00</td>
+                                <td>Total <b> NETO SIN IVA: </b> </td>
+                                <td nowrap> $ {{ subtotal * 0.8 | number:'1.2-2' }} </td>
                             </tr>
                         </tbody>
                         <tfoot>

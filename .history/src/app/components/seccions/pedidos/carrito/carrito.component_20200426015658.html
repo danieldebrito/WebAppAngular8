@@ -43,7 +43,7 @@
                         <table class="table table-bordered" id="excel-table">
                             <thead class="thead-danger">
                                 <tr>
-                                    <th class="cant">Cantidad</th>
+                                    <th scope="col">Cantidad</th>
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Aplicación</th>
                                     <th scope="col">P.Lista</th>
@@ -55,7 +55,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let item of carritoItems">
-                                    <td nowrap> <input style="width: 90px;" type="number" class="form-control" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                    <td style="width:25px;" class="cent"> <input class="inputCant" type="number" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
                                     <td nowrap class="cent"> {{ item.idArticulo }} </td>
                                     <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                                     <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
@@ -86,10 +86,10 @@
                             </tr>
                             <tr>
                                 <td>Descuento :</td>
-                                <td nowrap style="color:#FF0000"> <b> ( $ {{ subtotal - (subtotal * 0.8) | number:'1.2-2' }} ) </b></td>
+                                <td nowrap style="color:#FF0000"> ( $ {{ subtotal - (subtotal * 0.8) | number:'1.2-2' }} ) </td>
                             </tr>
                             <tr>
-                                <td>Total : <b> <br>  (Neto sin IVA) </b> </td>
+                                <td>Total <b> NETO SIN IVA: </b> </td>
                                 <td nowrap> $ {{ subtotal * 0.8 | number:'1.2-2' }} </td>
                             </tr>
                         </tbody>

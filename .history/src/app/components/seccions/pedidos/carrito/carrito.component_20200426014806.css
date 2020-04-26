@@ -31,12 +31,21 @@ th {
     text-align: center;
 }
 
+.table-responsive {
+    width: 100%;
+    height: 100%;
+}
+
 .card-header {
     text-align: left;
 }
 
 .cant {
     width: 30%;
+}
+
+.inputCant {
+    width: 50%;
 }
 
 .der {
@@ -89,8 +98,4 @@ textarea {
 
 .container {
     overflow-x: auto;
-}
-
-.cant {
-    width: 45px !important;
 }
