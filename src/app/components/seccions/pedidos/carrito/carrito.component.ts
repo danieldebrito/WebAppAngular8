@@ -161,6 +161,8 @@ export class CarritoComponent implements OnInit {
       });
   }
 
+// EXCEL  ///////////////////////////////////////////////////////////////////////////////////
+
   public exportexcel(): void {
     /* table id is passed over here */
     const element = document.getElementById('excel-table');
@@ -174,9 +176,7 @@ export class CarritoComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
-
-
-  // FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
+// FIREBASE  ///////////////////////////////////////////////////////////////////////////////////
 
   public getCarritoItems() {
     this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
@@ -205,6 +205,8 @@ export class CarritoComponent implements OnInit {
   public scrollTop() {
     window.scroll(0, 0);
   }
+
+// ON INIT  ///////////////////////////////////////////////////////////////////////////////////
 
   ngOnInit() {
     this.getCarritoItems();
