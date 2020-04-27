@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
+import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 import { Pedido } from 'src/app/class/pedido';
 
@@ -20,16 +20,18 @@ export class PedidosListadoComponent implements OnInit {
     private authService: AuthService,
     private expresosService: ExpresosService
   ) {
-    this.idCliente = this.authService.getIdentityLocalStorage().id;
+    this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
   }
 
   public ListarPedidosCliente() {
-    this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(response => {
-      this.pedidosCliente = response;
-    },
-      error => {
-        console.error(error);
+    this.pedidosService.getPedidos().subscribe(pedidos => {
+
+      pedidos.forEach(element => {
+        if ( element.idCliente === this.idCliente ) {
+          this.pedidosCliente.push(element);
+        }
       });
+    });
   }
 
   public TraerExpreso(id: string) {
@@ -45,5 +47,4 @@ export class PedidosListadoComponent implements OnInit {
   ngOnInit() {
     this.ListarPedidosCliente();
   }
-
 }

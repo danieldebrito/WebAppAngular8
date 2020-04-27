@@ -207,8 +207,9 @@ export class CarritoComponent implements OnInit {
 // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
 
 public getPedidos() {
-  this.pedidosService.getPedidos().subscribe(pedidos => {
-    /* this.pedidos = pedidos; */  // aca van mis pedidos, pero no lo uso en esta clase
+  this.carritoItemsService.getCarritoItems().subscribe(carritoItems => {
+    this.carritoItems = carritoItems;
+    this.getSubtotal();
   });
 }
 
