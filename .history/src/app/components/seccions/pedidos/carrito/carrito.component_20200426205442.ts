@@ -10,15 +10,13 @@ import { Pedido } from 'src/app/class/pedido';
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
 // import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
-// import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 
 // firebase
 import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.service';
-import { PedidosService } from 'src/app/services/firebase/pedidos.service';
-
 
 import * as XLSX from 'xlsx';
 
@@ -50,14 +48,14 @@ export class CarritoComponent implements OnInit {
   public fileName = 'ExcelSheet.xlsx';
 
   constructor(
-    // private pedidoItemServ: PedidoItemsService,
-    public pedidosService: PedidosService,
+    //    private pedidoItemServ: PedidoItemsService,
     public artService: ArticulosService,
+    public pedidosService: PedidosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
     private authService: AuthService,
     private toastr: ToastrService,
-    private carritoItemsService: CarritoItemsService,
+    public carritoItemsService: CarritoItemsService
   ) {
     this.clienteLogueado = this.authService.getIdentityLocalStorage();
     this.subtotal = 0;
@@ -106,7 +104,10 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-/*
+  /**
+   * cierra el pedido, asignando a los items cargados en el carrito el nro de pedido, antes tiene -1
+   * tambien al pedido le cambia el estado a cerrado
+   */
   public CerrarPedido() {
     this.pedidosService.Alta(
       this.clienteLogueado.idCliente,
@@ -129,7 +130,8 @@ export class CarritoComponent implements OnInit {
     // this.getPedidoItems();  // recargo la lista de items, quedaria vacia.
 
   }
-*/
+
+  public CerrarItems(idPedido) { }
 
   SeleccionaSucursaldeHTML() {
     this.idExpresoByName(this.expresoSelected);
@@ -201,9 +203,6 @@ export class CarritoComponent implements OnInit {
     this.carritoItemsService.updateCarritoItem(item);
   }
 
-  public CerrarItems() { }  // CODEAR
-
-
 // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
 
 public getPedidos() {
@@ -215,34 +214,29 @@ public getPedidos() {
 
 public addPedido() {
 
-  const pedido = new Pedido(
-    'abierto',
-    Date.now(),
-    this.clienteLogueado.idCliente,
-    this.clienteLogueado.idDescuento,
-    this.idExpresoSelected,
-    '', // idpedido
-    this.idSucursalSelected,
-    this.observaciones
-  );
+  /*
 
-  this.pedidosService.addPedido(pedido);
+  public estado: string,
+  public fecha: Date,
+  public idCliente: string,
+  public idDescuento: number,
+  public idExpreso: number,
+  public idPedido: string,
+  public idSucursal: number,
+  public observaciones: string
+*/
 
-  this.CerrarItems(); // CODEAR
-
+  this.carritoItemsService.addCarritoItem(pedido: Pedido);
 }
 
-public CerrarPedido() {} // CODEAR, CERRAR PEDIDO ASIGNA LOS ITEMS DEL CARRITO
-
-public deletePedido(pedido) {
-  this.pedidosService.deletePedido(pedido);
+public deletePedido(carritoItem) {
+  this.carritoItemsService.deleteCarritoItem(carritoItem);
+  this.getSubtotal();
 }
 
-updatePedido(pedido /*, event: any*/) {
-
-  // item.cantidad = event.target.value;
-
-  this.carritoItemsService.updateCarritoItem(pedido);
+updatePedido(item: CarritoItem, event: any) {
+  item.cantidad = event.target.value;
+  this.carritoItemsService.updateCarritoItem(item);
 }
 
 // ON INIT  ///////////////////////////////////////////////////////////////////////////////////
@@ -252,5 +246,8 @@ updatePedido(pedido /*, event: any*/) {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     this.scrollTop();
+
+    // this.SeleccionaSucursaldeHTML();
+
   }
 }

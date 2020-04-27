@@ -232,8 +232,6 @@ public addPedido() {
 
 }
 
-public CerrarPedido() {} // CODEAR, CERRAR PEDIDO ASIGNA LOS ITEMS DEL CARRITO
-
 public deletePedido(pedido) {
   this.pedidosService.deletePedido(pedido);
 }

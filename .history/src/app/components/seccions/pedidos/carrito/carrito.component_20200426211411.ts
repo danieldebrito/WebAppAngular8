@@ -232,7 +232,7 @@ public addPedido() {
 
 }
 
-public CerrarPedido() {} // CODEAR, CERRAR PEDIDO ASIGNA LOS ITEMS DEL CARRITO
+
 
 public deletePedido(pedido) {
   this.pedidosService.deletePedido(pedido);
@@ -252,5 +252,8 @@ updatePedido(pedido /*, event: any*/) {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     this.scrollTop();
+
+    // this.SeleccionaSucursaldeHTML();
+
   }
 }

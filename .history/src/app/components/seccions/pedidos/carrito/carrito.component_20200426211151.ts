@@ -232,17 +232,16 @@ public addPedido() {
 
 }
 
-public CerrarPedido() {} // CODEAR, CERRAR PEDIDO ASIGNA LOS ITEMS DEL CARRITO
 
-public deletePedido(pedido) {
-  this.pedidosService.deletePedido(pedido);
+
+public deletePedido(carritoItem) {
+  this.carritoItemsService.deleteCarritoItem(carritoItem);
+  this.getSubtotal();
 }
 
-updatePedido(pedido /*, event: any*/) {
-
-  // item.cantidad = event.target.value;
-
-  this.carritoItemsService.updateCarritoItem(pedido);
+updatePedido(item: CarritoItem, event: any) {
+  item.cantidad = event.target.value;
+  this.carritoItemsService.updateCarritoItem(item);
 }
 
 // ON INIT  ///////////////////////////////////////////////////////////////////////////////////
@@ -252,5 +251,8 @@ updatePedido(pedido /*, event: any*/) {
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     this.scrollTop();
+
+    // this.SeleccionaSucursaldeHTML();
+
   }
 }

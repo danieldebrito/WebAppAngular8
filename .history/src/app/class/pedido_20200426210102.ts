@@ -3,7 +3,7 @@ export class Pedido {
         public estado: string,
         public fecha: number,
         public idCliente: string,
-        public idDescuento: string,
+        public idDescuento: number,
         public idExpreso: number,
         public idPedido: string,
         public idSucursal: number,
