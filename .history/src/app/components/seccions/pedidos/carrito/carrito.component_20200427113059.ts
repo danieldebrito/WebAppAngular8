@@ -196,10 +196,15 @@ export class CarritoComponent implements OnInit {
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
 
   public async getCarritoItems() {
-
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements;
-      this.getSubtotal();
+    this.carritoItems = [];
+    this.carritoItemsService.getCarritoItems().subscribe(async elements => {
+      const cant = elements.length;
+      for (let i = 0; i < cant; i++) {
+        if (elements[i].idPedido === '-1') {
+          this.carritoItems.push(elements[i]);
+        }
+        // return await carritoAux;
+      }
     });
   }
 
@@ -207,6 +212,7 @@ export class CarritoComponent implements OnInit {
   public deleteCarritoItem(carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
     this.getSubtotal();
+    // this.getCarritoItems();
   }
 
   updateCantidadCarritoItem(item: CarritoItem, event: any) {

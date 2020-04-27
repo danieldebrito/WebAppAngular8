@@ -27,7 +27,7 @@ export class CarritoItemsService {
     }));
   }
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
     return this.carritoItems;
   }
 

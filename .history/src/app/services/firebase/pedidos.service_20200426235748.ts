@@ -13,6 +13,8 @@ export class PedidosService {
   pedidoDoc: AngularFirestoreDocument<Pedido>;
   pedidos: Observable<Pedido[]>;
 
+  public cantCarritoItems: number;
+
   constructor(public db: AngularFirestore) {
     this.pedidosCollection = this.db.collection('pedidos');
     this.pedidos = this.pedidosCollection.snapshotChanges().pipe(map(actions => {
@@ -36,8 +38,10 @@ export class PedidosService {
   public addPedido(pedido: Pedido) {
     this.pedidosCollection.add(pedido);
 
+    alert(pedido.idPedido);
+
     // retorno el id para actualizar los items del carrito.
-    // return pedido.idPedido;
+    return pedido.idPedido;
   }
 
   public updatePedido(pedido: Pedido) {

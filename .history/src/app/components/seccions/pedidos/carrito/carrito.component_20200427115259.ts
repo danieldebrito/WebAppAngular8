@@ -162,8 +162,14 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
+
     this.subtotal = 0;
+
+    alert(this.carritoItems);
+
     this.carritoItems.forEach(element => {
+      alert('la concha de tu madre, anda forra 2 !!!');
+
       this.subtotal += (element.precioLista * element.cantidad);
     });
   }
@@ -195,12 +201,12 @@ export class CarritoComponent implements OnInit {
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    this.carritoItemsService.getCarritoItems().subscribe( elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+    this.getSubtotal();
   }
 
 

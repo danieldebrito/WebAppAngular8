@@ -28,7 +28,7 @@ export class CarritoItemsService {
   }
 
   public async getCarritoItems() {
-    return this.carritoItems;
+    return await this.carritoItems;
   }
 
   public deleteCarritoItem(carritoItem: CarritoItem) {

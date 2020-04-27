@@ -195,12 +195,12 @@ export class CarritoComponent implements OnInit {
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    this.carritoItemsService.getCarritoItems().subscribe( elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+    this.getSubtotal();
   }
 
 

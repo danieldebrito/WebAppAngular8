@@ -21,6 +21,7 @@ import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 
 import * as XLSX from 'xlsx';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -36,9 +37,9 @@ export class CarritoComponent implements OnInit {
   public cantidad: number;
 
   public expresoSelected: string;   // opcion elegida en select
-  public idExpresoSelected;
+  public idExpresoSelected: number;
   public sucursalSelected: string; // opcion elegida en select
-  public idSucursalSelected;
+  public idSucursalSelected: string | number;
 
   // public idCliente: string;
   public clienteLogueado: Cliente;
@@ -169,7 +170,7 @@ export class CarritoComponent implements OnInit {
   }
 
   // para traer el texto del text area //
-  public doTextareaValueChange(event) {
+  public doTextareaValueChange(event: { target: { value: string; }; }) {
     try {
       this.observaciones = event.target.value;
     } catch (e) {
@@ -197,14 +198,14 @@ export class CarritoComponent implements OnInit {
 
   public async getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    (await this.carritoItemsService.getCarritoItems()).subscribe((elements: CarritoItem[]) => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+    this.getSubtotal();
   }
 
 
-  public deleteCarritoItem(carritoItem) {
+  public deleteCarritoItem(carritoItem: CarritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
     this.getSubtotal();
   }
@@ -250,11 +251,11 @@ export class CarritoComponent implements OnInit {
       */
   }
 
-  public deletePedido(pedido) {
+  public deletePedido(pedido: Pedido) {
     this.pedidosService.deletePedido(pedido);
   }
 
-  updatePedido(pedido /*, event: any*/) {
+  updatePedido(pedido: Pedido /*, event: any*/) {
 
     // item.cantidad = event.target.value;
 

@@ -21,6 +21,7 @@ import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 
 import * as XLSX from 'xlsx';
+import { async } from '@angular/core/testing';
 
 
 @Component({
@@ -195,12 +196,12 @@ export class CarritoComponent implements OnInit {
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    this.carritoItemsService.getCarritoItems().subscribe(async elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+    this.getSubtotal();
   }
 
 

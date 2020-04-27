@@ -165,6 +165,7 @@ export class CarritoComponent implements OnInit {
     this.subtotal = 0;
     this.carritoItems.forEach(element => {
       this.subtotal += (element.precioLista * element.cantidad);
+      alert(this.subtotal);
     });
   }
 
@@ -197,10 +198,11 @@ export class CarritoComponent implements OnInit {
 
   public async getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    this.carritoItemsService.getCarritoItems().subscribe( elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+
+    this.getSubtotal();
   }
 
 

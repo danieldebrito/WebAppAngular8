@@ -14,6 +14,7 @@ export class CarritoItemsService {
   carritoItems: Observable<CarritoItem[]>;
 
   public cantCarritoItems: number;
+  public id;
 
   constructor(public db: AngularFirestore) {
     // this.carritoItems = this.db.collection('carritoItems').valueChanges();
@@ -22,12 +23,13 @@ export class CarritoItemsService {
       return actions.map(a => {
         const data = a.payload.doc.data() as CarritoItem;
         data.idCarritoItem = a.payload.doc.id;
+        this.id = a.payload.doc.id;
         return data;
       });
     }));
   }
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
     return this.carritoItems;
   }
 
@@ -38,6 +40,7 @@ export class CarritoItemsService {
 
   public addCarritoItem(carritoItem: CarritoItem) {
     this.carritoItemsCollection.add(carritoItem);
+    carritoItem = this.id;
   }
 
   public updateCarritoItem(carritoItem: CarritoItem) {

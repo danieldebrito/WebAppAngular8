@@ -31,6 +31,10 @@ export class CarritoItemsService {
     return this.carritoItems;
   }
 
+  public async getCarritoItemsCliente() {
+    return this.carritoItems;
+  }
+
   public deleteCarritoItem(carritoItem: CarritoItem) {
     this.carritoItemDoc = this.db.doc(`carritoItems/${carritoItem.idCarritoItem}`);
     this.carritoItemDoc.delete();

@@ -19,6 +19,7 @@ export class PedidosService {
       return actions.map(a => {
         const data = a.payload.doc.data() as Pedido;
         data.idPedido = a.payload.doc.id;
+        alert(data.idPedido);
         return data;
       });
     }));

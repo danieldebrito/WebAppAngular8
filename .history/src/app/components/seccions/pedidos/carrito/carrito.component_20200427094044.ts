@@ -21,6 +21,7 @@ import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 
 import * as XLSX from 'xlsx';
+import { element } from 'protractor';
 
 
 @Component({
@@ -107,30 +108,30 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  /*
-    public CerrarPedido() {
-      this.pedidosService.Alta(
-        this.clienteLogueado.idCliente,
-        this.idSucursalSelected,
-        this.idExpresoSelected,
-        'cerrado',
-        this.pedidosService.getfecha(),
-        'obs.' // this.observaciones
-      ).then(
-        response => {
-          this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
-          console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
-          this.toastr.success('Pedido Generado', 'juntas MEYRO');
-        }
-      ).catch(
-        error => {
-          console.error('ERROR DEL SERVIDOR', error);
-        }
-      );
-      // this.getPedidoItems();  // recargo la lista de items, quedaria vacia.
-  
-    }
-  */
+/*
+  public CerrarPedido() {
+    this.pedidosService.Alta(
+      this.clienteLogueado.idCliente,
+      this.idSucursalSelected,
+      this.idExpresoSelected,
+      'cerrado',
+      this.pedidosService.getfecha(),
+      'obs.' // this.observaciones
+    ).then(
+      response => {
+        this.CerrarItems(response);  // en el response tengo el id del pedido, lo paso como parametro.
+        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
+        this.toastr.success('Pedido Generado', 'juntas MEYRO');
+      }
+    ).catch(
+      error => {
+        console.error('ERROR DEL SERVIDOR', error);
+      }
+    );
+    // this.getPedidoItems();  // recargo la lista de items, quedaria vacia.
+
+  }
+*/
 
   SeleccionaSucursaldeHTML() {
     this.idExpresoByName(this.expresoSelected);
@@ -168,8 +169,8 @@ export class CarritoComponent implements OnInit {
     });
   }
 
-  // para traer el texto del text area //
-  public doTextareaValueChange(event) {
+  // para traer el texto del text area //  
+  public doTextareaValueChange(event)  {
     try {
       this.observaciones = event.target.value;
     } catch (e) {
@@ -178,7 +179,7 @@ export class CarritoComponent implements OnInit {
   }
 
 
-  // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
+// EXCEL  ///////////////////////////////////////////////////////////////////////////////////
 
   public exportexcel(): void {
     /* table id is passed over here */
@@ -193,20 +194,26 @@ export class CarritoComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
-  // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
+// FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
 
-  public async getCarritoItems() {
+  public getCarritoItems() {
+    this.carritoItems = [];
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements;
+    this.carritoItemsService.getCarritoItems().subscribe(elements => {
+      elements.forEach( element => {
+        if ( element.idPedido === '-1' ) {
+          this.carritoItems.push(element);
+        }
+      });
+
       this.getSubtotal();
     });
   }
 
-
   public deleteCarritoItem(carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
     this.getSubtotal();
+    this.getCarritoItems();
   }
 
   updateCantidadCarritoItem(item: CarritoItem, event: any) {
@@ -219,49 +226,49 @@ export class CarritoComponent implements OnInit {
     this.carritoItemsService.updateCarritoItem(item);
   }
 
-  // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
+// FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
 
-  public getPedidos() {
-    this.pedidosService.getPedidos().subscribe(pedidos => {
-      /* this.pedidos = pedidos; */  // aca van mis pedidos, pero no lo uso en esta clase
-    });
-  }
+public getPedidos() {
+  this.pedidosService.getPedidos().subscribe(pedidos => {
+    /* this.pedidos = pedidos; */  // aca van mis pedidos, pero no lo uso en esta clase
+  });
+}
 
-  public addPedido() {
+public addPedido() {
 
-    // let idPedido = '';
+  // let idPedido = '';
 
-    this.SeleccionaSucursaldeHTML();
+  this.SeleccionaSucursaldeHTML();
 
-    this.pedido.estado = 'abierto';
-    this.pedido.fecha = Date.now();
-    this.pedido.idCliente = this.clienteLogueado.idCliente;
-    this.pedido.idDescuento = this.clienteLogueado.idDescuento;
-    this.pedido.idExpreso = this.idExpresoSelected;
-    this.pedido.idSucursal = this.idSucursalSelected;
-    this.pedido.observaciones = this.observaciones;
+  this.pedido.estado = 'abierto';
+  this.pedido.fecha = Date.now();
+  this.pedido.idCliente = this.clienteLogueado.idCliente;
+  this.pedido.idDescuento = this.clienteLogueado.idDescuento;
+  this.pedido.idExpreso = this.idExpresoSelected;
+  this.pedido.idSucursal = this.idSucursalSelected;
+  this.pedido.observaciones = this.observaciones;
 
-    this.pedidosService.addPedido(this.pedido);
+  this.pedidosService.addPedido(this.pedido);
 
-    /*
-      this.carritoItems.forEach( element => {
-        this.updateidPedidoCarritoItem(element, idPedido);
-      });
-      */
-  }
+/*
+  this.carritoItems.forEach( element => {
+    this.updateidPedidoCarritoItem(element, idPedido);
+  });
+  */
+}
 
-  public deletePedido(pedido) {
-    this.pedidosService.deletePedido(pedido);
-  }
+public deletePedido(pedido) {
+  this.pedidosService.deletePedido(pedido);
+}
 
-  updatePedido(pedido /*, event: any*/) {
+updatePedido(pedido /*, event: any*/) {
 
-    // item.cantidad = event.target.value;
+  // item.cantidad = event.target.value;
 
-    this.pedidosService.updatePedido(pedido);
-  }
+  this.pedidosService.updatePedido(pedido);
+}
 
-  // ON INIT  ///////////////////////////////////////////////////////////////////////////////////
+// ON INIT  ///////////////////////////////////////////////////////////////////////////////////
 
   ngOnInit() {
     this.getCarritoItems();

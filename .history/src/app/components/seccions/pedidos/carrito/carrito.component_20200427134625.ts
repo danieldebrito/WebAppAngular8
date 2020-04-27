@@ -199,8 +199,9 @@ export class CarritoComponent implements OnInit {
 
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+
+    this.getSubtotal();
   }
 
 

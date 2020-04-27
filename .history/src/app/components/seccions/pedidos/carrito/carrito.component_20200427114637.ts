@@ -162,8 +162,13 @@ export class CarritoComponent implements OnInit {
   }
 
   public getSubtotal() {
+
+    alert('la concha de tu madre, anda forra 1 !!!');
+
     this.subtotal = 0;
     this.carritoItems.forEach(element => {
+      alert('la concha de tu madre, anda forra 2 !!!');
+
       this.subtotal += (element.precioLista * element.cantidad);
     });
   }
@@ -197,10 +202,10 @@ export class CarritoComponent implements OnInit {
 
   public async getCarritoItems() {
 
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+    this.carritoItemsService.getCarritoItems().subscribe( elements => {
       this.carritoItems = elements;
-      this.getSubtotal();
     });
+    this.getSubtotal();
   }
 
 
