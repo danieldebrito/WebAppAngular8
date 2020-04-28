@@ -39,7 +39,6 @@ import { UsersTabsComponent } from './components/seccions/users/users-tabs/users
 import { AbmExpresosComponent } from './components/seccions/clientes/abm-expresos/abm-expresos.component';
 import { AbmNoticiasComponent } from './components/seccions/users/panel-control/abm-noticias/abm-noticias.component';
 import { AbmBlogComponent } from './components/seccions/users/panel-control/abm-blog/abm-blog.component';
-import { AbmArticulosComponent } from './components/seccions/users/panel-control/abm-articulos/abm-articulos.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -75,8 +74,7 @@ const appRoutes: Routes = [
       { path: 'users', component: UsersTabsComponent },
       { path: 'expresos', component: AbmExpresosComponent },
       { path: 'noticias', component: AbmNoticiasComponent },
-      { path: 'abmblog', component: AbmBlogComponent },
-      { path: 'abmarticulos', component: AbmArticulosComponent }
+      { path: 'abmblog', component: AbmBlogComponent }
     ]
   },
   {

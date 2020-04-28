@@ -65,18 +65,9 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.service';
-
-// cpanel
 import { SidebarComponent } from './components/seccions/users/panel-control/sidebar/sidebar.component';
 import { TopbarComponent } from './components/seccions/users/panel-control/topbar/topbar.component';
 import { PanelHomeComponent } from './components/seccions/users/panel-control/panel-home/panel-home.component';
-import { MensajesComponent } from './components/seccions/users/panel-control/mensajes/mensajes.component';
-import { PedidosComponent } from './components/seccions/users/panel-control/pedidos/pedidos.component';
-import { ClientesComponent } from './components/seccions/users/panel-control/clientes/clientes.component';
-import { UsersTabsComponent } from './components/seccions/users/users-tabs/users-tabs.component';
-import { AbmNoticiasComponent } from './components/seccions/users/panel-control/abm-noticias/abm-noticias.component';
-import { AbmBlogComponent } from './components/seccions/users/panel-control/abm-blog/abm-blog.component';
-import { AbmArticulosComponent } from './components/seccions/users/panel-control/abm-articulos/abm-articulos.component';
 
 @NgModule({
   declarations: [
@@ -126,14 +117,7 @@ import { AbmArticulosComponent } from './components/seccions/users/panel-control
     NuevoProductoPipe,
     SidebarComponent,
     TopbarComponent,
-    PanelHomeComponent,
-    MensajesComponent,
-    PedidosComponent,
-    ClientesComponent,
-    UsersTabsComponent,
-    AbmNoticiasComponent,
-    AbmBlogComponent,
-    AbmArticulosComponent
+    PanelHomeComponent
     ],
   imports: [
     BrowserModule,
