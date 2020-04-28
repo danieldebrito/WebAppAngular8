@@ -46,7 +46,7 @@ export class CarritoComponent implements OnInit {
   public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
-  // public desacBoton = false;
+  public pedido = {} as Pedido;
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
@@ -221,14 +221,8 @@ export class CarritoComponent implements OnInit {
   }
 
   public cerrarPedido() {
-    if ( this.carritoItems.length !== 0 ) {
-      this.updatePedido();
-      this.updateidPedidoCarritoItems(this.pedidosService.idPedido);
-      this.subtotal = 0;
-    } else {
-      this.toastr.error('ERROR, CARRITO VACIO', 'juntas MEYRO');
-    }
-
+    this.updatePedido();
+    this.updateidPedidoCarritoItems(this.pedidosService.idPedido);
   }
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////

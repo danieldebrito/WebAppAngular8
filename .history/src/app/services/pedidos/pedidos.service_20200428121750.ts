@@ -14,8 +14,8 @@ export class PedidosService {
   public fecha: string;
   public hora: string;
   public mensaje: any;
-
-  public idPedido; // id del pedido abierto
+  public pedidoAbierto: Pedido;
+  public pedido: Pedido;
 
   constructor(public miHttp: BaseService, private authService: AuthService) { }
 

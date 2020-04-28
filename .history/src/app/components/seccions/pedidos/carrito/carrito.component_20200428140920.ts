@@ -46,12 +46,13 @@ export class CarritoComponent implements OnInit {
   public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
-  // public desacBoton = false;
+  public pedido = {} as Pedido;
+  public idPedido;
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
-    private pedidosService: PedidosService,
-    private artService: ArticulosService,
+    public pedidosService: PedidosService,
+    public artService: ArticulosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
     private authService: AuthService,
@@ -173,12 +174,13 @@ export class CarritoComponent implements OnInit {
       'abierto',
       this.hoy,
       this.clienteLogueado.idDescuento,
-      0,
-      ''
+      this.subtotal,
+      this.observaciones
     ).then(
       response => {
         console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
-        this.pedidosService.idPedido = response;  // guardo en el servicio el id
+        this.idPedido = response;
+        this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
       error => {
@@ -189,7 +191,7 @@ export class CarritoComponent implements OnInit {
 
   public async updatePedido() {
     this.pedidosService.Update(
-      this.pedidosService.idPedido,
+      this.idPedido,
       this.idSucursalSelected,
       this.clienteLogueado.idCliente,
       this.idExpresoSelected,
@@ -200,8 +202,8 @@ export class CarritoComponent implements OnInit {
       this.observaciones
     ).then(
       response => {
-        console.log('se updateo el pedido nro => ' + response);  // tiro un mensajito
-        // this.idPedido = response;
+        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
+        this.idPedido = response;
         this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
@@ -213,22 +215,29 @@ export class CarritoComponent implements OnInit {
 
   public async getPedidoClienteAbierto() {
     this.pedidosService.traerpedidoAbierto(this.clienteLogueado.idCliente).subscribe(async response => {
-      this.pedidosService.idPedido = response.idPedido;
+      return response.idPedido;
     },
       error => {
         console.error(error);
       });
   }
 
-  public cerrarPedido() {
-    if ( this.carritoItems.length !== 0 ) {
-      this.updatePedido();
-      this.updateidPedidoCarritoItems(this.pedidosService.idPedido);
-      this.subtotal = 0;
-    } else {
-      this.toastr.error('ERROR, CARRITO VACIO', 'juntas MEYRO');
-    }
+  public async crearPedido() {
+    this.idPedido = await this.getPedidoClienteAbierto();
 
+    alert('espero id ' + await this.getPedidoClienteAbierto());
+    alert('id pededido' + this.idPedido);
+    alert('el undefined : ' + isUndefined(this.idPedido));
+
+    if (isUndefined(this.idPedido)) {
+      alert('if crear pedido');
+      this.addPedido();
+    }
+  }
+
+  public cerrarPedido() {
+    this.updatePedido();
+    this.updateidPedidoCarritoItems(this.idPedido);
   }
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
@@ -264,10 +273,11 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit() {
     this.getCarritoItems();
-    this.getPedidoClienteAbierto();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     this.scrollTop();
+
+    this.crearPedido();
   }
 }
 

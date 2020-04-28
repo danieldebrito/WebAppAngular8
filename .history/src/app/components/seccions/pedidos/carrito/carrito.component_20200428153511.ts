@@ -46,7 +46,8 @@ export class CarritoComponent implements OnInit {
   public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
-  // public desacBoton = false;
+  public pedido = {} as Pedido;
+  public idPedido;
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
@@ -173,8 +174,8 @@ export class CarritoComponent implements OnInit {
       'abierto',
       this.hoy,
       this.clienteLogueado.idDescuento,
-      0,
-      ''
+      this.subtotal,
+      this.observaciones
     ).then(
       response => {
         console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
@@ -189,7 +190,7 @@ export class CarritoComponent implements OnInit {
 
   public async updatePedido() {
     this.pedidosService.Update(
-      this.pedidosService.idPedido,
+      this.idPedido,
       this.idSucursalSelected,
       this.clienteLogueado.idCliente,
       this.idExpresoSelected,
@@ -221,14 +222,8 @@ export class CarritoComponent implements OnInit {
   }
 
   public cerrarPedido() {
-    if ( this.carritoItems.length !== 0 ) {
-      this.updatePedido();
-      this.updateidPedidoCarritoItems(this.pedidosService.idPedido);
-      this.subtotal = 0;
-    } else {
-      this.toastr.error('ERROR, CARRITO VACIO', 'juntas MEYRO');
-    }
-
+    this.updatePedido();
+    this.updateidPedidoCarritoItems(this.idPedido);
   }
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////

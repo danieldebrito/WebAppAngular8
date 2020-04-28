@@ -20,7 +20,6 @@ import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.ser
 // import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 import * as XLSX from 'xlsx';
-import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-carrito',
@@ -46,12 +45,13 @@ export class CarritoComponent implements OnInit {
   public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
-  // public desacBoton = false;
+  public pedido = {} as Pedido;
+  public idPedido;
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
-    private pedidosService: PedidosService,
-    private artService: ArticulosService,
+    public pedidosService: PedidosService,
+    public artService: ArticulosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
     private authService: AuthService,
@@ -61,6 +61,7 @@ export class CarritoComponent implements OnInit {
     this.clienteLogueado = this.authService.getIdentityLocalStorage();
     this.subtotal = 0;
   }
+
 
   /**
    * LISTA las sucursales del cliente en sesion
@@ -148,6 +149,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
 
   public exportexcel(): void {
@@ -173,12 +175,13 @@ export class CarritoComponent implements OnInit {
       'abierto',
       this.hoy,
       this.clienteLogueado.idDescuento,
-      0,
-      ''
+      this.subtotal,
+      this.observaciones
     ).then(
       response => {
         console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
-        this.pedidosService.idPedido = response;  // guardo en el servicio el id
+        this.idPedido = response;
+        this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
       error => {
@@ -189,7 +192,7 @@ export class CarritoComponent implements OnInit {
 
   public async updatePedido() {
     this.pedidosService.Update(
-      this.pedidosService.idPedido,
+      this.idPedido,
       this.idSucursalSelected,
       this.clienteLogueado.idCliente,
       this.idExpresoSelected,
@@ -200,8 +203,8 @@ export class CarritoComponent implements OnInit {
       this.observaciones
     ).then(
       response => {
-        console.log('se updateo el pedido nro => ' + response);  // tiro un mensajito
-        // this.idPedido = response;
+        console.log('se genero el pedido nro => ' + response);  // tiro un mensajito
+        this.idPedido = response;
         this.toastr.success('Pedido Generado', 'juntas MEYRO');
       }
     ).catch(
@@ -212,23 +215,25 @@ export class CarritoComponent implements OnInit {
   }
 
   public async getPedidoClienteAbierto() {
-    this.pedidosService.traerpedidoAbierto(this.clienteLogueado.idCliente).subscribe(async response => {
-      this.pedidosService.idPedido = response.idPedido;
+    this.pedidosService.traerpedidoAbierto(this.clienteLogueado.idCliente).subscribe( async response => {
+      return response.idPedido;
     },
       error => {
         console.error(error);
       });
   }
 
-  public cerrarPedido() {
-    if ( this.carritoItems.length !== 0 ) {
-      this.updatePedido();
-      this.updateidPedidoCarritoItems(this.pedidosService.idPedido);
-      this.subtotal = 0;
-    } else {
-      this.toastr.error('ERROR, CARRITO VACIO', 'juntas MEYRO');
+  public crearPedido() {
+    this.idPedido = this.getPedidoClienteAbierto();
+    // this.getPedidoClienteAbierto(this.clienteLogueado.idCliente);
+    if (!this.idPedido) {
+      this.addPedido();
     }
+  }
 
+  public cerrarPedido() {
+    this.updatePedido();
+    this.updateidPedidoCarritoItems(this.idPedido);
   }
 
   // FIREBASE CARRITO ITEMS ///////////////////////////////////////////////////////////////////////
@@ -241,6 +246,7 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
   public deleteCarritoItem(carritoItem) {
     this.carritoItemsService.deleteCarritoItem(carritoItem);
     this.getSubtotal();
@@ -251,6 +257,7 @@ export class CarritoComponent implements OnInit {
     this.carritoItemsService.updateCarritoItem(item);
   }
 
+
   public updateidPedidoCarritoItems(idPedido) {
     this.carritoItems.forEach(element => {
       if (element.idPedido === '-1' && element.idCliente === this.clienteLogueado.idCliente) {
@@ -260,53 +267,53 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
+  // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
+
+  /*
+  public getPedidos(idCliente) {
+    this.pedidosService.getPedidos().subscribe(pedidos => {
+    });
+  }
+
+  public addPedido() {
+    this.SeleccionaSucursaldeHTML();
+
+    this.pedido.estado = 'abierto';
+    this.pedido.fecha = Date.now();
+    this.pedido.idCliente = this.clienteLogueado.idCliente;
+    this.pedido.idDescuento = this.clienteLogueado.idDescuento;
+    this.pedido.idExpreso = this.idExpresoSelected;
+    this.pedido.idSucursal = this.idSucursalSelected;
+    this.pedido.observaciones = this.observaciones;
+
+    this.pedidosService.addPedido(this.pedido);
+
+      this.carritoItems.forEach( element => {
+        this.updateidPedidoCarritoItem(element, idPedido);
+      });
+  }
+
+  public deletePedido(pedido) {
+    this.pedidosService.deletePedido(pedido);
+  }
+
+  updatePedido(pedido) {
+
+    // item.cantidad = event.target.value;
+
+    this.pedidosService.updatePedido(pedido);
+  }
+  */
+
   // ON INIT  ///////////////////////////////////////////////////////////////////////////////////
 
   ngOnInit() {
     this.getCarritoItems();
-    this.getPedidoClienteAbierto();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
     this.scrollTop();
+
+    this.crearPedido();
   }
 }
-
-
-
-  // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
-
-/*
-public getPedidos(idCliente) {
-  this.pedidosService.getPedidos().subscribe(pedidos => {
-  });
-}
-
-public addPedido() {
-  this.SeleccionaSucursaldeHTML();
-
-  this.pedido.estado = 'abierto';
-  this.pedido.fecha = Date.now();
-  this.pedido.idCliente = this.clienteLogueado.idCliente;
-  this.pedido.idDescuento = this.clienteLogueado.idDescuento;
-  this.pedido.idExpreso = this.idExpresoSelected;
-  this.pedido.idSucursal = this.idSucursalSelected;
-  this.pedido.observaciones = this.observaciones;
-
-  this.pedidosService.addPedido(this.pedido);
-
-    this.carritoItems.forEach( element => {
-      this.updateidPedidoCarritoItem(element, idPedido);
-    });
-}
-
-public deletePedido(pedido) {
-  this.pedidosService.deletePedido(pedido);
-}
-
-updatePedido(pedido) {
-
-  // item.cantidad = event.target.value;
-
-  this.pedidosService.updatePedido(pedido);
-}
-*/

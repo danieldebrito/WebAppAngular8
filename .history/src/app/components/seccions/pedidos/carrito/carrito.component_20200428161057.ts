@@ -46,7 +46,7 @@ export class CarritoComponent implements OnInit {
   public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
-  // public desacBoton = false;
+  public desacBoton = false;
 
   constructor(
     // private pedidoItemServ: PedidoItemsService,
