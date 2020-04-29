@@ -1,5 +1,7 @@
 <div class="container">
-    <div (showValue)="cambiaVista()" *ngIf="!showDetail">
+
+
+    <div (showValue)="cambiaVista()" *ngIf="!show">
 
         <strong><h1>Pedidos</h1></strong> &nbsp;
 
@@ -10,7 +12,7 @@
                         <h5 class="card-title">Fecha : {{ item.fecha | date: 'dd/MM/yyyy' }} </h5>
                         <h5 class="card-title">ID Pedido: {{ item.idPedido }} </h5>
                         <button type="button" class="btn btn-outline-success"> {{ item.estado }} </button>&nbsp;
-                        <button type="button" class="btn btn-outline-primary" (click)="cambiaVista()">Ver Pedido</button>
+                        <button type="button" class="btn btn-outline-primary">Ver Pedido</button>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -26,7 +28,6 @@
         <hr>
     </div>
 
-    <div>
-        <app-pedido-detalle (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
-    </div>
+    <app-pedido-detalle (showValue)="cambiaVista()" *ngIf="show"></app-pedido-detalle>
+
 </div>

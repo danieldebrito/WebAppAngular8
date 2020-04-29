@@ -14,10 +14,11 @@ export class DetailComponent implements OnInit {
   public showDetail: boolean;
   public art: Articulo;
 
+  // img carousel
 
-  images = ['/assets/images/juntas/tc-01.jpg',
-    '/assets/images/juntas/tc-02.jpg',
-    '/assets/images/juntas/tc-03.jpg'];
+  images = ['../../../../../assets/images/juntas/tc-01.jpg',
+    '../../../../../assets/images/juntas/tc-02.jpg',
+    '../../../../../assets/images/juntas/tc-03.jpg'];
 
   constructor(private artService: ArticulosService) {
     this.showDetail = false;
@@ -28,11 +29,18 @@ export class DetailComponent implements OnInit {
     this.showDetail = !this.showDetail;
   }
 
-  public scrollTop() {
-    window.scroll(0, 0);
-  }
+  /* public traerUno() {
+     this.artService.traerUno().subscribe(response => {
+         this.art = response;
+     },
+         error => {
+             console.error(error);
+         });
+ }*/
+
+
 
   ngOnInit() {
-    this.scrollTop();
+    //  this.traerUno();
   }
 }

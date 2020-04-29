@@ -1,0 +1,106 @@
+/* para que no se pise con la navbar */
+
+.container {
+    padding-top: 4rem;
+}
+
+.btn {
+    margin-right: 3px;
+}
+
+.filtro {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+select {
+    width: 200px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+select {
+    padding: 2%;
+}
+
+.bgd {
+    background-color: #f2f3f4;
+}
+
+th {
+    background-color: red;
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.card-header {
+    text-align: left;
+}
+
+.cant {
+    width: 30%;
+    vertical-align: middle;
+}
+
+.der {
+    text-align: right;
+    vertical-align: middle;
+}
+
+.izq {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.cent {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.bgd {
+    background-color: #f2f3f4;
+    padding: 1%;
+}
+
+textarea {
+    width: 100%;
+    padding: 1%;
+}
+
+.top-container {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+}
+
+.header {
+    padding: 10px 16px;
+    background: #555;
+    color: #f1f1f1;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 102px;
+}
+
+.container {
+    overflow-x: auto;
+}
+
+.cant {
+    width: 40px !important;
+}

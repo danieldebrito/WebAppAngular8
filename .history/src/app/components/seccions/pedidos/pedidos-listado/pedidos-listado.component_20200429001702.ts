@@ -14,7 +14,7 @@ export class PedidosListadoComponent implements OnInit {
 
   public idCliente: string;
   public pedidosCliente: Pedido[] = [];
-  public showDetail = false;
+  public show: boolean;
 
   constructor(
     private pedidosService: PedidosService,
@@ -46,7 +46,7 @@ export class PedidosListadoComponent implements OnInit {
   }
 
   cambiaVista() {
-    this.showDetail = !this.showDetail;
+    this.show = !this.show;
   }
 
   ngOnInit() {

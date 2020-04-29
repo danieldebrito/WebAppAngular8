@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="bgd">
+        <h4>DETALLE DE PEDIDO</h4>
+        <!--
+        <label>Fecha : {{ hoy | date: 'dd/MM/yyyy' }} </label>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <strong>Cliente : </strong>
+                <p> {{ clienteLogueado.idCliente }} {{ clienteLogueado.razonSocial }}</p>
+            </div>
+
+            <div class="col-sm-3">
+                <strong>Direccion de Envio: </strong>
+                <select class="custom-select mr-1" [(ngModel)]="sucursalSelected" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let item of sucursales">
+                                {{ item.nombreSucursal }}
+                            </option>
+                        </select>
+            </div>
+
+            <div class="col-sm-3">
+                <strong>Medio de Envio: </strong>
+                <select class="custom-select mr-1" [(ngModel)]="expresoSelected" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let item of expresos">
+                                {{ item.nombre }}
+                            </option>
+                        </select>
+            </div>
+
+            <div class="col-sm-12">
+                <hr>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="container">
+                    <table class="table table-bordered" id="excel-table">
+                        <thead class="thead-danger">
+                            <tr>
+                                <th class="cant">Cantidad</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Aplicación</th>
+                                <th scope="col">P.Lista</th>
+                                <th scope="col">Dto.</th>
+                                <th scope="col">P.Neto</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Quitar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carritoItems">
+                                <td class="cant"> <input style="width: 90px;" type="number" class="form-control" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                <td nowrap class="cent"> {{ item.idArticulo }} </td>
+                                <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
+                                <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
+                                <td nowrap class="der"> 20 % </td>
+                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
+                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                                <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem(item)">
+                                            <i class="fa fa-trash"></i>
+                                        </button> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Detalle</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal: </td>
+                            <td nowrap> $ {{ subtotal | number:'1.2-2' }} </td>
+                        </tr>
+                        <tr>
+                            <td>Descuento :</td>
+                            <td nowrap style="color:#FF0000"> <b> ( $ {{ subtotal - (subtotal * 0.8) | number:'1.2-2' }} ) </b></td>
+                        </tr>
+                        <tr>
+                            <td>Total : <b> <br>  (Neto sin IVA) </b> </td>
+                            <td nowrap> $ {{ subtotal * 0.8 | number:'1.2-2' }} </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <td colspan="2">
+                            <button type="button" class="btn btn-success btn-block" (click)="cerrarPedido()">Finalizar
+                                        Pedido</button>
+                        </td>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="col-sm-12">
+            <textarea placeholder="Observaciones..." class="form-control" name="observaciones" rows="4" #message='ngModel' name="observaciones" [(ngModel)]="observaciones"></textarea>
+        </div>
+        -->
+    </div>
+
+</div>

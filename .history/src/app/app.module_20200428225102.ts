@@ -45,6 +45,7 @@ import { QuienSoyComponent } from './components/seccions/ayuda/quien-soy/quien-s
 import { AbmExpresosComponent } from './components/seccions/clientes/abm-expresos/abm-expresos.component';
 
 // pedidos
+import { PedidoDetalleComponent } from './components/seccions/pedidos/pedido-detalle/pedido-detalle.component';
 
 // nosotros
 import { HistoriaComponent } from './components/seccions/nosotros/historia/historia.component';
@@ -80,7 +81,6 @@ import { AbmNoticiasComponent } from './components/seccions/users/panel-control/
 import { AbmBlogComponent } from './components/seccions/users/panel-control/abm-blog/abm-blog.component';
 import { AbmArticulosComponent } from './components/seccions/users/panel-control/abm-articulos/abm-articulos.component';
 import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
-import { PedidoDetalleComponent } from './components/seccions/pedidos/pedido-detalle/pedido-detalle.component';
 
 @NgModule({
   declarations: [

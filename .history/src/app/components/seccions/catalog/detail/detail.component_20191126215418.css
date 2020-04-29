@@ -1,11 +1,12 @@
 /* para que no se pise con la navbar */
-
 .container {
     padding-top: 4rem;
 }
 
 .bgd {
-    background-color: #f2f3f4;
+    background-color:  #f2f3f4;
+    padding-left:  1%;
+    padding-right: 1%;
 }
 
 img {
@@ -13,11 +14,11 @@ img {
 }
 
 select {
-    width: 100%;
+    width:100%;
 }
 
 th {
-    background-color: red;
+    background-color:red;
     color: white;
     width: 100%;
     height: 100%;
@@ -25,7 +26,7 @@ th {
 }
 
 strong {
-    background-color: red;
+    background-color:red;
     color: white;
     width: 100%;
     height: 100%;
@@ -33,10 +34,10 @@ strong {
 }
 
 select {
-    height: 40px;
-    line-height: 30px;
-    background: #f4f4f4;
-}
+    height:40px;
+    line-height:30px;
+    background:#f4f4f4;
+} 
 
 .carritoInput {
     width: 30%;
@@ -46,7 +47,7 @@ select {
     text-align: right;
 }
 
-table {
+table{
     table-layout: fixed;
     width: auto;
     font-size: small;

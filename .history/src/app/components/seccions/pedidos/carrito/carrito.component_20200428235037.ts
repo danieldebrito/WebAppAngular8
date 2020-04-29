@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/clientes/auth.service';
 
 // import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { ArticulosService } from 'src/app/services/catalogo/articulos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 
@@ -47,7 +48,9 @@ export class CarritoComponent implements OnInit {
   // public desacBoton = false;
 
   constructor(
+    // private pedidoItemServ: PedidoItemsService,
     private pedidosService: PedidosService,
+    private artService: ArticulosService,
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
     private authService: AuthService,

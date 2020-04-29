@@ -14,7 +14,7 @@ export class PedidosListadoComponent implements OnInit {
 
   public idCliente: string;
   public pedidosCliente: Pedido[] = [];
-  public showDetail = false;
+  public showDetail: boolean;
 
   constructor(
     private pedidosService: PedidosService,

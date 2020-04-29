@@ -80,7 +80,6 @@ import { AbmNoticiasComponent } from './components/seccions/users/panel-control/
 import { AbmBlogComponent } from './components/seccions/users/panel-control/abm-blog/abm-blog.component';
 import { AbmArticulosComponent } from './components/seccions/users/panel-control/abm-articulos/abm-articulos.component';
 import { PanelControlComponent } from './components/seccions/users/panel-control/panel-control.component';
-import { PedidoDetalleComponent } from './components/seccions/pedidos/pedido-detalle/pedido-detalle.component';
 
 @NgModule({
   declarations: [
@@ -137,8 +136,7 @@ import { PedidoDetalleComponent } from './components/seccions/pedidos/pedido-det
     UsersTabsComponent,
     AbmNoticiasComponent,
     AbmBlogComponent,
-    AbmArticulosComponent,
-    PedidoDetalleComponent
+    AbmArticulosComponent
     ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@ export class PedidosListadoComponent implements OnInit {
   }
 
   cambiaVista() {
-    this.showDetail = !this.showDetail;
+    this.show = !this.show;
   }
 
   ngOnInit() {
