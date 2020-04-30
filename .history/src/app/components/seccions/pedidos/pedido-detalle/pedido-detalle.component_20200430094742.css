@@ -35,6 +35,11 @@ th {
     text-align: left;
 }
 
+.cant {
+    width: 30%;
+    vertical-align: middle;
+}
+
 .der {
     text-align: right;
     vertical-align: middle;

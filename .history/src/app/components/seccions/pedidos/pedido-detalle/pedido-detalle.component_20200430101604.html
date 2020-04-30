@@ -38,7 +38,7 @@
                 <table class="table table-bordered" id="excel-table">
                     <thead class="thead-danger">
                         <tr>
-                            <th scope="col">Cantidad</th>
+                            <th class="cant">Cantidad</th>
                             <th scope="col">Codigo</th>
                             <th scope="col">Aplicación</th>
                             <th scope="col">P.Lista</th>
@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of carritoItems">
-                            <td nowrap class="der"> {{ item.cantidad }} </td>
+                            <td class="cant"> {{ item.cantidad }} </td>
                             <td nowrap class="cent"> {{ item.idArticulo }} </td>
                             <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                             <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>

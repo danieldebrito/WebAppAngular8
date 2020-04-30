@@ -1,0 +1,98 @@
+<div class="container">
+
+    <div class="bgd">
+
+        <div class="row">
+            <h4>PEDIDO ON LINE Nro {{ idPedido }}</h4>
+            <button type="button" class="btn btn-primary btn-sm" (click)="cambia()">VOLVER</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="exportexcel()">Bajar Excel</button>
+        </div>
+
+        <label>Fecha : {{ pedido.fecha | date: 'dd/MM/yyyy' }} </label>
+
+        <div class="row">
+
+            <div class="col-sm-3">
+                <strong>Cliente : </strong>
+                <p> {{ clienteLogueado.idCliente }} {{ clienteLogueado.razonSocial }}</p>
+            </div>
+
+            <div class="col-sm-3">
+                <strong>Direccion de Envio: </strong>
+                <p> {{ pedido.idClienteSucursal }} </p>
+            </div>
+
+            <div class="col-sm-3">
+                <strong>Medio de Envio: </strong>
+                <p>{{ pedido.idExpreso }}</p>
+            </div>
+
+            <div class="col-sm-12">
+                <hr>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="container">
+                    <table class="table table-bordered" id="excel-table">
+                        <thead class="thead-danger">
+                            <tr>
+                                <th class="cant">Cantidad</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Aplicación</th>
+                                <th scope="col">P.Lista</th>
+                                <th scope="col">Dto.</th>
+                                <th scope="col">P.Neto</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carritoItems">
+                                <td class="cant"> {{ item.cantidad }} </td>
+                                <td nowrap class="cent"> {{ item.idArticulo }} </td>
+                                <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
+                                <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
+                                <td nowrap class="der"> 20 % </td>
+                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
+                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Detalle</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal: </td>
+                            <td nowrap> $ 000.00 </td>
+                        </tr>
+                        <tr>
+                            <td>Descuento :</td>
+                            <td nowrap style="color:#FF0000"> <b> ( $ 000.00 ) </b></td>
+                        </tr>
+                        <tr>
+                            <td>Total : <b> <br>  (Neto sin IVA) </b> </td>
+                            <td nowrap> {{ pedido.subtotalNeto }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="col-sm-12">
+            <textarea placeholder="Observaciones..." class="form-control" name="observaciones" rows="4" name="observaciones"></textarea>
+        </div>
+    </div>
+
+    <hr>
+</div>

@@ -1,7 +1,3 @@
-.btn {
-    margin-right: 3px;
-}
-
 .filtro {
     padding-left: 1%;
     padding-right: 1%;
@@ -33,6 +29,11 @@ th {
 
 .card-header {
     text-align: left;
+}
+
+.cant {
+    width: 30%;
+    vertical-align: middle;
 }
 
 .der {
