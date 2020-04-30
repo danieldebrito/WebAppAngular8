@@ -61,12 +61,9 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
 
       this.sucursales = response;
-
-      this.sucursal = this.sucursales[0];  // por defecto, si no cambia el select queda esta
-
-      /*
+      this.sucursalSelected = this.sucursales[0].nombreSucursal;
       this.getSucursalByName(this.sucursalSelected);
-      return response;*/
+      return response;
     });
   }
 
@@ -92,7 +89,7 @@ export class CarritoComponent implements OnInit {
 
   SeleccionaSucursaldeHTML() {
     this.idExpresoByName(this.expresoSelected);
-    // this.getSucursalByName(this.sucursalSelected);
+    this.getSucursalByName(this.sucursalSelected);
   }
 
   public idExpresoByName(name: string) {
@@ -188,7 +185,7 @@ export class CarritoComponent implements OnInit {
   public async updatePedido() {
     this.pedidosService.Update(
       this.pedidosService.idPedido,
-      this.sucursal.idSucursal,
+      this.idSucursalSelected,
       this.clienteLogueado.idCliente,
       this.idExpresoSelected,
       'enviado',

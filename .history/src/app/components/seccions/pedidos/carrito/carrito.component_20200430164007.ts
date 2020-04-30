@@ -62,7 +62,7 @@ export class CarritoComponent implements OnInit {
 
       this.sucursales = response;
 
-      this.sucursal = this.sucursales[0];  // por defecto, si no cambia el select queda esta
+     // this.sucursal = this.sucursales[0];
 
       /*
       this.getSucursalByName(this.sucursalSelected);

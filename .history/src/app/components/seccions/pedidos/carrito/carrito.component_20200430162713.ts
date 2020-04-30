@@ -61,10 +61,8 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
 
       this.sucursales = response;
-
-      this.sucursal = this.sucursales[0];  // por defecto, si no cambia el select queda esta
-
       /*
+      this.sucursalSelected = this.sucursales[0].nombreSucursal;
       this.getSucursalByName(this.sucursalSelected);
       return response;*/
     });

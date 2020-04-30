@@ -18,7 +18,7 @@ constructor(public miHttp: BaseService) { }
     return this.miHttp.httpDeleteP('/expresos/' + '"' + id + '"');
   }
 
-  public TraerUno(id: string): Observable<Expreso> {
+  public TraerUno(id: number): Observable<Expreso> {
     return this.miHttp.httpGetO<Expreso>('/expresos/' + '"' + id + '"');
   }
 

@@ -32,25 +32,25 @@ export class PedidosService {
   }
 
   public Alta(
-    // idPedido: number,  AI
+    // idPedido: number,
     idClienteSucursal: string,
     idCliente: string,
     idExpreso: string,
     estado: string,
-    fecha: string,
+    fecha: number,
     idDescuento: string,
-    subtotalNeto: number,
+    subtotal: number,
     observaciones: string
   ): Promise<object> {
     const request: object = {
-    // idPedido: number,    AI
+    // idPedido: number,
     idClienteSucursal,
     idCliente,
     idExpreso,
     estado,
     fecha,
     idDescuento,
-    subtotalNeto,
+    subtotal,
     observaciones
     };
     return this.miHttp.httpPostP('/pedidos/', request);
@@ -62,9 +62,9 @@ export class PedidosService {
     idCliente: string,
     idExpreso: string,
     estado: string,
-    fecha: string,
+    fecha: number  ,
     idDescuento: string,
-    subtotalNeto: number,
+    subtotal: number,
     observaciones: string
     ): Promise<object> {
     const request: object = {
@@ -75,7 +75,7 @@ export class PedidosService {
     estado,
     fecha,
     idDescuento,
-    subtotalNeto,
+    subtotal,
     observaciones
     };
     return this.miHttp.httpPostP('/pedidos/update', request);
@@ -85,6 +85,10 @@ export class PedidosService {
     return this.miHttp.httpGetO<Pedido>('/pedidos/abierto/' + '"' + idCliente + '"');
   }
 
+
+  /**
+   * lista todos los pedidos de un cliente
+   */
   public ListarPedidosCliente(idCliente): Observable<Pedido[]> {
     return this.miHttp.httpGetO<Pedido[]>('/pedidos/cliente/' + '"' + idCliente + '"');
   }
@@ -97,7 +101,7 @@ export class PedidosService {
     const hora = fechaActual.getHours().toString();
     const minutos = fechaActual.getMinutes().toString();
     const segundos = fechaActual.getSeconds().toString();
-    this.fecha = dia + '/' + mes + '/' + anio;
+    this.fecha = anio + '/' + mes + '/' + dia;
     this.hora = hora + ':' + minutos + ':' + segundos;
 
     const ret = this.fecha;

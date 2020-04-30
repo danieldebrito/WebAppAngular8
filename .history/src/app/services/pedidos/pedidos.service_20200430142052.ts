@@ -32,7 +32,7 @@ export class PedidosService {
   }
 
   public Alta(
-    // idPedido: number,  AI
+    // idPedido: number,
     idClienteSucursal: string,
     idCliente: string,
     idExpreso: string,
@@ -43,7 +43,7 @@ export class PedidosService {
     observaciones: string
   ): Promise<object> {
     const request: object = {
-    // idPedido: number,    AI
+    // idPedido: number,
     idClienteSucursal,
     idCliente,
     idExpreso,
@@ -85,6 +85,10 @@ export class PedidosService {
     return this.miHttp.httpGetO<Pedido>('/pedidos/abierto/' + '"' + idCliente + '"');
   }
 
+
+  /**
+   * lista todos los pedidos de un cliente
+   */
   public ListarPedidosCliente(idCliente): Observable<Pedido[]> {
     return this.miHttp.httpGetO<Pedido[]>('/pedidos/cliente/' + '"' + idCliente + '"');
   }

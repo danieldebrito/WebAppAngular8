@@ -5,11 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Articulo } from 'src/app/class/articulo';
 import { Cliente } from 'src/app/class/cliente';
 import { CarritoItem } from 'src/app/class/carritoItem';
-import { ClienteSucursal } from 'src/app/class/clienteSucursal';
-import { Expreso } from 'src/app/class/expreso';
 
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
+
+// import { PedidoItemsService } from 'src/app/services/pedidos/pedido-items.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
@@ -34,14 +34,14 @@ export class CarritoComponent implements OnInit {
 
   public expresoSelected: string;   // opcion elegida en select
   public idExpresoSelected;
-  public sucursal: ClienteSucursal; // opcion elegida en select
+  public sucursalSelected: string; // opcion elegida en select
   public idSucursalSelected;
 
   public clienteLogueado: Cliente;
   public observaciones = '';
 
   public subtotal = 0;
-  public hoy: string;
+  public hoy = Date.now();
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
   public fileName = 'ExcelSheet.xlsx';
 
@@ -61,12 +61,9 @@ export class CarritoComponent implements OnInit {
     this.sucursalesService.ListarPorCliente(this.clienteLogueado.idCliente).subscribe(response => {
 
       this.sucursales = response;
-
-      this.sucursal = this.sucursales[0];  // por defecto, si no cambia el select queda esta
-
-      /*
+      this.sucursalSelected = this.sucursales[0].nombreSucursal;
       this.getSucursalByName(this.sucursalSelected);
-      return response;*/
+      return response;
     });
   }
 
@@ -92,7 +89,7 @@ export class CarritoComponent implements OnInit {
 
   SeleccionaSucursaldeHTML() {
     this.idExpresoByName(this.expresoSelected);
-    // this.getSucursalByName(this.sucursalSelected);
+    this.getSucursalByName(this.sucursalSelected);
   }
 
   public idExpresoByName(name: string) {
@@ -125,16 +122,6 @@ export class CarritoComponent implements OnInit {
     } else {
       this.subtotal = 0;
     }
-  }
-
-  getfecha() {
-    const fechaActual = new Date();
-    const dia = fechaActual.getDate().toString();
-    const mes = (fechaActual.getMonth() + 1).toString();
-    const anio = fechaActual.getFullYear().toString();
-    const hora = fechaActual.getHours().toString();
-    const minutos = fechaActual.getMinutes().toString();
-    return dia + '/' + mes + '/' + anio + ' - ' + hora + ':' + minutos;
   }
 
   // para traer el texto del text area //
@@ -188,11 +175,11 @@ export class CarritoComponent implements OnInit {
   public async updatePedido() {
     this.pedidosService.Update(
       this.pedidosService.idPedido,
-      this.sucursal.idSucursal,
+      this.idSucursalSelected,
       this.clienteLogueado.idCliente,
       this.idExpresoSelected,
       'enviado',
-      this.getfecha(),
+      this.pedidosService.getfecha(),
       this.clienteLogueado.idDescuento,
       this.subtotal,
       this.observaciones
@@ -265,7 +252,6 @@ export class CarritoComponent implements OnInit {
     this.getPedidoClienteAbierto();
     this.listaSucursalesCliente();
     this.listarExpresosCliente();
-    this.hoy = this.pedidosService.getfecha();
     this.scrollTop();
   }
 }

@@ -1,9 +1,5 @@
 <div class="container">
 
-    <div class="row">
-        <app-pedidos-tabs></app-pedidos-tabs>
-    </div>
-
     <form #f="ngForm" name="f" (change)="SeleccionaSucursaldeHTML()">
         <div class="bgd">
             <h4>CARRITO DE COMPRAS</h4>
@@ -18,8 +14,8 @@
 
                 <div class="col-sm-3">
                     <strong>Direccion de Envio: </strong>
-                    <select class="custom-select mr-1" [(ngModel)]="sucursal" name="sucursal" [ngModelOptions]="{standalone: true}">
-                        <option *ngFor="let sucursal of sucursales" [ngValue]="sucursal">
+                    <select class="custom-select mr-1" [(ngModel)]="sucursal" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let sucursal of sucursales">
                             {{ sucursal.nombreSucursal }}
                         </option>
                     </select>
@@ -37,45 +33,42 @@
                 <div class="col-sm-3">
                     <button type="button" class="btn btn-primary" (click)="exportexcel()">Bajar Excel</button>
                 </div>
-            </div>
 
-
-            <div class="row">
                 <div class="col-sm-12">
                     <hr>
                 </div>
-            </div>
 
-            <div class="row">
                 <div class="col-sm-9">
-                    <table class="table table-bordered" id="excel-table">
-                        <thead class="thead-danger">
-                            <tr>
-                                <th class="cant">Cantidad</th>
-                                <th scope="col">Codigo</th>
-                                <th scope="col">Aplicación</th>
-                                <th scope="col">P.Lista</th>
-                                <th scope="col">Dto.</th>
-                                <th scope="col">P.Neto</th>
-                                <th scope="col">Subtotal</th>
-                                <th scope="col">Quitar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of carritoItems">
-                                <td class="cant"> <input style="width: 90px;" type="number" class="form-control" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
-                                <td nowrap class="cent"> {{ item.idArticulo }} </td>
-                                <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
-                                <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
-                                <td nowrap class="der"> 20 % </td>
-                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
-                                <td nowrap class="der"> $ {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
-                                <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem(item)">
-                                            <i class="fa fa-trash"></i>
-                                        </button> </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="container">
+                        <table class="table table-bordered" id="excel-table">
+                            <thead class="thead-danger">
+                                <tr>
+                                    <th class="cant">Cantidad</th>
+                                    <th scope="col">Codigo</th>
+                                    <th scope="col">Aplicación</th>
+                                    <th scope="col">P.Lista</th>
+                                    <th scope="col">Dto.</th>
+                                    <th scope="col">P.Neto</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Quitar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of carritoItems">
+                                    <td class="cant"> <input style="width: 90px;" type="number" class="form-control" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
+                                    <td nowrap class="cent"> {{ item.idArticulo }} </td>
+                                    <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
+                                    <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> 20 % </td>
+                                    <td nowrap class="der"> $ {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
+                                    <td nowrap class="der"> $ {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                                    <td class="cent"> <button type="button" class="btn btn-danger" (click)="deleteCarritoItem(item)">
+                                        <i class="fa fa-trash"></i>
+                                    </button> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="col-sm-3">
@@ -103,10 +96,11 @@
                         <tfoot>
                             <td colspan="2">
                                 <button type="button" class="btn btn-success btn-block" (click)="cerrarPedido()">Finalizar
-                                        Pedido</button>
+                                    Pedido</button>
                             </td>
                         </tfoot>
                     </table>
+
                 </div>
             </div>
 
@@ -116,6 +110,9 @@
                 <textarea placeholder="Observaciones..." class="form-control" name="observaciones" rows="4" #message='ngModel' name="observaciones" [(ngModel)]="observaciones"></textarea>
             </div>
         </div>
+
     </form>
+
     <hr>
+
 </div>

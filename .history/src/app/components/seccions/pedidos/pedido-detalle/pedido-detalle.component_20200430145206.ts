@@ -3,13 +3,10 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { CarritoItem } from 'src/app/class/carritoItem';
 import { Pedido } from 'src/app/class/pedido';
 import { Cliente } from 'src/app/class/cliente';
-
 // services
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.service';
-import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
-import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 
 import * as XLSX from 'xlsx';
 
@@ -28,15 +25,10 @@ export class PedidoDetalleComponent implements OnInit {
   public pedido: Pedido = {};
   public clienteLogueado: Cliente;
 
-  public expreso: string;
-  public sucursal: string;
-
   public fileName = 'MEYRO_pedido' + this.idPedido + '.xlsx';
 
 
   constructor(
-    private sucursalesService: SucursalesService,
-    private expresosService: ExpresosService,
     private authService: AuthService,
     private carritoItemsService: CarritoItemsService,
     private pedidosService: PedidosService
@@ -58,27 +50,6 @@ export class PedidoDetalleComponent implements OnInit {
         console.error(error);
       });
   }
-
-  // expreso y sucursal //////////////////////////////////////////////////////
-
-  public getExpreso(id: number) {
-    this.expresosService.TraerUno(id).subscribe(response => {
-      this.expreso = response.nombre;
-    },
-      error => {
-        console.error(error);
-      });
-  }
-
-  public getSucursal(id: string) {
-    this.sucursalesService.TraerUno(id).subscribe(response => {
-      this.sucursal = response.calle + response.numero + response.localidad;
-    },
-      error => {
-        console.error(error);
-      });
-  }
-
 
     // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
 
@@ -105,8 +76,6 @@ export class PedidoDetalleComponent implements OnInit {
 
   ngOnInit() {
     this.getCarritoItems(this.idPedido);
-    this.getSucursal(this.pedido.idClienteSucursal);
-    this.getExpreso(this.pedido.idExpreso);
     this.getPedido(this.idPedido);
     this.scrollTop();
   }

@@ -1,8 +1,6 @@
 <div class="container">
     <div (showValue)="cambiaVista()" *ngIf="!showDetail">
 
-        <app-pedidos-tabs></app-pedidos-tabs>
-
         <strong><h1>Pedidos</h1></strong> &nbsp;
 
         <div class="card mb-12" *ngFor="let item of pedidosCliente">

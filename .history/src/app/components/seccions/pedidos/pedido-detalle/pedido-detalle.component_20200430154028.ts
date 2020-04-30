@@ -61,7 +61,7 @@ export class PedidoDetalleComponent implements OnInit {
 
   // expreso y sucursal //////////////////////////////////////////////////////
 
-  public getExpreso(id: number) {
+  public getExpreso(id: string) {
     this.expresosService.TraerUno(id).subscribe(response => {
       this.expreso = response.nombre;
     },
@@ -72,7 +72,7 @@ export class PedidoDetalleComponent implements OnInit {
 
   public getSucursal(id: string) {
     this.sucursalesService.TraerUno(id).subscribe(response => {
-      this.sucursal = response.calle + response.numero + response.localidad;
+      this.sucursal = response.nombreSucursal;
     },
       error => {
         console.error(error);
@@ -105,8 +105,8 @@ export class PedidoDetalleComponent implements OnInit {
 
   ngOnInit() {
     this.getCarritoItems(this.idPedido);
-    this.getSucursal(this.pedido.idClienteSucursal);
-    this.getExpreso(this.pedido.idExpreso);
+    this.getSucursal(this.idPedido);
+    this.getExpreso(this.idPedido);
     this.getPedido(this.idPedido);
     this.scrollTop();
   }
