@@ -231,7 +231,7 @@ export class CarritoComponent implements OnInit {
   public async getCarritoItems() {
 
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.clienteLogueado.idCliente && item.idPedido === -1);
+      this.carritoItems = elements.filter(item => item.idCliente === this.clienteLogueado.idCliente && item.idPedido === '-1');
       this.getSubtotal();
     });
   }

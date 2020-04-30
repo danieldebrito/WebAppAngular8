@@ -28,7 +28,12 @@ export class PedidosListadoComponent implements OnInit {
 
   public ListarPedidosCliente() {
     this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(pedidos => {
-      this.pedidosCliente = pedidos;
+
+      pedidos.forEach(element => {
+        if ( element.idCliente === this.idCliente ) {
+          this.pedidosCliente.push(element);
+        }
+      });
     });
   }
 

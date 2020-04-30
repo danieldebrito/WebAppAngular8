@@ -1,7 +1,7 @@
 export class Pedido {
     constructor(
         public idPedido?: number,
-        public idClienteSucursal?: number,
+        public idSucursal?: number,
         public idCliente?: string,
         public idExpreso?: number,
         public estado?: string,

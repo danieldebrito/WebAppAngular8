@@ -8,7 +8,7 @@
     <div class="bgd">
         <h4>PEDIDO ON LINE</h4>
 
-        <label>Fecha : pedido.fecha | date: 'dd/MM/yyyy' </label>
+        <label>Fecha : {{ hoy | date: 'dd/MM/yyyy' }} </label>
 
         <div class="row">
             <div class="col-sm-3">
@@ -18,7 +18,7 @@
 
             <div class="col-sm-3">
                 <strong>Direccion de Envio: </strong>
-                <p> {{ pedido.idClienteSucursal }} </p>
+                <p>{{ pedido.idSucursal }}</p>
             </div>
 
             <div class="col-sm-3">
@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of carritoItems">
-                                <td class="cant"> {{ item.cantidad }} </td>
+                                <td class="cant"> <input style="width: 90px;" type="number" class="form-control" name="cantidad" value="{{ item.cantidad }}" (change)="updateCantidadCarritoItem(item, $event)"> </td>
                                 <td nowrap class="cent"> {{ item.idArticulo }} </td>
                                 <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
                                 <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>

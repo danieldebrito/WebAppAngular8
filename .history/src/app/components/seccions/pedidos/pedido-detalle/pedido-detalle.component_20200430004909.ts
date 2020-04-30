@@ -25,7 +25,7 @@ export class PedidoDetalleComponent implements OnInit {
   public pedido: Pedido = {};
   public clienteLogueado: Cliente;
 
-  public fileName = 'pedido_' + this.idPedido + '.xlsx';
+  public fileName = 'ExcelSheet.xlsx';
 
 
   constructor(

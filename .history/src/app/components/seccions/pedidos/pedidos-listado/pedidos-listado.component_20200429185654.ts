@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
+import { PedidosService } from 'src/app/services/firebase/pedidos.service';
 
 import { Pedido } from 'src/app/class/pedido';
 
@@ -15,8 +15,7 @@ export class PedidosListadoComponent implements OnInit {
   public idCliente: string;
   public pedidosCliente: Pedido[] = [];
   public showDetail = false;
-  // public idPedido: string;
-  @Input() idPedido: string;
+  public idPedido: string;
 
   constructor(
     private pedidosService: PedidosService,
@@ -27,8 +26,13 @@ export class PedidosListadoComponent implements OnInit {
   }
 
   public ListarPedidosCliente() {
-    this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(pedidos => {
-      this.pedidosCliente = pedidos;
+    this.pedidosService.getPedidos().subscribe(pedidos => {
+
+      pedidos.forEach(element => {
+        if ( element.idCliente === this.idCliente ) {
+          this.pedidosCliente.push(element);
+        }
+      });
     });
   }
 
@@ -42,12 +46,8 @@ export class PedidosListadoComponent implements OnInit {
     });
   }
 
-  cambiaVista() {
-    this.showDetail = !this.showDetail;
-  }
-
-  cambia(idPedido) {
-    this.idPedido = idPedido;
+  cambiaVista(pedido: Pedido) {
+    this.idPedido = pedido.idPedido;
     this.showDetail = !this.showDetail;
   }
 

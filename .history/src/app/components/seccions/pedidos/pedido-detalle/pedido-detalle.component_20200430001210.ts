@@ -22,10 +22,10 @@ export class PedidoDetalleComponent implements OnInit {
 
   public showDetail = false;
   public carritoItems: CarritoItem[] = [];
-  public pedido: Pedido = {};
+  public pedido: Pedido;
   public clienteLogueado: Cliente;
 
-  public fileName = 'pedido_' + this.idPedido + '.xlsx';
+  public fileName = 'ExcelSheet.xlsx';
 
 
   constructor(
@@ -70,13 +70,8 @@ export class PedidoDetalleComponent implements OnInit {
     this.showValue.emit();
   }
 
-  public scrollTop() {
-    window.scroll(0, 0);
-  }
-
   ngOnInit() {
     this.getCarritoItems(this.idPedido);
     this.getPedido(this.idPedido);
-    this.scrollTop();
   }
 }

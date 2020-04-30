@@ -53,7 +53,7 @@ export class BotonComprarComponent implements OnInit {
 
   public async getCarritoItems() {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.identity.idCliente && item.idPedido === -1);
+      this.carritoItems = elements.filter(item => item.idCliente === this.identity.idCliente && item.idPedido === '-1');
     });
   }
 
@@ -61,18 +61,23 @@ export class BotonComprarComponent implements OnInit {
     this.carritoItem.idPedido = -1;
     this.carritoItem.idCliente = this.identity.idCliente;
     this.carritoItem.idArticulo = this.id_articulo;
-    this.carritoItem.cantidad = this.cantidad;
     this.carritoItem.descripcionCorta = this.articulo.descripcion_corta;
+    this.carritoItem.cantidad = this.cantidad;
     this.carritoItem.precioLista = this.articulo.precio_lista;
 
     this.carritoItemsService.addCarritoItem(this.carritoItem);
   }
 
+  /**
+   *
+   * @param carritoItemUpdate le paso un elemento de ahi saca el id y los datos actualizados
+   */
   updateCarritoItem(carritoItemUpdate: CarritoItem) {
     this.carritoItemsService.updateCarritoItem(carritoItemUpdate);
   }
 
   public cargarCarrritoItem() {
+
     let flag = true;
     this.getCarritoItems();
     let carritoItemAux: CarritoItem;

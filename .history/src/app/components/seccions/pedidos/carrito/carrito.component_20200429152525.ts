@@ -231,7 +231,7 @@ export class CarritoComponent implements OnInit {
   public async getCarritoItems() {
 
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.clienteLogueado.idCliente && item.idPedido === -1);
+      this.carritoItems = elements.filter(item => item.idCliente === this.clienteLogueado.idCliente && item.idPedido === '-1');
       this.getSubtotal();
     });
   }
@@ -248,7 +248,7 @@ export class CarritoComponent implements OnInit {
 
   public updateidPedidoCarritoItems(idPedido) {
     this.carritoItems.forEach(element => {
-      if (element.idPedido === -1 && element.idCliente === this.clienteLogueado.idCliente) {
+      if (element.idPedido === '-1' && element.idCliente === this.clienteLogueado.idCliente) {
         element.idPedido = idPedido;
         this.carritoItemsService.updateCarritoItem(element);
       }
@@ -265,3 +265,43 @@ export class CarritoComponent implements OnInit {
     this.scrollTop();
   }
 }
+
+
+
+  // FIREBASE PEDIDOS ///////////////////////////////////////////////////////////////////////////
+
+/*
+public getPedidos(idCliente) {
+  this.pedidosService.getPedidos().subscribe(pedidos => {
+  });
+}
+
+public addPedido() {
+  this.SeleccionaSucursaldeHTML();
+
+  this.pedido.estado = 'abierto';
+  this.pedido.fecha = Date.now();
+  this.pedido.idCliente = this.clienteLogueado.idCliente;
+  this.pedido.idDescuento = this.clienteLogueado.idDescuento;
+  this.pedido.idExpreso = this.idExpresoSelected;
+  this.pedido.idSucursal = this.idSucursalSelected;
+  this.pedido.observaciones = this.observaciones;
+
+  this.pedidosService.addPedido(this.pedido);
+
+    this.carritoItems.forEach( element => {
+      this.updateidPedidoCarritoItem(element, idPedido);
+    });
+}
+
+public deletePedido(pedido) {
+  this.pedidosService.deletePedido(pedido);
+}
+
+updatePedido(pedido) {
+
+  // item.cantidad = event.target.value;
+
+  this.pedidosService.updatePedido(pedido);
+}
+*/

@@ -3,14 +3,14 @@
 
         <strong><h1>Pedidos</h1></strong> &nbsp;
 
-        <div class="card mb-12" *ngFor="let item of pedidosCliente">
+        <div class="card mb-12" *ngFor="let item of pedidosCliente" [(ngModel)]="item.idPedido">
             <div class="row no-gutters">
                 <div class="col-md-4 p-1">
                     <div class="card-header">
                         <h5 class="card-title">Fecha : {{ item.fecha | date: 'dd/MM/yyyy' }} </h5>
                         <h5 class="card-title">ID Pedido: {{ item.idPedido }} </h5>
                         <button type="button" class="btn btn-outline-success"> {{ item.estado }} </button>&nbsp;
-                        <button type="button" class="btn btn-outline-primary" (click)="cambia(item.idPedido)">Ver Pedido</button>
+                        <button type="button" class="btn btn-outline-primary" (click)="cambiaVista()">Ver Pedido</button>
                     </div>
                 </div>
                 <div class="col-md-8">
