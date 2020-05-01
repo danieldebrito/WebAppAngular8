@@ -1,7 +1,3 @@
-.container {
-    padding-top: 4rem;
-}
-
 .btn {
     margin-right: 3px;
 }
@@ -37,11 +33,6 @@ th {
 
 .card-header {
     text-align: left;
-}
-
-.cant {
-    width: 30%;
-    vertical-align: middle;
 }
 
 .der {
@@ -100,10 +91,18 @@ textarea {
 }
 
 .cant {
-    width: 40px !important;
+    width: 10px !important;
 }
 
-.icon {
-    width: 24px !important;
-    height: 24px !important;
+.codigo {
+    width: 15px;
+}
+
+.icons {
+    height: 18px;
+    width: 18px;
+    font-size: 18px;
+    line-height: 18px;
+    padding-left: 12px;
+    vertical-align: -2px;
 }

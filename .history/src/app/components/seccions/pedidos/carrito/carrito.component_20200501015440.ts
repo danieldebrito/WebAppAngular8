@@ -43,7 +43,7 @@ export class CarritoComponent implements OnInit {
   public subtotal = 0;
   public hoy: string;
   public carritoItems: CarritoItem[] = [];  // listado de items del carrito
-  public fileName = 'MEYRO_carrito.xlsx';
+  public fileName = 'meyro_carrito.xlsx';
 
   constructor(
     private pedidosService: PedidosService,
