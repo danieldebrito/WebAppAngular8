@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/clientes/auth.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
-import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 
 import { Pedido } from 'src/app/class/pedido';
 
@@ -16,16 +15,15 @@ export class PedidosListadoComponent implements OnInit {
   public idCliente: string;
   public pedidosCliente: Pedido[] = [];
   public showDetail = false;
-  public idPedido: string;
+  // @Input() 
+  idPedido: string;
 
-  public expresoNombre;
-  public direccion;
+  public expresoNombre: string;
 
   constructor(
     private pedidosService: PedidosService,
     private authService: AuthService,
-    private expresosService: ExpresosService,
-    private sucursalesService: SucursalesService
+    private expresosService: ExpresosService
   ) {
     this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
   }
@@ -33,25 +31,16 @@ export class PedidosListadoComponent implements OnInit {
   public ListarPedidosCliente() {
     this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(pedidos => {
       this.pedidosCliente = pedidos;
-      this.pedidosCliente.map( item => {
-        this.TraerExpreso(item.idExpreso);
-        this.TraerDireccion(item.idClienteSucursal);
-      });
     });
   }
 
   public TraerExpreso(id: number) {
     this.expresosService.TraerUno(id).subscribe(response => {
-      this.expresoNombre =  response.nombre;
+      return response.nombre;
     },
     error => {
       console.error(error);
-    });
-  }
 
-  public TraerDireccion(id: string) {
-    this.sucursalesService.TraerUno(id).subscribe( response  => {
-       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
     });
   }
 

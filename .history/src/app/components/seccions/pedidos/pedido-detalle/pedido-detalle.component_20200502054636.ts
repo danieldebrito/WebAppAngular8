@@ -29,7 +29,7 @@ export class PedidoDetalleComponent implements OnInit {
   public clienteLogueado: Cliente;
 
   public expreso: string;
-  public direccion: string;
+  public sucursal: string;
 
   public fileName = 'MEYRO_pedido.xlsx';
 
@@ -53,8 +53,6 @@ export class PedidoDetalleComponent implements OnInit {
   public getPedido(idPedido) {
     this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
-      this.TraerDireccion(response.idClienteSucursal);
-      this.getExpreso(response.idExpreso);
     },
       error => {
         console.error(error);
@@ -73,29 +71,26 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   public TraerDireccion(id: string) {
-    this.sucursalesService.TraerUno(id).subscribe(response => {
-      this.direccion = response.calle + response.numero + response.localidad + response.provincia;
-    },
-    error => {
-      console.error(error);
+    this.sucursalesService.TraerUno(id).subscribe( response  => {
+       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
     });
-}
-
-
-  // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
-
-  public exportexcel(): void {
-    /* table id is passed over here */
-    const element = document.getElementById('excel-table');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);
   }
+
+
+    // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
+
+    public exportexcel(): void {
+      /* table id is passed over here */
+      const element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+      /* save to file */
+      XLSX.writeFile(wb, this.fileName);
+    }
 
   cambia() {
     this.showValue.emit();
@@ -107,6 +102,8 @@ export class PedidoDetalleComponent implements OnInit {
 
   ngOnInit() {
     this.getCarritoItems(this.idPedido);
+    this.getSucursal(this.pedido.idClienteSucursal);
+    this.getExpreso(this.pedido.idExpreso);
     this.getPedido(this.idPedido);
     this.scrollTop();
   }

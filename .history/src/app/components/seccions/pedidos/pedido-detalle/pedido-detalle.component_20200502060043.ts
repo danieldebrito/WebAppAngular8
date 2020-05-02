@@ -74,12 +74,10 @@ export class PedidoDetalleComponent implements OnInit {
 
   public TraerDireccion(id: string) {
     this.sucursalesService.TraerUno(id).subscribe(response => {
+      alert(id);
       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
-    },
-    error => {
-      console.error(error);
     });
-}
+  }
 
 
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////

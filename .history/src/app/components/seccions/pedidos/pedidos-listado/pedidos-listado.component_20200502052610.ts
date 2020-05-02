@@ -51,8 +51,9 @@ export class PedidosListadoComponent implements OnInit {
 
   public TraerDireccion(id: string) {
     this.sucursalesService.TraerUno(id).subscribe( response  => {
-       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
+       this.direccion = response.calle + response.numero + '<br>' + response.localidad + response.provincia;
     });
+
   }
 
   cambiaVista() {

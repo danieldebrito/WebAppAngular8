@@ -5,7 +5,7 @@
 
         <strong><h1>Pedidos</h1></strong>
 
-        <div class="card mb-12 p-2" *ngFor="let item of pedidosCliente">
+        <div class="card mb-12" *ngFor="let item of pedidosCliente">
             <div class="row no-gutters">
                 <div class="col-md-4 p-1">
                     <div class="card-header">
@@ -25,7 +25,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Direccion de Entrega : </h5>
                         <h5 class="card-title">{{ direccion }}</h5>
-                        <h5 class="card-title">Expreso : {{ expresoNombre }} </h5>
+                        <h5 class="card-title">Expreso : </h5>
+                        <h5 class="card-title">{{ expresoNombre }}</h5>
                     </div>
                 </div>
             </div>

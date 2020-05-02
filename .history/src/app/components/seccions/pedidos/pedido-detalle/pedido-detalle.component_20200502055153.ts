@@ -53,8 +53,6 @@ export class PedidoDetalleComponent implements OnInit {
   public getPedido(idPedido) {
     this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
-      this.TraerDireccion(response.idClienteSucursal);
-      this.getExpreso(response.idExpreso);
     },
       error => {
         console.error(error);
@@ -74,12 +72,10 @@ export class PedidoDetalleComponent implements OnInit {
 
   public TraerDireccion(id: string) {
     this.sucursalesService.TraerUno(id).subscribe(response => {
+      alert(response.calle + response.numero + response.localidad + response.provincia);
       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
-    },
-    error => {
-      console.error(error);
     });
-}
+  }
 
 
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
@@ -107,6 +103,8 @@ export class PedidoDetalleComponent implements OnInit {
 
   ngOnInit() {
     this.getCarritoItems(this.idPedido);
+    this.TraerDireccion(this.pedido.idClienteSucursal);
+    this.getExpreso(this.pedido.idExpreso);
     this.getPedido(this.idPedido);
     this.scrollTop();
   }
