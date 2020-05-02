@@ -5,16 +5,16 @@
 
         <strong><h1>Pedidos</h1></strong>
 
-        <div>
+        <div class="container">
             <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
         </div>
 
-        <div class="card mb-12 p-2" *ngFor="let item of pedidosCliente | paginate: { itemsPerPage: 20, currentPage: p }">
+        <div class="card mb-12 p-2" *ngFor="let item of pedidosCliente | paginate: { itemsPerPage: 2, currentPage: p }">
             <div class="row no-gutters">
                 <div class="col-md-4 p-1">
                     <div class="card-header">
-                        <h5 class="card-title"><b>Fecha y Hora :</b> {{ item.fecha }} </h5>
-                        <h5 class="card-title"><b>ID Pedido :</b> {{ item.idPedido }} </h5>
+                        <h5 class="card-title">Fecha y Hora : {{ item.fecha }} </h5>
+                        <h5 class="card-title">ID Pedido: {{ item.idPedido }} </h5>
 
                         <button type="button" class="btn btn-outline-success">
                             {{ item.estado }} 
@@ -27,9 +27,9 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title"><b>Direccion de Entrega : </b></h5>
+                        <h5 class="card-title">Direccion de Entrega : </h5>
                         <h5 class="card-title">{{ direccion }}</h5>
-                        <h5 class="card-title"><b>Expreso :</b> {{ expresoNombre }} </h5>
+                        <h5 class="card-title">Expreso : {{ expresoNombre }} </h5>
                     </div>
                 </div>
             </div>

@@ -66,12 +66,7 @@ export class PedidosListadoComponent implements OnInit {
     this.showDetail = !this.showDetail;
   }
 
-  public scrollTop() {
-    window.scroll(0, 0);
-  }
-
   ngOnInit() {
     this.ListarPedidosCliente();
-    this.scrollTop();
   }
 }
