@@ -169,11 +169,7 @@ export class FilterComponent implements OnInit {
       this.columnaMarca = arrayRetMarca;
       this.columnaComb = arrayRetComb;
       this.columnaMotor = arrayRetMotor;
-
-      this.columnaModelo = [];
-      arrayRetModelo.map( item => this.columnaModelo = this.columnaModelo.concat(item.split(' / ')));
-
-      // this.columnaModelo = arrayRetModelo;
+      this.columnaModelo = arrayRetModelo;
       this.columnaCilind = arrayRetCilind;
       this.columnaStd = arrayRetStd;
       this.columnaProd = arrayRetProd;

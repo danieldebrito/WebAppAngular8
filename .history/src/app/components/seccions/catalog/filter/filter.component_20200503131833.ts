@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cards } from 'src/app/class/cards';
 // services
 import { CardsService } from 'src/app/services/catalogo/cards.service';
+import { isUndefined } from 'util';
 
 
 @Component({
@@ -169,11 +170,7 @@ export class FilterComponent implements OnInit {
       this.columnaMarca = arrayRetMarca;
       this.columnaComb = arrayRetComb;
       this.columnaMotor = arrayRetMotor;
-
-      this.columnaModelo = [];
-      arrayRetModelo.map( item => this.columnaModelo = this.columnaModelo.concat(item.split(' / ')));
-
-      // this.columnaModelo = arrayRetModelo;
+      this.columnaModelo = arrayRetModelo;
       this.columnaCilind = arrayRetCilind;
       this.columnaStd = arrayRetStd;
       this.columnaProd = arrayRetProd;
@@ -220,7 +217,8 @@ export class FilterComponent implements OnInit {
 
   public Limpiar() {
     this.cardsService.ListarO().subscribe(response => {
-      this.dataFiltrada = response;
+      this.concatenarModelos(response);
+      // this.dataFiltrada = response;
 
       this.linea = '';
       this.marca = '';
@@ -237,6 +235,29 @@ export class FilterComponent implements OnInit {
       error => {
         console.error(error);
       });
+  }
+
+  public concatenarModelos(response) {
+    const tam = response.length;
+
+    let check: Cards = {};
+
+    const arrayAux = response;
+    const dataFiltradaRet = [];
+
+    for (let i = 0; i < tam; i++) {
+      dataFiltradaRet.push(response[i]);
+      dataFiltradaRet.push(response[i]);
+      check = dataFiltradaRet.pop();
+
+      if (check.id_articulo === arrayAux[i + 1].id_articulo
+        && check.motor === arrayAux[i + 1].motor  && !isUndefined(arrayAux[i + 1].motor) ) {
+          check.modelo += arrayAux.modelo;
+      } else {
+        dataFiltradaRet.push(arrayAux[i + 1]);
+      }
+    }
+    this.dataFiltrada = dataFiltradaRet;
   }
 
   public getByID() {

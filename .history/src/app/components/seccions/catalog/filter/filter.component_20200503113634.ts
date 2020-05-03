@@ -169,11 +169,7 @@ export class FilterComponent implements OnInit {
       this.columnaMarca = arrayRetMarca;
       this.columnaComb = arrayRetComb;
       this.columnaMotor = arrayRetMotor;
-
-      this.columnaModelo = [];
-      arrayRetModelo.map( item => this.columnaModelo = this.columnaModelo.concat(item.split(' / ')));
-
-      // this.columnaModelo = arrayRetModelo;
+      this.columnaModelo = arrayRetModelo;
       this.columnaCilind = arrayRetCilind;
       this.columnaStd = arrayRetStd;
       this.columnaProd = arrayRetProd;
@@ -220,7 +216,8 @@ export class FilterComponent implements OnInit {
 
   public Limpiar() {
     this.cardsService.ListarO().subscribe(response => {
-      this.dataFiltrada = response;
+      this.concatenarModelos(response);
+      // this.dataFiltrada = response;
 
       this.linea = '';
       this.marca = '';
@@ -237,6 +234,27 @@ export class FilterComponent implements OnInit {
       error => {
         console.error(error);
       });
+  }
+
+  public concatenarModelos(dataFiltrada) {
+    const tam = dataFiltrada.length;
+
+    const dataFiltradaRetAux = dataFiltrada;
+    const dataFiltradaRet = [];
+
+    for ( let i = 0 ; i < tam ; i++ ) {
+      const check = dataFiltradaRet.pop();
+
+      if ( check.id_articulo === dataFiltradaRetAux[i].id_articulo
+        && check.motor === dataFiltradaRetAux[i].motor ) {
+
+          check.modelo += ' / ' + dataFiltradaRet[i].modelo;
+          dataFiltradaRet.push(check);
+      } else {
+        dataFiltradaRet.push(dataFiltradaRet[i]);
+      }
+      this.dataFiltrada = dataFiltradaRet;
+    }
   }
 
   public getByID() {

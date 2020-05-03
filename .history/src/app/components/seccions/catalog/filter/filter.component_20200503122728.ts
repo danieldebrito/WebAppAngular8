@@ -169,11 +169,7 @@ export class FilterComponent implements OnInit {
       this.columnaMarca = arrayRetMarca;
       this.columnaComb = arrayRetComb;
       this.columnaMotor = arrayRetMotor;
-
-      this.columnaModelo = [];
-      arrayRetModelo.map( item => this.columnaModelo = this.columnaModelo.concat(item.split(' / ')));
-
-      // this.columnaModelo = arrayRetModelo;
+      this.columnaModelo = arrayRetModelo;
       this.columnaCilind = arrayRetCilind;
       this.columnaStd = arrayRetStd;
       this.columnaProd = arrayRetProd;
@@ -220,7 +216,8 @@ export class FilterComponent implements OnInit {
 
   public Limpiar() {
     this.cardsService.ListarO().subscribe(response => {
-      this.dataFiltrada = response;
+      this.concatenarModelos(response);
+      // this.dataFiltrada = response;
 
       this.linea = '';
       this.marca = '';
@@ -237,6 +234,26 @@ export class FilterComponent implements OnInit {
       error => {
         console.error(error);
       });
+  }
+
+  public concatenarModelos(response) {
+    const tam = response.length;
+    const cardAux: Cards = { id_articulo: ''};
+    const arrayAux = response;
+    arrayAux.unshift(response[0]);
+    const dataFiltradaRet = [];
+
+    alert(response.length + '' + arrayAux.length );
+
+    for (let i = 0; i < tam; i++) {
+      if (response[i].id_articulo === cardAux[i].id_articulo
+        && response[i].motor === cardAux[i].motor) {
+
+
+      } else {
+      }
+      this.dataFiltrada = dataFiltradaRet;
+    }
   }
 
   public getByID() {
