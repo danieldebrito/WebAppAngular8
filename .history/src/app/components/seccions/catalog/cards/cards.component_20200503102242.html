@@ -1,6 +1,8 @@
 <div class="container">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+</div>
 
+<div class="container p-2">
     <div class="card-group">
         <div class="col-md-3 p-3" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
             <div class="card">

@@ -1,9 +1,11 @@
 <div class="container">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+</div>
 
+<div class="container">
     <div class="card-group">
         <div class="col-md-3 p-3" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
-            <div class="card">
+            <div class="card p-2">
                 <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
 
                 <div class="card-body">
