@@ -1,5 +1,5 @@
 <div class="container">
-    <div (showValue)="cambiaVista($event)" *ngIf="!showDetail">
+    <div (showValue)="cambiaVista()" *ngIf="!showDetail">
 
         <app-pedidos-tabs></app-pedidos-tabs>
 
@@ -9,7 +9,7 @@
             <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
         </div>
 
-        <div class="card mb-12 p-2" *ngFor="let item of pedidosCliente | paginate: { itemsPerPage: 20, currentPage: p }">
+        <div class="card mb-12 p-2" *ngFor="let item of pedidos | paginate: { itemsPerPage: 20, currentPage: p }">
             <app-pedidos (showValue)="cambiaVista($event)" [pedido]="item"></app-pedidos>
         </div>
         <hr>
