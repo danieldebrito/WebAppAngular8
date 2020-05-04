@@ -41,6 +41,7 @@ export class PedidoslistadoComponent implements OnInit {
   cambiaVista(event) {
     this.showDetail = !this.showDetail;
     this.pedido = event.pedido;
+    alert(this.pedido.idPedido);
   }
 
   public scrollTop() {

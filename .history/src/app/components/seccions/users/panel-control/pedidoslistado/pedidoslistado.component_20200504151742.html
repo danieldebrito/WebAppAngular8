@@ -16,6 +16,6 @@
     </div>
 
     <div>
-        <app-pedido-detalle [showBar]="showBar" [idPedido]="pedido.idPedido" (showValue)="cambiaVista($event)" *ngIf="showDetail"></app-pedido-detalle>
+        <app-pedido-detalle [showBar]="showBar" [idPedido]="idPedido" (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
     </div>
 </div>

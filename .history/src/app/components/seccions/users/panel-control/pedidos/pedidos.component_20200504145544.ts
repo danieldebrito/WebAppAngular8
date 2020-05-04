@@ -14,6 +14,7 @@ export class PedidosComponent implements OnInit {
   @Input() pedido: Pedido;
   @Output() showValue = new EventEmitter();
 
+
   public showDetail = false;
 
   public expresoNombre;

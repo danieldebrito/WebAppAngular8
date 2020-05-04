@@ -14,6 +14,7 @@ export class PedidosComponent implements OnInit {
   @Input() pedido: Pedido;
   @Output() showValue = new EventEmitter();
 
+
   public showDetail = false;
 
   public expresoNombre;
@@ -43,7 +44,7 @@ export class PedidosComponent implements OnInit {
       });
   }
 
-  cambia() {
+  cambia(event) {
     this.showDetail = !this.showDetail;
     this.showValue.emit({pedido: this.pedido});
   }

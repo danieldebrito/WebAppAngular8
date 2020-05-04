@@ -14,10 +14,13 @@ export class PedidosComponent implements OnInit {
   @Input() pedido: Pedido;
   @Output() showValue = new EventEmitter();
 
-  public showDetail = false;
 
+  public showDetail = false;
+  public showBar = false;
+  public idPedido;
   public expresoNombre;
   public direccion;
+  public p: number;  // paginacion primer page
 
   constructor(
     private expresosService: ExpresosService,
@@ -43,9 +46,14 @@ export class PedidosComponent implements OnInit {
       });
   }
 
-  cambia() {
+  cambiaVista() {
     this.showDetail = !this.showDetail;
-    this.showValue.emit({pedido: this.pedido});
+  }
+
+  cambia(idPedido) {
+    this.idPedido = idPedido;
+    this.showDetail = !this.showDetail;
+    this.showValue.emit();
   }
 
   ngOnInit() {

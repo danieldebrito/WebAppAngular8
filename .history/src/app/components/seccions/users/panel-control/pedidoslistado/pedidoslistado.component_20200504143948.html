@@ -9,13 +9,13 @@
 
         <div class="card mb-12 p-2" *ngFor="let item of pedidos | paginate: { itemsPerPage: 20, currentPage: p }">
 
-            <app-pedidos (showValue)="cambiaVista($event)" [pedido]="item"></app-pedidos>
+            <app-pedidos [pedido]="item"></app-pedidos>
 
         </div>
         <hr>
     </div>
 
     <div>
-        <app-pedido-detalle [showBar]="showBar" [idPedido]="pedido.idPedido" (showValue)="cambiaVista($event)" *ngIf="showDetail"></app-pedido-detalle>
+        <app-pedido-detalle [showBar]="showBar" [idPedido]="idPedido" (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
     </div>
 </div>

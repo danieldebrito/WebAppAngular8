@@ -5,11 +5,11 @@
             <h5 class="card-title"><b>ID Pedido :</b> {{ pedido.idPedido }} </h5>
 
             <button type="button" class="btn btn-outline-success">
-                {{ pedido.estado }} 
-            </button>&nbsp;
-            <button type="button" class="btn btn-outline-primary" (click)="cambia()">
-                Ver Pedido
-            </button>
+                            {{ pedido.estado }} 
+                        </button>&nbsp;
+            <button type="button" class="btn btn-outline-primary" (click)="cambia(pedido)">
+                            Ver Pedido
+                        </button>
 
         </div>
     </div>

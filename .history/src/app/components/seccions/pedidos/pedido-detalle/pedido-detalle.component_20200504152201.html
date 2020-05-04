@@ -1,0 +1,165 @@
+<div class="container">
+
+    <div class="row" *ngIf="showBar">
+        <div class="col-md-12">
+            <ul class="nav nav-pills mb-3">
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" routerLink="/catalogo">
+                        <strong>Ir a Catalogo</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" routerLink="/carrito">
+                        <i class="fa fa-cart-plus"></i>&nbsp;
+                        <strong>Ir a Carrito</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" (click)="cambia()">
+                        <strong>Historial Pedidos</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" (click)="exportexcel()">
+                        <strong>Exportar Excel</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!showBar">
+        <div class="col-md-12">
+            <ul class="nav nav-pills mb-3">
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" routerLink="/catalogo">
+                        <strong>Ir a Catalogo</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" routerLink="/carrito">
+                        <i class="fa fa-cart-plus"></i>&nbsp;
+                        <strong>Ir a Carrito</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" (click)="cambia($event)">
+                        <strong>Volver a Pedidos</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger" (click)="exportexcel()">
+                        <strong>Exportar Excel</strong>
+                    </a>&nbsp;&nbsp;
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <h4>PEDIDO ON LINE - # {{ pedido.idPedido }} </h4>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <strong>Cliente : </strong>
+            <p> {{ pedido.idCliente }} </p>
+        </div>
+
+
+
+        <div class="col-sm-2">
+            <strong>Fecha : </strong>
+            <p> {{ pedido.fecha }} </p>
+        </div>
+
+        <div class="col-sm-2">
+            <strong>Medio de Envio: </strong>
+            <p>{{ expreso }}</p>
+        </div>
+
+        <div class="col-sm-5">
+            <strong>Direccion de Envio: </strong>
+            <p> {{ direccion }} </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="excel-table">
+                    <thead class="thead-danger">
+                        <tr>
+                            <th class="cant">Cantidad</th>
+                            <th class="codigo">Codigo</th>
+                            <th scope="col">Aplicación</th>
+                            <th scope="col">P.Lista</th>
+                            <th scope="col">Dto.</th>
+                            <th scope="col">P.Neto</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of carritoItems">
+                            <td nowrap class="der"> {{ item.cantidad }} </td>
+                            <td nowrap class="cent"> {{ item.idArticulo }} </td>
+                            <td nowrap class="izq"> {{ item.descripcionCorta }} </td>
+                            <td nowrap class="der"> $ {{ item.precioLista | number:'1.2-2' }} </td>
+                            <td nowrap class="der"> 20 % </td>
+                            <td nowrap class="der"> $ {{ item.precioLista * 0.8 | number:'1.2-2' }} </td>
+                            <td nowrap class="der"> $ {{ item.precioLista * 0.8 * item.cantidad | number:'1.2-2' }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Detalle</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Subtotal: </td>
+                        <td nowrap> $ {{ pedido.subtotalNeto | number:'1.2-2' }} </td>
+                    </tr>
+                    <tr>
+                        <td>Descuento :</td>
+                        <td nowrap style="color:#FF0000"> <b> ( $ {{ pedido.subtotalNeto - (pedido.subtotalNeto * 0.8) | number:'1.2-2' }} ) </b></td>
+                    </tr>
+                    <tr>
+                        <td>Total : <b> <br> </b> </td>
+                        <td nowrap> $ {{ pedido.subtotalNeto * 0.8 | number:'1.2-2' }} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <textarea placeholder="Observaciones..." class="form-control" name="observaciones" rows="4" name="observaciones"></textarea>
+        </div>
+    </div>
+
+</div>
+
+<hr>

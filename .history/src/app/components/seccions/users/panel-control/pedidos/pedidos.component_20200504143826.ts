@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { Pedido } from 'src/app/class/pedido';
@@ -14,42 +15,45 @@ export class PedidosComponent implements OnInit {
   @Input() pedido: Pedido;
   @Output() showValue = new EventEmitter();
 
-  public showDetail = false;
 
+  public showDetail = false;
+  public showBar = false;
+  public idPedido;
   public expresoNombre;
   public direccion;
+  public p: number;  // paginacion primer page
 
   constructor(
+    private pedidosService: PedidosService,
     private expresosService: ExpresosService,
     private sucursalesService: SucursalesService,
     private clientesService: ClientesService
   ) { }
 
-  public TraerExpreso(pedido: Pedido) {
-    this.expresosService.TraerUno(pedido.idExpreso).subscribe(response => {
-      this.expresoNombre = response.nombre;
+  public TraerExpreso(id: number) {
+    this.expresosService.TraerUno(id).subscribe(response => {
+      this.expresoNombre =  response.nombre;
     },
-      error => {
-        console.error(error);
-      });
+    error => {
+      console.error(error);
+    });
   }
 
   public TraerDireccion(pedido: Pedido) {
-    this.sucursalesService.TraerUno(pedido.idClienteSucursal).subscribe(response => {
-      this.direccion = response.calle + response.numero + response.localidad + response.provincia;
-    },
-      error => {
-        console.error(error);
-      });
+    this.sucursalesService.TraerUno(pedido.idClienteSucursal).subscribe( response  => {
+       this.direccion =  response.calle + response.numero + response.localidad + response.provincia;
+    });
   }
 
-  cambia() {
+  cambiaVista() {
     this.showDetail = !this.showDetail;
-    this.showValue.emit({pedido: this.pedido});
   }
 
-  ngOnInit() {
-    this.TraerDireccion(this.pedido);
-    this.TraerExpreso(this.pedido);
-   }
+  cambia(idPedido) {
+    this.idPedido = idPedido;
+    this.showDetail = !this.showDetail;
+    this.showValue.emit();
+  }
+
+  ngOnInit() {}
 }

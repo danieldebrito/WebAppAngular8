@@ -112,7 +112,7 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   cambia() {
-    this.showValue.emit({pedido: this.pedido});
+    this.showValue.emit();
   }
 
   public scrollTop() {
