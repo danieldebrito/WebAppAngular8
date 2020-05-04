@@ -21,12 +21,12 @@ import * as XLSX from 'xlsx';
 export class PedidoDetalleComponent implements OnInit {
 
   @Output() showValue = new EventEmitter();
-  @Input() idPedido: string;
+  @Input() pedido: Pedido;
   @Input() showBar: boolean;  // para que muestre u oculte la barra superior
 
   public showDetail = false;
   public carritoItems: CarritoItem[] = [];
-  public pedido: Pedido = {};
+  // public pedido: Pedido = {};
 
   public cliente: Cliente;
   public expreso: string;
@@ -50,6 +50,7 @@ export class PedidoDetalleComponent implements OnInit {
     });
   }
 
+/*
   public async getPedido(idPedido) {
     ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
       this.pedido = response;
@@ -62,6 +63,7 @@ export class PedidoDetalleComponent implements OnInit {
         console.error(error);
       });
   }
+  */
 
   /// cliente /////////////////////////////////////////////////////////////////
 
@@ -119,8 +121,11 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPedido(this.idPedido);
+    // this.getPedido(this.idPedido);
     this.scrollTop();
-    this.getCarritoItems(this.idPedido);
+    this.getCarritoItems(this.pedido.idPedido);
+    this.TraerDireccion(this.pedido.idClienteSucursal);
+    this.getExpreso(this.pedido.idExpreso);
+    this.traerCliente(this.pedido.idCliente);
   }
 }

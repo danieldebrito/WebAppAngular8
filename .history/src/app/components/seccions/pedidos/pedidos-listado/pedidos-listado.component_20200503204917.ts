@@ -17,7 +17,6 @@ export class PedidosListadoComponent implements OnInit {
   public pedidosCliente: Pedido[] = [];
   public showDetail = false;
   public idPedido: string;
-  public pedido: Pedido;
 
   public showBar = true; // para que pedido detalle muestre la barra superior
 
@@ -42,7 +41,6 @@ export class PedidosListadoComponent implements OnInit {
       this.pedidosCliente.map( item => {
         this.TraerExpreso(item.idExpreso);
         this.TraerDireccion(item.idClienteSucursal);
-        this.pedido = item;
       });
     });
   }

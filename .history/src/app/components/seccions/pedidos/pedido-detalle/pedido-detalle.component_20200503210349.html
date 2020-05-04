@@ -1,5 +1,7 @@
 <div class="container">
 
+
+
     <div class="row" *ngIf="showBar">
         <div class="col-md-12">
             <ul class="nav nav-pills mb-3">
@@ -30,45 +32,21 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="!showBar">
-        <div class="col-md-12">
-            <ul class="nav nav-pills mb-3">
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger" routerLink="/catalogo">
-                        <strong>Ir a Catalogo</strong>
-                    </a>&nbsp;&nbsp;
-                </li>
-
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger" routerLink="/carrito">
-                        <i class="fa fa-cart-plus"></i>&nbsp;
-                        <strong>Ir a Carrito</strong>
-                    </a>&nbsp;&nbsp;
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger" (click)="cambia()">
-                        <strong>Volver a Pedidos</strong>
-                    </a>&nbsp;&nbsp;
-                </li>
-
-                <li class="nav-item">
-                    <a class="btn btn-outline-danger" (click)="exportexcel()">
-                        <strong>Exportar Excel</strong>
-                    </a>&nbsp;&nbsp;
-                </li>
-            </ul>
-        </div>
-    </div>
-
 
     <div class="row">
-        <h4>PEDIDO ON LINE - # {{ pedido.idPedido }} </h4>
+        <h4>PEDIDO ON LINE - # {{ idPedido }} </h4>
+
+        <div *ngIf="!showBar">
+            <a class="btn btn-outline-danger" (click)="cambia()">
+                <strong>Historial Pedidos</strong>
+            </a>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-sm-3">
             <strong>Cliente : </strong>
-            <p> {{ pedido.idCliente }} </p>
+            <p> {{ clienteLogueado.idCliente }} {{ clienteLogueado.razonSocial }}</p>
         </div>
 
 

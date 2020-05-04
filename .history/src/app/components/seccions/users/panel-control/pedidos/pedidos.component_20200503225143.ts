@@ -7,22 +7,21 @@ import { SucursalesService } from 'src/app/services/clientes/sucursales.service'
 import { Pedido } from 'src/app/class/pedido';
 
 @Component({
-  selector: 'app-pedidos-listado',
-  templateUrl: './pedidos-listado.component.html',
-  styleUrls: ['./pedidos-listado.component.css']
+  selector: 'app-pedidos',
+  templateUrl: './pedidos.component.html',
+  styleUrls: ['./pedidos.component.css']
 })
-export class PedidosListadoComponent implements OnInit {
+export class PedidosComponent implements OnInit {
 
   public idCliente: string;
   public pedidosCliente: Pedido[] = [];
   public showDetail = false;
-  public idPedido: string;
-  public pedido: Pedido;
-
-  public showBar = true; // para que pedido detalle muestre la barra superior
+  // public idPedido: string;
+  public showBar = false;
 
   public expresoNombre;
   public direccion;
+  public pedido: Pedido;
 
   public p: number;  // paginacion primer page
 
@@ -37,12 +36,13 @@ export class PedidosListadoComponent implements OnInit {
   }
 
   public ListarPedidosCliente() {
-    this.pedidosService.ListarPedidosCliente(this.idCliente).subscribe(pedidos => {
+    this.pedidosService.Listar().subscribe(pedidos => {
       this.pedidosCliente = pedidos;
       this.pedidosCliente.map( item => {
+        this.pedido = item;
         this.TraerExpreso(item.idExpreso);
         this.TraerDireccion(item.idClienteSucursal);
-        this.pedido = item;
+
       });
     });
   }

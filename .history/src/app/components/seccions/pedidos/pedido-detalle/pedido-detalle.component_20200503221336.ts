@@ -48,10 +48,11 @@ export class PedidoDetalleComponent implements OnInit {
       this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
         && item.idPedido === idPedido);
     });
+    const tam = this.carritoItems.length;
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
 
       this.TraerDireccion(response.idClienteSucursal);
@@ -119,8 +120,8 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCarritoItems(this.idPedido);
     this.getPedido(this.idPedido);
     this.scrollTop();
-    this.getCarritoItems(this.idPedido);
   }
 }

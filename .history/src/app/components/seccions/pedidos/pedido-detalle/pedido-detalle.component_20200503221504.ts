@@ -50,8 +50,8 @@ export class PedidoDetalleComponent implements OnInit {
     });
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
 
       this.TraerDireccion(response.idClienteSucursal);

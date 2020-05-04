@@ -41,7 +41,7 @@ export class PedidoDetalleComponent implements OnInit {
     private carritoItemsService: CarritoItemsService,
     private clientesServide: ClientesService,
     private pedidosService: PedidosService
-  ) { }
+  ) {}
 
   public async getCarritoItems(idPedido) {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
@@ -50,8 +50,8 @@ export class PedidoDetalleComponent implements OnInit {
     });
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
 
       this.TraerDireccion(response.idClienteSucursal);
@@ -66,13 +66,16 @@ export class PedidoDetalleComponent implements OnInit {
   /// cliente /////////////////////////////////////////////////////////////////
 
   public traerCliente(idCliente: string) {
-    this.clientesServide.traerUno(idCliente).subscribe(response => {
+    this.clientesServide.traerUno(idCliente).subscribe( response => {
+
+      alert( response.idCliente );
+
       this.cliente = response;
     },
-      error => {
-        console.error(error);
-      });
-  }
+    error => {
+      console.error(error);
+    });
+}
 
   // expreso y sucursal //////////////////////////////////////////////////////
 
@@ -89,10 +92,10 @@ export class PedidoDetalleComponent implements OnInit {
     this.sucursalesService.TraerUno(id).subscribe(response => {
       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
     },
-      error => {
-        console.error(error);
-      });
-  }
+    error => {
+      console.error(error);
+    });
+}
 
 
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
@@ -119,8 +122,8 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCarritoItems(this.idPedido);
     this.getPedido(this.idPedido);
     this.scrollTop();
-    this.getCarritoItems(this.idPedido);
   }
 }

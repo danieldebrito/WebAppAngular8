@@ -41,17 +41,16 @@ export class PedidoDetalleComponent implements OnInit {
     private carritoItemsService: CarritoItemsService,
     private clientesServide: ClientesService,
     private pedidosService: PedidosService
-  ) { }
+  ) {}
 
   public async getCarritoItems(idPedido) {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
-        && item.idPedido === idPedido);
+      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente && item.idPedido === idPedido);
     });
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
 
       this.TraerDireccion(response.idClienteSucursal);
@@ -66,13 +65,13 @@ export class PedidoDetalleComponent implements OnInit {
   /// cliente /////////////////////////////////////////////////////////////////
 
   public traerCliente(idCliente: string) {
-    this.clientesServide.traerUno(idCliente).subscribe(response => {
+    this.clientesServide.traerUno(idCliente).subscribe( response => {
       this.cliente = response;
     },
-      error => {
-        console.error(error);
-      });
-  }
+    error => {
+      console.error(error);
+    });
+}
 
   // expreso y sucursal //////////////////////////////////////////////////////
 
@@ -89,10 +88,10 @@ export class PedidoDetalleComponent implements OnInit {
     this.sucursalesService.TraerUno(id).subscribe(response => {
       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
     },
-      error => {
-        console.error(error);
-      });
-  }
+    error => {
+      console.error(error);
+    });
+}
 
 
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
@@ -119,8 +118,8 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCarritoItems(this.idPedido);
     this.getPedido(this.idPedido);
     this.scrollTop();
-    this.getCarritoItems(this.idPedido);
   }
 }

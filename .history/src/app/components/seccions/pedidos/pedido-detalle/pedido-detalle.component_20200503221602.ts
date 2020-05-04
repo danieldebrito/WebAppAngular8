@@ -45,13 +45,13 @@ export class PedidoDetalleComponent implements OnInit {
 
   public async getCarritoItems(idPedido) {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
+      this.carritoItems = elements.filter(item => item.idCliente === '40-012'
         && item.idPedido === idPedido);
     });
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
 
       this.TraerDireccion(response.idClienteSucursal);

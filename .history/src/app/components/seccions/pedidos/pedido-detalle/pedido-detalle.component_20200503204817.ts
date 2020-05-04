@@ -5,11 +5,11 @@ import { Pedido } from 'src/app/class/pedido';
 import { Cliente } from 'src/app/class/cliente';
 
 // services
+import { AuthService } from 'src/app/services/clientes/auth.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
-import { ClientesService } from 'src/app/services/clientes/clientes.service';
 
 import * as XLSX from 'xlsx';
 
@@ -22,13 +22,16 @@ export class PedidoDetalleComponent implements OnInit {
 
   @Output() showValue = new EventEmitter();
   @Input() idPedido: string;
-  @Input() showBar: boolean;  // para que muestre u oculte la barra superior
+  @Input() showBar: boolean;
+
+  public showBar = true;
+
 
   public showDetail = false;
   public carritoItems: CarritoItem[] = [];
   public pedido: Pedido = {};
+  public clienteLogueado: Cliente;
 
-  public cliente: Cliente;
   public expreso: string;
   public direccion: string;
 
@@ -38,36 +41,24 @@ export class PedidoDetalleComponent implements OnInit {
   constructor(
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
+    private authService: AuthService,
     private carritoItemsService: CarritoItemsService,
-    private clientesServide: ClientesService,
     private pedidosService: PedidosService
-  ) { }
+  ) {
+    this.clienteLogueado = this.authService.getIdentityLocalStorage();
+  }
 
   public async getCarritoItems(idPedido) {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
-        && item.idPedido === idPedido);
+      this.carritoItems = elements.filter(item => item.idCliente === this.clienteLogueado.idCliente && item.idPedido === idPedido);
     });
   }
 
-  public async getPedido(idPedido) {
-    ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
+  public getPedido(idPedido) {
+    this.pedidosService.TraerUno(idPedido).subscribe(response => {
       this.pedido = response;
-
       this.TraerDireccion(response.idClienteSucursal);
       this.getExpreso(response.idExpreso);
-      this.traerCliente(this.pedido.idCliente);
-    },
-      error => {
-        console.error(error);
-      });
-  }
-
-  /// cliente /////////////////////////////////////////////////////////////////
-
-  public traerCliente(idCliente: string) {
-    this.clientesServide.traerUno(idCliente).subscribe(response => {
-      this.cliente = response;
     },
       error => {
         console.error(error);
@@ -89,10 +80,10 @@ export class PedidoDetalleComponent implements OnInit {
     this.sucursalesService.TraerUno(id).subscribe(response => {
       this.direccion = response.calle + response.numero + response.localidad + response.provincia;
     },
-      error => {
-        console.error(error);
-      });
-  }
+    error => {
+      console.error(error);
+    });
+}
 
 
   // EXCEL  ///////////////////////////////////////////////////////////////////////////////////
@@ -119,8 +110,8 @@ export class PedidoDetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCarritoItems(this.idPedido);
     this.getPedido(this.idPedido);
     this.scrollTop();
-    this.getCarritoItems(this.idPedido);
   }
 }

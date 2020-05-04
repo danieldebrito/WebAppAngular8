@@ -1,6 +1,8 @@
 <div class="container">
     <div (showValue)="cambiaVista()" *ngIf="!showDetail">
 
+        <app-pedidos-tabs></app-pedidos-tabs>
+
         <strong><h1>Pedidos</h1></strong>
 
         <div>
@@ -36,6 +38,6 @@
     </div>
 
     <div>
-        <app-pedido-detalle [showBar]="showBar" [idPedido]="idPedido" (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
+        <app-pedido-detalle [idPedido]="idPedido" (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
     </div>
 </div>
