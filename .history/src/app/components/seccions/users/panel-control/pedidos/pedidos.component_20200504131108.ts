@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/clientes/auth.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
-import { ClientesService } from 'src/app/services/clientes/clientes.service';
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
+
 import { Pedido } from 'src/app/class/pedido';
 
 @Component({
@@ -12,21 +13,48 @@ import { Pedido } from 'src/app/class/pedido';
 })
 export class PedidosComponent implements OnInit {
 
-  @Input() pedido: Pedido;
+  public idCliente: string;
+
+  public pedidos: Pedido[] = [];
+  public idPedido;
+  public pedido: Pedido;
 
   public showDetail = false;
   public showBar = false;
-  public idPedido;
+
   public expresoNombre;
   public direccion;
+
   public p: number;  // paginacion primer page
 
   constructor(
     private pedidosService: PedidosService,
+    private authService: AuthService,
     private expresosService: ExpresosService,
-    private sucursalesService: SucursalesService,
-    private clientesService: ClientesService
-  ) { }
+    private sucursalesService: SucursalesService
+  ) {
+    this.idCliente = this.authService.getIdentityLocalStorage().idCliente;
+    this.p = 1;
+  }
+
+  public ListarPedidosCliente() {
+    this.pedidosService.Listar().subscribe(pedidos => {
+      this.pedidos = pedidos;
+    });
+  }
+
+  public async traerPedidoPorID(id) {
+    this.pedidosService.TraerUno(id).subscribe( response => {
+      this.pedido = response;
+
+      this.TraerExpreso(this.pedido.idExpreso);
+      // this.TraerDireccion(this.pedido.idClienteSucursal);
+
+    },
+    error => {
+      console.error(error);
+    });
+  }
 
   public TraerExpreso(id: number) {
     this.expresosService.TraerUno(id).subscribe(response => {
@@ -37,8 +65,8 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  public TraerDireccion(pedido: Pedido) {
-    this.sucursalesService.TraerUno(pedido.idClienteSucursal).subscribe( response  => {
+  public async TraerDireccion(pedido: Pedido) {
+    this.sucursalesService.TraerUno(pedido.idClienteSucursal).subscribe( async response  => {
        this.direccion =  response.calle + response.numero + response.localidad + response.provincia;
     });
   }
@@ -52,5 +80,14 @@ export class PedidosComponent implements OnInit {
     this.showDetail = !this.showDetail;
   }
 
-  ngOnInit() {}
+  public scrollTop() {
+    window.scroll(0, 0);
+  }
+
+  ngOnInit() {
+    this.ListarPedidosCliente();
+    // this.traerPedidoPorID(this.);
+
+    this.scrollTop();
+  }
 }

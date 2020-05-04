@@ -1,0 +1,42 @@
+<div class="container">
+    <div (showValue)="cambiaVista()" *ngIf="!showDetail">
+
+        <strong><h1>Pedidos</h1></strong>
+
+        <div>
+            <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+        </div>
+
+        <div class="card mb-12 p-2" *ngFor="let item of pedidos | paginate: { itemsPerPage: 20, currentPage: p }">
+            <div class="row no-gutters">
+                <div class="col-md-4 p-1">
+                    <div class="card-header">
+                        <h5 class="card-title"><b>Fecha y Hora : <br> </b> {{ item.fecha }} </h5>
+                        <h5 class="card-title"><b>ID Pedido :</b> {{ item.idPedido }} </h5>
+
+                        <button type="button" class="btn btn-outline-success">
+                            {{ item.estado }} 
+                        </button>&nbsp;
+                        <button type="button" class="btn btn-outline-primary" (click)="cambia(item.idPedido)">
+                            Ver Pedido
+                        </button>
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>Cliente : {{ item.idCliente }} </b></h5>
+                        <h5 class="card-title"><b>Direccion de Entrega : </b></h5>
+                        <h5 class="card-title">{{ item.idsucursal }}</h5>
+                        <h5 class="card-title"><b>Expreso :</b> {{ expresoNombre }} </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div>
+        <app-pedido-detalle [showBar]="showBar" [idPedido]="idPedido" (showValue)="cambiaVista()" *ngIf="showDetail"></app-pedido-detalle>
+    </div>
+</div>

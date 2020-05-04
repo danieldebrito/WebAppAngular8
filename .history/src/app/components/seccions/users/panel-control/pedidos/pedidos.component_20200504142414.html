@@ -1,13 +1,13 @@
 <div class="row no-gutters">
     <div class="col-md-4 p-1">
         <div class="card-header">
-            <h5 class="card-title"><b>Fecha y Hora : <br> </b> {{ pedido.fecha }} </h5>
-            <h5 class="card-title"><b>ID Pedido :</b> {{ pedido.idPedido }} </h5>
+            <h5 class="card-title"><b>Fecha y Hora : <br> </b> {{ item.fecha }} </h5>
+            <h5 class="card-title"><b>ID Pedido :</b> {{ item.idPedido }} </h5>
 
             <button type="button" class="btn btn-outline-success">
-                            {{ pedido.estado }} 
+                            {{ item.estado }} 
                         </button>&nbsp;
-            <button type="button" class="btn btn-outline-primary" (click)="cambia(pedido.idPedido)">
+            <button type="button" class="btn btn-outline-primary" (click)="cambia(item.idPedido)">
                             Ver Pedido
                         </button>
 
@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-8">
         <div class="card-body">
-            <h5 class="card-title"><b>Cliente : {{ pedido.idCliente }} </b></h5>
+            <h5 class="card-title"><b>Cliente : {{ item.idCliente }} </b></h5>
             <h5 class="card-title"><b>Direccion de Entrega : </b></h5>
             <h5 class="card-title">{{ direccion }}</h5>
             <h5 class="card-title"><b>Expreso :</b> {{ expresoNombre }} </h5>
