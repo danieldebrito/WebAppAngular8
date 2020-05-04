@@ -14,7 +14,7 @@ import { Pedido } from 'src/app/class/pedido';
 export class PedidosComponent implements OnInit {
 
   public idCliente: string;
-  public pedidos: Pedido[] = [];
+  public pedidosCliente: Pedido[] = [];
   public showDetail = false;
   public idPedido: string;
   public showBar = false;
@@ -37,9 +37,9 @@ export class PedidosComponent implements OnInit {
 
   public ListarPedidosCliente() {
     this.pedidosService.Listar().subscribe(pedidos => {
-      this.pedidos = pedidos;
+      this.pedidosCliente = pedidos;
 
-      this.pedidos.map( item => {
+      this.pedidosCliente.map( item => {
         this.pedido = item;
         this.TraerExpreso(item.idExpreso);
         this.TraerDireccion(item.idClienteSucursal);

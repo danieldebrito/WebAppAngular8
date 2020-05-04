@@ -43,6 +43,13 @@ export class PedidoDetalleComponent implements OnInit {
     private pedidosService: PedidosService
   ) { }
 
+  public async getCarritoItems(idPedido) {
+    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
+      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
+        && item.idPedido === idPedido);
+    });
+  }
+
   public async getPedido(idPedido) {
     ( this.pedidosService.TraerUno(idPedido)).subscribe(async response => {
       this.pedido = response;
@@ -50,18 +57,10 @@ export class PedidoDetalleComponent implements OnInit {
       this.TraerDireccion(response.idClienteSucursal);
       this.getExpreso(response.idExpreso);
       this.traerCliente(response.idCliente);
-      this.getCarritoItems(response);
     },
       error => {
         console.error(error);
       });
-  }
-
-  public async getCarritoItems(pedido: Pedido) {
-    (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === pedido.idCliente
-        && item.idPedido === pedido.idPedido);
-    });
   }
 
   /// cliente /////////////////////////////////////////////////////////////////
@@ -122,5 +121,6 @@ export class PedidoDetalleComponent implements OnInit {
   ngOnInit() {
     this.getPedido(this.idPedido);
     this.scrollTop();
+    this.getCarritoItems(this.idPedido);
   }
 }

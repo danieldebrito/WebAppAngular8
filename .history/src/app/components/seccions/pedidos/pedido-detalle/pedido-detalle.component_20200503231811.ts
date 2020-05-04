@@ -50,17 +50,17 @@ export class PedidoDetalleComponent implements OnInit {
       this.TraerDireccion(response.idClienteSucursal);
       this.getExpreso(response.idExpreso);
       this.traerCliente(response.idCliente);
-      this.getCarritoItems(response);
+      this.getCarritoItems(response.idPedido);
     },
       error => {
         console.error(error);
       });
   }
 
-  public async getCarritoItems(pedido: Pedido) {
+  public async getCarritoItems(idPedido) {
     (await this.carritoItemsService.getCarritoItems()).subscribe(elements => {
-      this.carritoItems = elements.filter(item => item.idCliente === pedido.idCliente
-        && item.idPedido === pedido.idPedido);
+      this.carritoItems = elements.filter(item => item.idCliente === this.pedido.idCliente
+        && item.idPedido === idPedido);
     });
   }
 
