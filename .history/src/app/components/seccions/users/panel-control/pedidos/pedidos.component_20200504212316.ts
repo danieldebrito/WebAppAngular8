@@ -47,20 +47,25 @@ export class PedidosComponent implements OnInit {
 
   public claseButton(estado) {
     switch (estado) {
-      case 'En Curso':
+      case 'en curso':
         this.clase = 'btn btn-secondary';
+        alert(this.clase);
         break;
-      case 'Enviado':
+      case 'enviado':
         this.clase = 'btn btn-secondary';
+        alert(this.clase);
         break;
-      case 'Leido':
+      case 'leido':
         this.clase = 'btn btn-success';
+        alert(this.clase);
         break;
-      case 'Retenido':
+      case 'retenido':
         this.clase = 'btn btn-warning';
+        alert(this.clase);
         break;
-      case 'Anulado':
+      case 'anulado':
         this.clase = 'btn btn-danger';
+        alert(this.clase);
         break;
     }
   }

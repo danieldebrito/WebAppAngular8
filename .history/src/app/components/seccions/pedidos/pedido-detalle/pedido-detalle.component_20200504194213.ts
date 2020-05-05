@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import * as XLSX from 'xlsx';
-
 // class
 import { CarritoItem } from 'src/app/class/carritoItem';
 import { Pedido } from 'src/app/class/pedido';
@@ -12,7 +10,8 @@ import { CarritoItemsService } from 'src/app/services/firebase/carrito-items.ser
 import { SucursalesService } from 'src/app/services/clientes/sucursales.service';
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
-import { ToastrService } from 'ngx-toastr';
+
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-pedido-detalle',
@@ -22,7 +21,6 @@ import { ToastrService } from 'ngx-toastr';
 export class PedidoDetalleComponent implements OnInit {
 
   @Output() showValue = new EventEmitter();
-  @Output() refrescaLista = new EventEmitter();
   @Input() idPedido: number;
   @Input() showBar: boolean;  // para que muestre u oculte la barra superior
 
@@ -36,12 +34,12 @@ export class PedidoDetalleComponent implements OnInit {
 
   public fileName = 'MEYRO_pedido.xlsx';
 
+
   constructor(
     private sucursalesService: SucursalesService,
     private expresosService: ExpresosService,
     private carritoItemsService: CarritoItemsService,
     private clientesServide: ClientesService,
-    private toastr: ToastrService,
     private pedidosService: PedidosService
   ) { }
 
@@ -59,21 +57,15 @@ export class PedidoDetalleComponent implements OnInit {
       });
   }
 
-  public async updatePedido(estado) {
-    this.pedidosService.Update(
-      this.idPedido,
-      this.pedido.idClienteSucursal,
-      this.pedido.idCliente,
-      this.pedido.idExpreso,
-      estado,
-      this.pedido.fecha,
-      this.pedido.idDescuento,
-      this.pedido.subtotalNeto,
-      this.pedido.observaciones
+  public UpdateEstado(estado: string) {
+
+    alert(this.idPedido);
+    this.pedidosService.UpdateEstado(
+      2,
+      estado
     ).then(
       response => {
         console.log('se updateo el pedido nro => ' + response);  // tiro un mensajito
-        this.toastr.success('Actualizado', estado);
       }
     ).catch(
       error => {
@@ -138,7 +130,6 @@ export class PedidoDetalleComponent implements OnInit {
 
   cambia() {
     this.showValue.emit({pedido: this.pedido});
-    this.refrescaLista.emit();
   }
 
   public scrollTop() {

@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import * as XLSX from 'xlsx';
-
 // class
 import { CarritoItem } from 'src/app/class/carritoItem';
 import { Pedido } from 'src/app/class/pedido';
@@ -14,6 +12,8 @@ import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
 import { ToastrService } from 'ngx-toastr';
 
+import * as XLSX from 'xlsx';
+
 @Component({
   selector: 'app-pedido-detalle',
   templateUrl: './pedido-detalle.component.html',
@@ -22,7 +22,6 @@ import { ToastrService } from 'ngx-toastr';
 export class PedidoDetalleComponent implements OnInit {
 
   @Output() showValue = new EventEmitter();
-  @Output() refrescaLista = new EventEmitter();
   @Input() idPedido: number;
   @Input() showBar: boolean;  // para que muestre u oculte la barra superior
 
@@ -35,6 +34,7 @@ export class PedidoDetalleComponent implements OnInit {
   public direccion: string;
 
   public fileName = 'MEYRO_pedido.xlsx';
+
 
   constructor(
     private sucursalesService: SucursalesService,
@@ -138,7 +138,8 @@ export class PedidoDetalleComponent implements OnInit {
 
   cambia() {
     this.showValue.emit({pedido: this.pedido});
-    this.refrescaLista.emit();
+    this.getPedido(this.idPedido);
+
   }
 
   public scrollTop() {

@@ -49,18 +49,23 @@ export class PedidosComponent implements OnInit {
     switch (estado) {
       case 'En Curso':
         this.clase = 'btn btn-secondary';
+        alert(this.clase);
         break;
       case 'Enviado':
         this.clase = 'btn btn-secondary';
+        alert(this.clase);
         break;
       case 'Leido':
         this.clase = 'btn btn-success';
+        alert(this.clase);
         break;
       case 'Retenido':
         this.clase = 'btn btn-warning';
+        alert(this.clase);
         break;
       case 'Anulado':
         this.clase = 'btn btn-danger';
+        alert(this.clase);
         break;
     }
   }

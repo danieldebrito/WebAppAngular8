@@ -1,6 +1,4 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import * as XLSX from 'xlsx';
-
 // class
 import { CarritoItem } from 'src/app/class/carritoItem';
 import { Pedido } from 'src/app/class/pedido';
@@ -13,6 +11,8 @@ import { SucursalesService } from 'src/app/services/clientes/sucursales.service'
 import { ExpresosService } from 'src/app/services/expresos/expresos.service';
 import { ClientesService } from 'src/app/services/clientes/clientes.service';
 import { ToastrService } from 'ngx-toastr';
+
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-pedido-detalle',
@@ -35,6 +35,7 @@ export class PedidoDetalleComponent implements OnInit {
   public direccion: string;
 
   public fileName = 'MEYRO_pedido.xlsx';
+
 
   constructor(
     private sucursalesService: SucursalesService,

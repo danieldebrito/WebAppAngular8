@@ -60,7 +60,7 @@ export class PedidosService {
     idPedido: number,
     idClienteSucursal: string,
     idCliente: string,
-    idExpreso: number,
+    idExpreso: string,
     estado: string,
     fecha: string,
     idDescuento: string,
@@ -82,7 +82,7 @@ export class PedidosService {
   }
 
   public UpdateEstado(
-    idPedido: number,
+    idPedido: string,
     estado: string
     ): Promise<object> {
     const request: object = {
