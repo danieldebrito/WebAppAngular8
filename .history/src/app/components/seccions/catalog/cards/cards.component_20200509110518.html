@@ -1,12 +1,9 @@
-<div class="container p-2">
-
+<div class="container">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
 
-    <div class="row">
-        <div class="col-md-3 p-2" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
-
-            <div class="card">
-
+    <div class="card-deck">
+        <div>
+            <div class="card" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
                 <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
 
                 <div class="card-body">
@@ -20,17 +17,19 @@
                         <b>{{ item.competicion | competicion }}</b>
                     </p>
 
-                    <button type="button" routerLink="/detalle" class="btn btn-outline-danger btn-sm">
-                        Mas Info
-                    </button>&nbsp;
+                    <div class="row p-1">
+                        <button type="button" routerLink="/detalle" class="btn btn-outline-danger btn-sm">
+                            Mas Info
+                        </button>&nbsp;
 
-                    <button type="button" routerLink="/detalle" class="btn btn-outline-success btn-sm">
-                        Nueva
-                    </button>&nbsp;
+                        <button type="button" routerLink="/detalle" class="btn btn-outline-success btn-sm">
+                            Nueva
+                        </button>&nbsp;
 
-                    <button type="button" routerLink="/detalle" class="btn btn-outline-primary btn-sm">
-                        En Promo
-                    </button>
+                        <button type="button" routerLink="/detalle" class="btn btn-outline-primary btn-sm">
+                        En Promo  
+                        </button>
+                    </div>
 
                 </div>
 
@@ -38,7 +37,10 @@
                     <app-boton-comprar [id_articulo]='item.id_articulo'></app-boton-comprar>
                 </div>
             </div>
-            <hr>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
 </div>

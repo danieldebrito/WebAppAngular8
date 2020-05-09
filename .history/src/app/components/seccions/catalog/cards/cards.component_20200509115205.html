@@ -4,7 +4,7 @@
 
 
     <div class="row row-cols-1 row-cols-md-4">
-        <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 64, currentPage: p }">
+        <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 50, currentPage: p }">
 
             <div class="card">
                 <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
@@ -34,11 +34,26 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+
+
+                </div>
+
+                <div class="card-footer">
                     <app-boton-comprar [id_articulo]='item.id_articulo'></app-boton-comprar>
                 </div>
             </div>
         </div>
     </div>
+
+    -->
+
 </div>
 
 <div class="container">
