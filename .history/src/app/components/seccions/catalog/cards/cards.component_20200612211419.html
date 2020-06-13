@@ -1,5 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="Items | async; else loading">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+
+
+
     <div class="row row-cols-1 row-cols-md-4">
         <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 72, currentPage: p }">
 

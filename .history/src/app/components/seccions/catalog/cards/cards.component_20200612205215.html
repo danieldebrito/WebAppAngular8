@@ -1,5 +1,8 @@
 <div class="container">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
+
+
+
     <div class="row row-cols-1 row-cols-md-4">
         <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 72, currentPage: p }">
 
@@ -36,14 +39,11 @@
             </div>
         </div>
     </div>
-
-    <ng-template #loading>
-        loading.....
-    </ng-template>
-
 </div>
 
-
+<ng-template #loading>
+    loading.....
+</ng-template>
 
 <div class="container">
     <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
