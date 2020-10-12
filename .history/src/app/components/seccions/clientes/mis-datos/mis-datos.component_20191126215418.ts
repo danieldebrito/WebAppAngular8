@@ -16,7 +16,7 @@ export class MisDatosComponent implements OnInit {
   constructor(private authService: AuthService) {
   }
 
-  onSubmit() {}
+  onSubmit () {}
 
   ngOnInit() {
     this.cliente = this.authService.getIdentityLocalStorage();

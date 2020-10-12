@@ -1,10 +1,7 @@
 <div class="container">
     <pagination-controls (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
-
-
-
     <div class="row row-cols-1 row-cols-md-4">
-        <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 32, currentPage: p }">
+        <div class="col mb-3" *ngFor="let item of Items | paginate: { itemsPerPage: 20, currentPage: p }">
 
             <div class="card">
                 <img src="{{ item.urlImgPeq }}" class="card-img-top" alt="Imagen de Junta">
@@ -39,7 +36,14 @@
             </div>
         </div>
     </div>
+
+    <ng-template #loading>
+        loading.....
+    </ng-template>
+
 </div>
+
+
 
 <div class="container">
     <pagination-controls (click)="scrollTop()" (pageChange)="p = $event" previousLabel="Previo" nextLabel="Siguiente"></pagination-controls>
